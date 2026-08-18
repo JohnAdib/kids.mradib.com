@@ -31,7 +31,8 @@ export function ChartForm({
     <section className="tool-panel">
       <h2>Reference chart</h2>
       <p>
-        The full table, not a test. Pick a year, or tick only 2, 3, 5 and 10.
+        The full table, not a test. Pick a year group, or tick only 2, 3, 5 and
+        10.
       </p>
       <div className="field-row">
         <label>

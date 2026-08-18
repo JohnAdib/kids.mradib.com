@@ -29,8 +29,7 @@ export function PrintHistoryList({ records, onReprint }: Props) {
               {record.label}
               <br />
               <small>
-                {record.kind} ·{" "}
-                {new Date(record.printedAt).toLocaleString("en-GB")}
+                {record.kind} · {new Date(record.printedAt).toLocaleString()}
               </small>
             </span>
             <button

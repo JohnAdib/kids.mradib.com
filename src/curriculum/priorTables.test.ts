@@ -2,7 +2,7 @@ import { expect, test } from "vitest";
 import { priorTables } from "./priorTables";
 import { ukYearTables } from "./ukYearTables";
 
-test("year 3 tables match the UK map", () => {
+test("year 3 tables match the school map", () => {
   expect([...ukYearTables[3]]).toEqual([2, 3, 4, 5, 10]);
 });
 

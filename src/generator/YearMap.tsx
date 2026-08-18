@@ -5,8 +5,8 @@ export function YearMap() {
     <section className="section">
       <h2>Year map</h2>
       <p className="lede">
-        This is how UK primary usually meets the tables. Use it as a guide, not
-        a gate.
+        This is a common order for the first years of school. Use it as a guide,
+        not a gate.
       </p>
       <ul className="year-list">
         <li>

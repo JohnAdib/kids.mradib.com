@@ -10,9 +10,8 @@ export function HubPage() {
           <p className="kicker">Home practice</p>
           <h1>School facts, on paper, until they stick.</h1>
           <p className="lede">
-            Kids is a small site for UK primary practice at the kitchen table.
-            Print a pack, write a name at the top, time it, mark it. We start
-            with maths.
+            I made this for my daughters, to print times tables until they
+            stick. If it helps at your table too, use it. We start with maths.
           </p>
         </section>
         <div className="card-grid">

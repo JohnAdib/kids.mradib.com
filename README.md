@@ -1,18 +1,18 @@
 # Kids
 
-Printable home practice for UK primary children. Built for the kitchen table, not for another screen.
+Printable times tables for the first years of primary school, anywhere.
 
-Most times-tables generators dump fifty of the same sum on a page. The child can chant 7 for a week and quietly forget 4. Division is treated as a different subject. There is no name line, no timer, no way to mark the sheet, and no fridge chart of *only* the tables that child actually needs.
+I made this for my daughters. The usual generators were not good enough: a wall of the same sum, no division, and last term’s tables gone the moment a new one arrived. So I built a small printer for the kitchen table. If you like it, use it for your own children.
 
-Kids exists to fix that. A parent picks a table and a stage — multiplication, then division, then mixed — and prints four mixed pages. A pack whose focus is 7 is a lot of 7 **and** a lot of the tables already earned. Last term’s facts stay alive while the new one is learned. Speed is part of mastery, so each sheet has a suggested time, a space for time taken, and a score box.
+A parent picks a table and a stage — multiplication, then division, then mixed — and prints four mixed pages. A pack whose focus is 7 is a lot of 7 **and** a lot of the tables already earned. Speed is part of mastery, so each sheet has a suggested time, a space for time taken, and a score box. There is also a fridge chart of only the tables you want.
 
-The site is [kids.mradib.com](https://kids.mradib.com). Maths (times tables) is first. Other subjects can follow as the children grow.
+The site is [kids.mradib.com](https://kids.mradib.com). Times tables first. Other subjects can follow as the children grow.
 
 ## Pedagogy
 
 A child has mastered a table when three things are true: they answer quickly without counting up, they can undo the fact (division), and they can still do last term’s tables while they learn the new one.
 
-We teach in that order on purpose. Multiplication first. Division next, as the same fact backwards. Then mixed, so the page layout cannot give the answer away. Year 2–6 labels on the site are a map, not a cage.
+We teach in that order on purpose. Multiplication first. Division next, as the same fact backwards. Then mixed, so the page layout cannot give the answer away.
 
 ## Contribute
 
