@@ -573,8 +573,9 @@
 .partial-square {
   border-collapse: collapse;
   width: 100%;
-  height: 100%;
-  flex: 1;
+  height: auto;
+  flex: none;
+  align-self: start;
   table-layout: fixed;
 }
 
@@ -582,15 +583,16 @@
 .partial-square td {
   border: 1px solid currentColor;
   text-align: center;
-  height: auto;
-  width: auto;
+  vertical-align: middle;
   font-size: 10pt;
-  padding: 1mm 0;
+  padding: 1.2mm 0;
+  height: 11mm;
 }
 
 .partial-square .write-box {
-  min-width: 6mm;
-  min-height: 5mm;
+  min-width: 7mm;
+  min-height: 7mm;
+  box-sizing: border-box;
 }
 
 .path-grid {
