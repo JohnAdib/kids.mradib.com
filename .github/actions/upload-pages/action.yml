@@ -1,0 +1,10 @@
+name: Upload Pages
+description: Upload dist as a GitHub Pages artifact
+
+runs:
+  using: composite
+  steps:
+    - name: Upload Pages artifact
+      uses: actions/upload-pages-artifact@v4
+      with:
+        path: dist

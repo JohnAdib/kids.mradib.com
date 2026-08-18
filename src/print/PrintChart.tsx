@@ -1,9 +1,9 @@
 import type { ChartGroup } from "../charts/ChartGroup";
 import { chunkChartGroups } from "../charts/chunkChartGroups";
 import type { ReferenceChart } from "../charts/ReferenceChart";
+import { PageHeader } from "./PageHeader";
 import type { PrintColour } from "./PrintColour";
 import type { PrintFont } from "./PrintFont";
-import { PageHeader } from "./PageHeader";
 
 type Props = {
   chart: ReferenceChart;

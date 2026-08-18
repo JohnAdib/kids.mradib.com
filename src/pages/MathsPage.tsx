@@ -20,8 +20,8 @@ export function MathsPage() {
             <span className="chip">Print</span>
             <h2>Times tables</h2>
             <p>
-              Practice packs and reference charts for 0 to 12, with division
-              as the same fact backwards.
+              Practice packs and reference charts for 0 to 12, with division as
+              the same fact backwards.
             </p>
           </a>
         </div>
@@ -35,8 +35,8 @@ export function MathsPage() {
               learn the new one.
             </p>
             <p>
-              That is why a 7 pack is not a 7-only test. It is a lot of 7, and
-              a lot of 2, 3, 4, 5, 6, 8 and 10, on the same four pages.
+              That is why a 7 pack is not a 7-only test. It is a lot of 7, and a
+              lot of 2, 3, 4, 5, 6, 8 and 10, on the same four pages.
             </p>
           </div>
         </section>

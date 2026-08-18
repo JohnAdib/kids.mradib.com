@@ -21,9 +21,12 @@ Print from the times tables page. Choose **Save as PDF** in the browser dialog i
 
 ```bash
 npm test
+npm run lint
 npm run build
 npm run preview
 ```
+
+CI (`.github/workflows/ci.yml`) runs lint, types, tests, and build on every pull request and on every push to `main`. A green push to `main` also deploys `dist` to GitHub Pages at [kids.mradib.com](https://kids.mradib.com).
 
 ## What it prints
 

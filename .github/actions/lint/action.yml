@@ -1,0 +1,9 @@
+name: Lint
+description: Run Biome CI (format, lint, imports)
+
+runs:
+  using: composite
+  steps:
+    - name: Run Biome CI
+      shell: bash
+      run: npm run lint

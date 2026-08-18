@@ -27,12 +27,13 @@ export function PageHeader({
       </div>
       <div className="print-meta">
         <span>
-          Name: <span className="print-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+          Name:{" "}
+          <span className="print-line">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          </span>
         </span>
         {showScore ? (
-          <span>
-            Score: Correct ______ Incorrect ______ / {itemCount}
-          </span>
+          <span>Score: Correct ______ Incorrect ______ / {itemCount}</span>
         ) : (
           <span>Keep this chart nearby.</span>
         )}
@@ -41,7 +42,10 @@ export function PageHeader({
         ) : null}
         {showScore ? (
           <span>
-            Time taken: <span className="print-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            Time taken:{" "}
+            <span className="print-line">
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </span>
           </span>
         ) : null}
       </div>

@@ -9,7 +9,9 @@ test("a 7 pack is about half 7 and half earlier tables", () => {
     count: 100,
     next: createSeededRandom("seven"),
   });
-  const focusCount = facts.filter((fact) => fact.a === 7 || fact.b === 7).length;
+  const focusCount = facts.filter(
+    (fact) => fact.a === 7 || fact.b === 7,
+  ).length;
   expect(focusCount).toBeGreaterThan(40);
   expect(focusCount).toBeLessThan(70);
   expect(facts.some((fact) => fact.a !== 7 && fact.b !== 7)).toBe(true);

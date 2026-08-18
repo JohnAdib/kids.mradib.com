@@ -349,8 +349,7 @@ input[type="number"] {
     background: white;
   }
 
-  .site-shell,
   .screen-only {
-    display: none !important;
+    display: none;
   }
 }

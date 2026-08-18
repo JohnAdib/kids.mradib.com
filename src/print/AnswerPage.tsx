@@ -1,7 +1,7 @@
 import type { PracticePack } from "../pack/PracticePack";
+import { PageHeader } from "./PageHeader";
 import type { PrintColour } from "./PrintColour";
 import type { PrintFont } from "./PrintFont";
-import { PageHeader } from "./PageHeader";
 
 type Props = {
   pack: PracticePack;

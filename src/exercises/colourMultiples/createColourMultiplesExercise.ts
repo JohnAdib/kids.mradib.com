@@ -1,5 +1,5 @@
-import { shuffleCopy } from "../../rng/shuffleCopy";
 import { pickInteger } from "../../rng/pickInteger";
+import { shuffleCopy } from "../../rng/shuffleCopy";
 import type { ColourGrid } from "./ColourGrid";
 
 type Input = {

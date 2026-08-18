@@ -1,6 +1,6 @@
 import { listPrintedRecords } from "./listPrintedRecords";
-import { printedHistoryKey } from "./printedHistoryKey";
 import type { PrintedRecord } from "./PrintedRecord";
+import { printedHistoryKey } from "./printedHistoryKey";
 
 type Store = {
   getItem(key: string): string | null;

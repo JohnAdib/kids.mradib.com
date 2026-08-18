@@ -1,7 +1,7 @@
 import { expect, test } from "vitest";
 import { formatChartLabel } from "./formatChartLabel";
-import { formatPackMachineId } from "./formatPackMachineId";
 import { formatPackLabel } from "./formatPackLabel";
+import { formatPackMachineId } from "./formatPackMachineId";
 import { formatSuggestedTime } from "./formatSuggestedTime";
 import { nextSequence } from "./nextSequence";
 import { suggestSeconds } from "./suggestSeconds";
