@@ -1,5 +1,5 @@
-import { Blank } from "../../print/Blank";
 import { ExerciseHeading } from "../../print/ExerciseHeading";
+import { FactSlot } from "../../print/FactSlot";
 import type { FactFamilyCard } from "./FactFamilyCard";
 
 type Props = {
@@ -35,15 +35,10 @@ export function FactFamilyExercise({ cards }: Props) {
 }
 
 function num(card: FactFamilyCard, slot: "a" | "b" | "product") {
-  if (card.hide === slot) {
-    return <Blank />;
-  }
-  return card[slot];
+  return <FactSlot value={card.hide === slot ? null : card[slot]} />;
 }
 
 function div(card: FactFamilyCard, slot: "divA" | "divB") {
-  if (card.hide === slot) {
-    return <Blank />;
-  }
-  return slot === "divA" ? card.b : card.a;
+  const value = slot === "divA" ? card.b : card.a;
+  return <FactSlot value={card.hide === slot ? null : value} />;
 }
