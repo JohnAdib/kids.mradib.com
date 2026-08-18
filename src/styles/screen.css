@@ -309,9 +309,10 @@ input[type="number"] {
   color: var(--white);
 }
 
-.ghost-button {
-  background: var(--mint);
-  color: var(--ink);
+.primary-button:disabled,
+.ghost-button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
 }
 
 .history-list {

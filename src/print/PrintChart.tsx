@@ -1,4 +1,5 @@
 import type { ChartGroup } from "../charts/ChartGroup";
+import { chunkChartGroups } from "../charts/chunkChartGroups";
 import type { ReferenceChart } from "../charts/ReferenceChart";
 import type { PrintColour } from "./PrintColour";
 import type { PrintFont } from "./PrintFont";
@@ -12,31 +13,34 @@ type Props = {
 };
 
 export function PrintChart({ chart, groups, font, colour }: Props) {
+  const pages = chunkChartGroups(groups, 6);
   return (
     <div
       className={`print-root is-preview print-font-${font} print-colour-${colour}`}
     >
-      <article className="print-page">
-        <PageHeader
-          brand="Kids"
-          label={chart.label}
-          machineId={chart.machineId}
-          showScore={false}
-        />
-        <div className="chart-grid">
-          {groups.map((group) => (
-            <section className="family-card" key={group.table}>
-              <h3 className="exercise-title">{group.table} times table</h3>
-              {group.rows.map((row) => (
-                <p key={row.expression}>
-                  {row.expression}
-                  {row.inverse ? ` · ${row.inverse}` : ""}
-                </p>
-              ))}
-            </section>
-          ))}
-        </div>
-      </article>
+      {pages.map((pageGroups, pageIndex) => (
+        <article className="print-page" key={pageIndex}>
+          <PageHeader
+            brand="Kids"
+            label={chart.label}
+            machineId={chart.machineId}
+            showScore={false}
+          />
+          <div className="chart-grid">
+            {pageGroups.map((group) => (
+              <section className="family-card" key={group.table}>
+                <h3 className="exercise-title">{group.table} times table</h3>
+                {group.rows.map((row) => (
+                  <p key={row.expression}>
+                    {row.expression}
+                    {row.inverse ? ` · ${row.inverse}` : ""}
+                  </p>
+                ))}
+              </section>
+            ))}
+          </div>
+        </article>
+      ))}
     </div>
   );
 }
