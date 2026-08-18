@@ -1,0 +1,239 @@
+@page {
+  size: A4;
+  margin: 10mm;
+}
+
+.print-root {
+  display: none;
+}
+
+.print-font-clear {
+  font-family: "Atkinson Hyperlegible", "Segoe UI", sans-serif;
+  font-variant-numeric: tabular-nums;
+}
+
+.print-font-handwriting {
+  font-family: Kalam, "Comic Sans MS", cursive;
+}
+
+.print-font-mono {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+.print-colour-ink {
+  color: #111;
+}
+
+.print-colour-colour {
+  color: #2a2420;
+}
+
+@media print {
+  .print-root {
+    display: block;
+  }
+
+  .print-page {
+    page-break-after: always;
+    break-after: page;
+    min-height: 270mm;
+  }
+
+  .print-page:last-child {
+    page-break-after: auto;
+    break-after: auto;
+  }
+}
+
+@media screen {
+  .print-root.is-preview {
+    display: grid;
+    gap: 1.5rem;
+    margin: 2rem auto 4rem;
+    width: min(210mm, 100%);
+  }
+
+  .print-page {
+    background: white;
+    min-height: 270mm;
+    padding: 12mm;
+    box-shadow: 0 12px 40px rgb(42 36 32 / 12%);
+  }
+}
+
+.print-page {
+  display: flex;
+  flex-direction: column;
+  gap: 8mm;
+}
+
+.print-header {
+  display: grid;
+  gap: 3mm;
+  border-bottom: 1.5px solid currentColor;
+  padding-bottom: 4mm;
+}
+
+.print-brand {
+  display: flex;
+  justify-content: space-between;
+  gap: 8mm;
+  font-weight: 700;
+}
+
+.print-meta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3mm 8mm;
+  font-size: 12pt;
+}
+
+.print-line {
+  border-bottom: 1px solid currentColor;
+  min-width: 40mm;
+  display: inline-block;
+}
+
+.exercise-title {
+  font-size: 13pt;
+  font-weight: 700;
+  margin: 0 0 3mm;
+}
+
+.exercise-help {
+  margin: 0 0 4mm;
+  font-size: 11pt;
+}
+
+.missing-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 4mm;
+}
+
+.missing-item,
+.compare-item,
+.true-false-item,
+.odd-item {
+  border: 1px solid currentColor;
+  border-radius: 2mm;
+  padding: 4mm;
+  min-height: 14mm;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2mm;
+}
+
+.wheel-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8mm;
+  justify-items: center;
+}
+
+.wheel-svg {
+  width: 88mm;
+  height: 88mm;
+}
+
+.match-board {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10mm;
+  min-height: 90mm;
+}
+
+.match-col {
+  display: grid;
+  gap: 4mm;
+}
+
+.match-chip {
+  border: 1.5px solid currentColor;
+  border-radius: 3mm;
+  padding: 3mm 4mm;
+  width: fit-content;
+}
+
+.match-chip.left {
+  border-radius: 3mm 12mm 12mm 3mm;
+}
+
+.colour-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 2mm;
+}
+
+.colour-cell {
+  border: 1px solid currentColor;
+  min-height: 16mm;
+  display: grid;
+  place-items: center;
+  font-size: 13pt;
+}
+
+.family-row,
+.skip-row,
+.array-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5mm;
+}
+
+.family-card,
+.skip-card,
+.array-card {
+  border: 1px solid currentColor;
+  border-radius: 3mm;
+  padding: 4mm;
+}
+
+.partial-square {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.partial-square th,
+.partial-square td {
+  border: 1px solid currentColor;
+  text-align: center;
+  height: 11mm;
+  width: 11mm;
+}
+
+.path-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 2mm;
+}
+
+.path-cell {
+  border: 1px solid currentColor;
+  min-height: 14mm;
+  display: grid;
+  place-items: center;
+}
+
+.answer-list {
+  columns: 2;
+  gap: 8mm;
+  font-size: 11pt;
+}
+
+.print-colour-colour .match-chip.left,
+.print-colour-colour .colour-cell,
+.print-colour-colour .wheel-fill {
+  fill: #b8e0d2;
+  background: #e7f6f0;
+}
+
+.print-colour-colour .family-card {
+  background: #fff4ea;
+}
+
+.print-colour-ink .wheel-fill {
+  fill: white;
+}
