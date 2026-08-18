@@ -38,7 +38,7 @@ export function PracticeForm({
   return (
     <section className="tool-panel tool-panel-compact">
       <h2>Practice pack</h2>
-      <p>Tick the tables for this quiz. Four A4 pages.</p>
+      <p>Tick the tables for this quiz. The address bar becomes the link.</p>
       <div className="table-picks">
         {Array.from({ length: 12 }, (_, i) => i + 1).map((table) => (
           <label key={table}>

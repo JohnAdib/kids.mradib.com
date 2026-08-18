@@ -80,9 +80,10 @@
     margin: 1.5rem auto 0;
   }
 
-  .print-toolbar p {
-    margin: 0;
-    font-weight: 700;
+  .print-toolbar-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
   }
 
   .print-root.is-preview {

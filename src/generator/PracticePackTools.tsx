@@ -1,9 +1,6 @@
 import { useEffect, useState } from "react";
 import type { Stage } from "../facts/Stage";
-import { composePack } from "../pack/composePack";
-import { nextSequence } from "../pack/nextSequence";
 import type { PracticePack } from "../pack/PracticePack";
-import { sequenceKey } from "../pack/sequenceKey";
 import { AnswerPage } from "../print/AnswerPage";
 import type { PrintColour } from "../print/PrintColour";
 import type { PrintFont } from "../print/PrintFont";
@@ -12,19 +9,43 @@ import { PrintPortal } from "../print/PrintPortal";
 import { PrintPreviewBar } from "../print/PrintPreviewBar";
 import { notifyPrintedHistory } from "../printHistory/notifyPrintedHistory";
 import { recordPrintedRecord } from "../printHistory/recordPrintedRecord";
-import { createSeededRandom } from "../rng/createSeededRandom";
-import { makeShortSeed } from "../rng/makeShortSeed";
+import { formatPackSearch } from "../search/formatPackSearch";
+import type { PackSearch } from "../search/PackSearch";
+import { packFromSearch } from "../search/packFromSearch";
+import { parsePackSearch } from "../search/parsePackSearch";
+import { replacePageSearch } from "../search/replacePageSearch";
 import { browserStore } from "../storage/browserStore";
 import { PracticeForm } from "./PracticeForm";
 
+const boot = parsePackSearch(
+  typeof window === "undefined" ? "" : window.location.search,
+);
+const booted =
+  boot && typeof localStorage !== "undefined"
+    ? packFromSearch(boot, localStorage)
+    : null;
+
 export function PracticePackTools() {
   const store = browserStore();
-  const [tables, setTables] = useState<number[]>([2, 5, 10]);
-  const [stage, setStage] = useState<Stage>("multiply");
-  const [includeAnswers, setIncludeAnswers] = useState(false);
-  const [font, setFont] = useState<PrintFont>("clear");
-  const [colour, setColour] = useState<PrintColour>("ink");
-  const [pack, setPack] = useState<PracticePack | null>(null);
+  const [tables, setTables] = useState<number[]>(
+    booted?.pack.tables ?? boot?.tables ?? [2, 5, 10],
+  );
+  const [stage, setStage] = useState<Stage>(
+    booted?.pack.stage ?? boot?.stage ?? "multiply",
+  );
+  const [includeAnswers, setIncludeAnswers] = useState(
+    boot?.includeAnswers ?? false,
+  );
+  const [font, setFont] = useState<PrintFont>(boot?.font ?? "clear");
+  const [colour, setColour] = useState<PrintColour>(boot?.colour ?? "ink");
+  const [pack, setPack] = useState<PracticePack | null>(booted?.pack ?? null);
+
+  useEffect(() => {
+    if (booted) {
+      document.title = booted.pack.machineId;
+      replacePageSearch(formatPackSearch(booted.request));
+    }
+  }, []);
 
   useEffect(() => {
     const onAfterPrint = () => {
@@ -61,20 +82,16 @@ export function PracticePackTools() {
       ?.scrollIntoView({ block: "start" });
   }, [pack]);
 
-  function generatePack() {
-    const sequence = nextSequence(
-      store,
-      sequenceKey("pack", tables.join("-"), stage),
-    );
-    const seed = makeShortSeed(createSeededRandom(`${Date.now()}-${sequence}`));
-    const nextPack = composePack({
-      tables,
-      stage,
-      seed,
-      sequence,
-    });
-    setPack(nextPack);
-    document.title = nextPack.machineId;
+  function showRequest(request: PackSearch) {
+    const next = packFromSearch(request, store);
+    setTables(next.pack.tables);
+    setStage(next.pack.stage);
+    setFont(request.font);
+    setColour(request.colour);
+    setIncludeAnswers(request.includeAnswers);
+    setPack(next.pack);
+    document.title = next.pack.machineId;
+    replacePageSearch(formatPackSearch(next.request));
   }
 
   return (
@@ -90,14 +107,22 @@ export function PracticePackTools() {
         onIncludeAnswers={setIncludeAnswers}
         onFont={setFont}
         onColour={setColour}
-        onGenerate={generatePack}
+        onGenerate={() =>
+          showRequest({
+            tables,
+            stage,
+            font,
+            colour,
+            includeAnswers,
+          })
+        }
         onPrint={() => window.print()}
         canPrint={Boolean(pack)}
       />
       {pack ? (
         <PrintPortal>
           <PrintPreviewBar
-            label="Four A4 pages. Print them, or save as PDF."
+            label="This link is the pack. Print it, or save as PDF."
             onPrint={() => window.print()}
           />
           <PrintPack pack={pack} font={font} colour={colour} />

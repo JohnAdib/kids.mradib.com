@@ -11,8 +11,7 @@ export function PrintsPage() {
           <p className="kicker">Prints</p>
           <h1>What this browser has printed.</h1>
           <p className="lede">
-            Saved after you print, not after you generate. Reprint the same
-            sheet from the seed.
+            Saved after you print. Each one is a link back to that sheet.
           </p>
         </section>
         <PrintsTools />

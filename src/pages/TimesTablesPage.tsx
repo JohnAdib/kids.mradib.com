@@ -12,7 +12,8 @@ export function TimesTablesPage() {
           <p className="kicker">Maths · Times tables</p>
           <h1>Practice pack</h1>
           <p className="lede">
-            Tick 1, 2 and 3 for a quiz of just those tables. Four A4 pages.
+            Tick the tables, or type them in the address bar:
+            <code> ?tables=1,2,3</code>
           </p>
           <TimesTablesSubnav current="pack" />
         </section>

@@ -4,7 +4,7 @@ Printable times tables for the first years of primary school, anywhere.
 
 I made this for my daughters. The usual generators were not good enough: a wall of the same sum, no division, and last term’s tables gone the moment a new one arrived. So I built a small printer for the kitchen table. If you like it, use it for your own children.
 
-A parent ticks the tables for the quiz — 1, 2 and 3 if that is what they have been practising — and prints four A4 pages, one activity on each. Each sheet has a name line and a score box (`______ / total`). The times table — a multiplication square on one A4 page — is a separate page. Prints stay in the header after you print.
+A parent ticks the tables for the quiz — or types them in the address bar as `?tables=1,2,3` — and prints four A4 pages, one activity on each. Each sheet has a name line and a score box (`______ / total`). That URL is the pack: open it again and you get the same pages. The times table is a separate page. Prints stay in the header after you print.
 
 The site is [kids.mradib.com](https://kids.mradib.com). The source is on [GitHub](https://github.com/JohnAdib/kids.mradib.com). Times tables first. Other subjects can follow as the children grow.
 

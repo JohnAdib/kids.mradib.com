@@ -198,6 +198,11 @@ h2 {
   color: var(--ink-soft);
 }
 
+.lede code {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.92em;
+}
+
 .card-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
@@ -433,6 +438,12 @@ input[type="number"] {
 .ghost-button {
   background: var(--mint);
   color: var(--ink);
+}
+
+a.ghost-button {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
 }
 
 @media (hover: hover) and (pointer: fine) {

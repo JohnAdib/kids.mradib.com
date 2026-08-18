@@ -12,7 +12,7 @@ export function TimesTablesChartsPage() {
           <p className="kicker">Maths · Times table</p>
           <h1>Times table</h1>
           <p className="lede">
-            One A4 multiplication square. Switch the colouring if you like.
+            One A4 square, or type <code>?to=10</code> in the address bar.
           </p>
           <TimesTablesSubnav current="chart" />
         </section>
