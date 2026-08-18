@@ -2,6 +2,7 @@ import { expect, test } from "vitest";
 import { challengeTitle } from "./challengeTitle";
 
 test("each challenge has a short name a child can say", () => {
+  expect(challengeTitle("timesFacts")).toBe("Times pop");
   expect(challengeTitle("wheel")).toBe("Pizza wheel");
   expect(challengeTitle("missingNumber")).toBe("Sneaky blanks");
   expect(challengeTitle("matchLines")).toBe("Join the pals");

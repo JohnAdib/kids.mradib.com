@@ -7,6 +7,7 @@ import { createMultiplesPathExercise } from "../exercises/multiplesPath/createMu
 import { createOddOneOutExercise } from "../exercises/oddOneOut/createOddOneOutExercise";
 import { createPartialSquareExercise } from "../exercises/partialSquare/createPartialSquareExercise";
 import { createSkipCountExercise } from "../exercises/skipCount/createSkipCountExercise";
+import { createTimesFactsExercise } from "../exercises/timesFacts/createTimesFactsExercise";
 import { createTrueFalseExercise } from "../exercises/trueFalse/createTrueFalseExercise";
 import { createWheelExercise } from "../exercises/wheel/createWheelExercise";
 import { createWhichIsMoreExercise } from "../exercises/whichIsMore/createWhichIsMoreExercise";
@@ -17,14 +18,14 @@ import { sortedUniqueNumbers } from "../numbers/sortedUniqueNumbers";
 import { createSeededRandom } from "../rng/createSeededRandom";
 import { collectAnswers } from "./collectAnswers";
 import { countMarkableItems } from "./countMarkableItems";
+import { defaultPackChallengeIds } from "./defaultPackChallengeIds";
 import { defaultPageCount } from "./defaultPageCount";
-import { fillPageKinds } from "./fillPageKinds";
 import { formatPackLabel } from "./formatPackLabel";
 import { formatPackMachineId } from "./formatPackMachineId";
 import type { PackChallengeId } from "./PackChallengeId";
 import type { PackExercise } from "./PackExercise";
 import type { PracticePack } from "./PracticePack";
-import { packChallengeIds } from "./packChallengeIds";
+import { packPageCombos } from "./packPageCombos";
 import { suggestSeconds } from "./suggestSeconds";
 
 type Input = {
@@ -41,17 +42,17 @@ export function composePack(input: Input): PracticePack {
   const chosen = tables.length > 0 ? tables : [2];
   const focus = chosen.reduce((max, table) => Math.max(max, table), 1);
   const pageCount = input.pageCount ?? defaultPageCount;
-  const challenges = [...(input.challenges ?? packChallengeIds)];
+  const challenges = [...(input.challenges ?? defaultPackChallengeIds)];
   const next = createSeededRandom(input.seed);
   const multiply = pickMultiplicationFacts({
     tables: chosen,
-    count: Math.max(40, pageCount * 12),
+    count: Math.max(40, pageCount * 36),
     next,
   });
   const divide = pickDivisionFacts(multiply, next);
-  const pages = fillPageKinds(challenges, pageCount, next).map((kind) => ({
-    exercises: [
-      buildExercise(kind, {
+  const pages = packPageCombos(challenges, pageCount, next).map((kinds) => ({
+    exercises: kinds.map((kind) =>
+      buildExercise(kind, kinds.length > 1, {
         focus,
         stage: input.stage,
         multiply,
@@ -59,7 +60,7 @@ export function composePack(input: Input): PracticePack {
         reviewTables: chosen,
         next,
       }),
-    ],
+    ),
   }));
   const exercises = pages.flatMap((page) => page.exercises);
   const itemCount = countMarkableItems(exercises);
@@ -88,6 +89,7 @@ export function composePack(input: Input): PracticePack {
 
 function buildExercise(
   kind: PackExercise["type"],
+  shared: boolean,
   ctx: {
     focus: number;
     stage: Stage;
@@ -98,6 +100,17 @@ function buildExercise(
   },
 ): PackExercise {
   switch (kind) {
+    case "timesFacts":
+      return {
+        type: "timesFacts",
+        items: createTimesFactsExercise({
+          multiply: ctx.multiply,
+          divide: ctx.divide,
+          stage: ctx.stage,
+          count: shared ? 18 : 36,
+          next: ctx.next,
+        }),
+      };
     case "missingNumber":
       return {
         type: "missingNumber",
@@ -105,7 +118,7 @@ function buildExercise(
           multiply: ctx.multiply,
           divide: ctx.divide,
           stage: ctx.stage,
-          count: 12,
+          count: shared ? 12 : 24,
           next: ctx.next,
         }),
       };
@@ -126,7 +139,7 @@ function buildExercise(
           multiply: ctx.multiply,
           divide: ctx.divide,
           stage: ctx.stage,
-          count: 8,
+          count: shared ? 6 : 10,
           next: ctx.next,
         }),
       };
@@ -143,7 +156,7 @@ function buildExercise(
         type: "factFamily",
         cards: createFactFamilyExercise({
           facts: ctx.multiply,
-          count: 4,
+          count: shared ? 4 : 6,
           next: ctx.next,
         }),
       };
@@ -152,7 +165,7 @@ function buildExercise(
         type: "trueFalse",
         items: createTrueFalseExercise({
           facts: ctx.multiply,
-          count: 6,
+          count: shared ? 6 : 12,
           next: ctx.next,
         }),
       };
@@ -161,14 +174,17 @@ function buildExercise(
         type: "skipCount",
         items: createSkipCountExercise({
           tables: ctx.reviewTables,
-          count: 6,
+          count: shared ? 4 : 8,
           next: ctx.next,
         }),
       };
     case "arrayDots":
       return {
         type: "arrayDots",
-        items: createArrayDotsExercise({ facts: ctx.multiply, count: 4 }),
+        items: createArrayDotsExercise({
+          facts: ctx.multiply,
+          count: shared ? 4 : 6,
+        }),
       };
     case "partialSquare":
       return {
@@ -183,14 +199,17 @@ function buildExercise(
         type: "oddOneOut",
         items: createOddOneOutExercise({
           facts: ctx.multiply,
-          count: 4,
+          count: shared ? 4 : 8,
           next: ctx.next,
         }),
       };
     case "whichIsMore":
       return {
         type: "whichIsMore",
-        items: createWhichIsMoreExercise({ facts: ctx.multiply, count: 6 }),
+        items: createWhichIsMoreExercise({
+          facts: ctx.multiply,
+          count: shared ? 6 : 12,
+        }),
       };
     case "multiplesPath":
       return {

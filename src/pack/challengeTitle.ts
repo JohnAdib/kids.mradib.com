@@ -2,6 +2,8 @@ import type { PackExercise } from "./PackExercise";
 
 export function challengeTitle(kind: PackExercise["type"]) {
   switch (kind) {
+    case "timesFacts":
+      return "Times pop";
     case "missingNumber":
       return "Sneaky blanks";
     case "wheel":

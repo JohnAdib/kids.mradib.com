@@ -7,6 +7,7 @@ import { MultiplesPathExercise } from "../exercises/multiplesPath/MultiplesPathE
 import { OddOneOutExercise } from "../exercises/oddOneOut/OddOneOutExercise";
 import { PartialSquareExercise } from "../exercises/partialSquare/PartialSquareExercise";
 import { SkipCountExercise } from "../exercises/skipCount/SkipCountExercise";
+import { TimesFactsExercise } from "../exercises/timesFacts/TimesFactsExercise";
 import { TrueFalseExercise } from "../exercises/trueFalse/TrueFalseExercise";
 import { WheelExercise } from "../exercises/wheel/WheelExercise";
 import { WhichIsMoreExercise } from "../exercises/whichIsMore/WhichIsMoreExercise";
@@ -18,6 +19,8 @@ type Props = {
 
 export function RenderPackExercise({ exercise }: Props) {
   switch (exercise.type) {
+    case "timesFacts":
+      return <TimesFactsExercise items={exercise.items} />;
     case "missingNumber":
       return <MissingNumberExercise items={exercise.items} />;
     case "wheel":

@@ -1,16 +1,16 @@
 type Props = {
-  brand: string;
+  title: string;
   label: string;
   itemCount?: number;
   showScore: boolean;
 };
 
-export function PageHeader({ brand, label, itemCount, showScore }: Props) {
+export function PageHeader({ title, label, itemCount, showScore }: Props) {
   return (
     <header className="print-header">
+      <h2 className="print-page-title">{title}</h2>
       <div className="print-meta-line">
-        <span className="print-brand-mark">{brand}</span>
-        <span className="print-pack-label">{label}</span>
+        <span className="print-brand-mark">Kids · {label}</span>
         <span className="print-name">
           Name{" "}
           <span className="print-line print-line-name">

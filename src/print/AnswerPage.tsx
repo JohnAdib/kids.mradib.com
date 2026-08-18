@@ -16,12 +16,7 @@ export function AnswerPage({ pack, font, colour }: Props) {
       className={`print-root is-preview print-font-${font} print-colour-${colour}`}
     >
       <PrintPage>
-        <PageHeader
-          brand="Kids · answers"
-          label={pack.label}
-          showScore={false}
-        />
-        <h3 className="exercise-title">Answer sheet</h3>
+        <PageHeader title="Answer sheet" label={pack.label} showScore={false} />
         <p className="exercise-help">Keep this page away from the child.</p>
         <ol className="answer-list">
           {pack.answers.map((answer, index) => (

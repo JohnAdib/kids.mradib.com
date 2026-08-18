@@ -1,4 +1,6 @@
+import { countMarkableItems } from "../pack/countMarkableItems";
 import type { PracticePack } from "../pack/PracticePack";
+import { pageComboTitle } from "../pack/pageComboTitle";
 import { PageHeader } from "./PageHeader";
 import type { PrintColour } from "./PrintColour";
 import type { PrintFont } from "./PrintFont";
@@ -16,22 +18,24 @@ export function PrintPack({ pack, font, colour }: Props) {
     <div
       className={`print-root is-preview print-font-${font} print-colour-${colour}`}
     >
-      {pack.pages.map((page, index) => (
-        <PrintPage key={index}>
-          <PageHeader
-            brand="Kids"
-            label={pack.label}
-            itemCount={pack.itemCount}
-            showScore
-          />
-          {page.exercises.map((exercise, exerciseIndex) => (
-            <RenderPackExercise
-              exercise={exercise}
-              key={`${exercise.type}-${exerciseIndex}`}
+      {pack.pages.map((page, index) => {
+        return (
+          <PrintPage key={index}>
+            <PageHeader
+              title={pageComboTitle(page.exercises.map((item) => item.type))}
+              label={pack.label}
+              itemCount={countMarkableItems(page.exercises)}
+              showScore
             />
-          ))}
-        </PrintPage>
-      ))}
+            {page.exercises.map((item, exerciseIndex) => (
+              <RenderPackExercise
+                exercise={item}
+                key={`${item.type}-${exerciseIndex}`}
+              />
+            ))}
+          </PrintPage>
+        );
+      })}
     </div>
   );
 }

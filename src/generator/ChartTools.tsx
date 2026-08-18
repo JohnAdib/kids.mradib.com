@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import type { ChartColouring } from "../charts/ChartColouring";
+import { formatChartTabTitle } from "../charts/formatChartTabTitle";
 import type { ReferenceChart } from "../charts/ReferenceChart";
 import { PrintChart } from "../print/PrintChart";
 import type { PrintColour } from "../print/PrintColour";
@@ -53,7 +54,7 @@ export function ChartTools() {
     seedRef.current = next.chart.seed;
     sequenceRef.current = next.chart.sequence;
     setChart(next.chart);
-    document.title = next.chart.machineId;
+    document.title = formatChartTabTitle(lastFactor);
     replacePageSearch(formatChartSearch(next.request));
   }, [lastFactor, includeZero, colouring, font, colour, store]);
 

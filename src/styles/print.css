@@ -1,6 +1,6 @@
 @page {
   size: A4 portrait;
-  margin: 12mm;
+  margin: 8mm;
 }
 
 .print-root {
@@ -32,7 +32,7 @@
 .print-page {
   display: flex;
   flex-direction: column;
-  gap: 5mm;
+  gap: 3mm;
   box-sizing: border-box;
 }
 
@@ -95,7 +95,7 @@
   .print-page {
     width: 210mm;
     height: 297mm;
-    padding: 10mm;
+    padding: 6mm;
     overflow: hidden;
     transform-origin: top left;
     transform: scale(calc(100cqi / 210mm));
@@ -105,15 +105,24 @@
 .print-header {
   flex: 0 0 auto;
   border-bottom: 1px solid currentColor;
-  padding-bottom: 3mm;
+  padding-bottom: 2mm;
+}
+
+.print-page-title {
+  font-family: var(--display);
+  font-size: 18pt;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin: 0 0 1.5mm;
+  line-height: 1.1;
 }
 
 .print-meta-line {
   display: flex;
   align-items: baseline;
-  gap: 4mm 8mm;
+  gap: 3mm 6mm;
   flex-wrap: nowrap;
-  font-size: 11pt;
+  font-size: 10pt;
 }
 
 .print-brand-mark {
@@ -154,15 +163,48 @@
 }
 
 .exercise-help {
-  margin: 0 0 4mm;
-  font-size: 11pt;
+  margin: 0 0 2mm;
+  font-size: 10.5pt;
+}
+
+.times-facts-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-auto-rows: 1fr;
+  gap: 2mm 4mm;
+  flex: 1;
+  align-content: stretch;
+}
+
+.times-fact {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5mm;
+  font-size: 13pt;
+  min-height: 0;
+  padding: 0 1mm;
+  font-variant-numeric: tabular-nums;
+}
+
+.fact-slot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 3.4ch;
+  min-height: 1.15em;
+  font-variant-numeric: tabular-nums;
+}
+
+.fact-slot.is-blank {
+  border-bottom: 1px solid currentColor;
 }
 
 .missing-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: repeat(6, 1fr);
-  gap: 4mm;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-auto-rows: 1fr;
+  gap: 2.5mm;
   flex: 1;
   align-content: stretch;
 }
@@ -173,13 +215,14 @@
 .odd-item {
   border: 1px solid currentColor;
   border-radius: 1.5mm;
-  padding: 3mm 4mm;
-  min-height: 18mm;
+  padding: 2mm 2.5mm;
+  min-height: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 3mm;
-  font-size: 15pt;
+  gap: 2mm;
+  font-size: 13pt;
+  font-variant-numeric: tabular-nums;
 }
 
 .wheel-row {
@@ -190,8 +233,13 @@
 }
 
 .wheel-svg {
-  width: 148mm;
-  height: 148mm;
+  width: 168mm;
+  height: 168mm;
+}
+
+.print-page > section:not(:only-of-type) .wheel-svg {
+  width: 92mm;
+  height: 92mm;
 }
 
 .match-board {
@@ -222,7 +270,7 @@
 .colour-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 3mm;
+  gap: 2mm;
   flex: 1;
   align-content: stretch;
 }
@@ -373,7 +421,7 @@
 .array-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 6mm;
+  gap: 4mm;
   flex: 1;
   align-content: stretch;
 }
@@ -383,7 +431,7 @@
 .array-card {
   border: 1px solid currentColor;
   border-radius: 3mm;
-  padding: 5mm;
+  padding: 3mm;
 }
 
 .partial-square {

@@ -1,5 +1,5 @@
-import { Blank } from "../../print/Blank";
 import { ExerciseHeading } from "../../print/ExerciseHeading";
+import { FactSlot } from "../../print/FactSlot";
 import type { MissingNumberItem } from "./MissingNumberItem";
 
 type Props = {
@@ -18,27 +18,14 @@ export function MissingNumberExercise({ items }: Props) {
             className="missing-item"
             key={`${item.left}-${item.right}-${index}`}
           >
-            <span>{cell(item, "left")}</span>
+            <FactSlot value={item.blank === "left" ? null : item.left} />
             <span>{item.symbol}</span>
-            <span>{cell(item, "right")}</span>
+            <FactSlot value={item.blank === "right" ? null : item.right} />
             <span>=</span>
-            <span>{cell(item, "result")}</span>
+            <FactSlot value={item.blank === "result" ? null : item.result} />
           </div>
         ))}
       </div>
     </section>
   );
-}
-
-function cell(item: MissingNumberItem, slot: MissingNumberItem["blank"]) {
-  if (item.blank === slot) {
-    return <Blank />;
-  }
-  if (slot === "left") {
-    return item.left;
-  }
-  if (slot === "right") {
-    return item.right;
-  }
-  return item.result;
 }

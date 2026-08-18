@@ -27,6 +27,7 @@
 
 html {
   background: var(--paper);
+  scrollbar-gutter: stable;
 }
 
 body {
@@ -78,9 +79,29 @@ a:hover {
   max-width: 28rem;
 }
 
+.workspace-empty {
+  width: 100%;
+  aspect-ratio: 210 / 297;
+  min-height: 0;
+  border: 2px dashed rgb(42 36 32 / 18%);
+  border-radius: 1rem;
+  display: grid;
+  place-items: center;
+  padding: 2rem;
+  background: rgb(255 250 243 / 70%);
+  text-align: center;
+}
+
+.workspace-empty p {
+  margin: 0;
+  max-width: 18rem;
+  font-weight: 700;
+  color: var(--ink-soft);
+}
+
 .print-workspace {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) min(20.5rem, 100%);
+  grid-template-columns: minmax(0, 1fr) 20.5rem;
   grid-template-areas: "preview form";
   gap: 1.25rem 1.5rem;
   align-items: start;
@@ -195,9 +216,13 @@ a:hover {
   margin-bottom: 2.5rem;
 }
 
+.site-shell-wide .site-header {
+  margin-bottom: 1.1rem;
+}
+
 .hero-compact {
-  gap: 0.65rem;
-  margin-bottom: 1.25rem;
+  gap: 0.5rem;
+  margin-bottom: 0.85rem;
 }
 
 .kicker {
@@ -450,28 +475,40 @@ input[type="number"] {
   min-height: 2.4rem;
 }
 
-.challenge-picks {
-  display: grid;
-  gap: 0.3rem;
+.challenge-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
   margin: 0;
   padding: 0;
   border: 0;
 }
 
-.challenge-picks legend {
+.challenge-chips-label {
+  width: 100%;
   font-weight: 700;
   font-size: 0.92rem;
-  margin-bottom: 0.35rem;
   padding: 0;
+  float: none;
 }
 
-.challenge-picks label {
-  display: flex;
-  align-items: center;
-  gap: 0.45rem;
-  font-size: 0.9rem;
+.chip-toggle {
+  border: 1.5px solid var(--line);
+  background: var(--paper);
+  border-radius: 999px;
+  padding: 0.28rem 0.7rem;
+  min-height: 2rem;
+  flex: 0 0 auto;
+  font: inherit;
+  font-size: 0.82rem;
   font-weight: 700;
-  min-height: 1.9rem;
+  cursor: pointer;
+}
+
+.chip-toggle.is-on {
+  background: var(--ink);
+  color: var(--white);
+  border-color: var(--ink);
 }
 
 .actions {

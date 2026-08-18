@@ -6,6 +6,7 @@ export function countMarkableItems(exercises: PackExercise[]) {
 
 function countOne(exercise: PackExercise) {
   switch (exercise.type) {
+    case "timesFacts":
     case "missingNumber":
       return exercise.items.length;
     case "wheel":

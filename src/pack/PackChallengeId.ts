@@ -1,4 +1,5 @@
 export type PackChallengeId =
+  | "timesFacts"
   | "missingNumber"
   | "wheel"
   | "matchLines"

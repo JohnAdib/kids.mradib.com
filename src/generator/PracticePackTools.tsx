@@ -1,14 +1,16 @@
 import { useEffect, useRef, useState } from "react";
 import type { Stage } from "../facts/Stage";
+import { defaultPackChallengeIds } from "../pack/defaultPackChallengeIds";
 import { defaultPageCount } from "../pack/defaultPageCount";
+import { formatPackTabTitle } from "../pack/formatPackTabTitle";
 import type { PackChallengeId } from "../pack/PackChallengeId";
 import type { PracticePack } from "../pack/PracticePack";
-import { packChallengeIds } from "../pack/packChallengeIds";
 import { AnswerPage } from "../print/AnswerPage";
 import type { PrintColour } from "../print/PrintColour";
 import type { PrintFont } from "../print/PrintFont";
 import { PrintPack } from "../print/PrintPack";
 import { PrintWorkspace } from "../print/PrintWorkspace";
+import { WorkspaceEmpty } from "../print/WorkspaceEmpty";
 import { notifyPrintedHistory } from "../printHistory/notifyPrintedHistory";
 import { recordPrintedRecord } from "../printHistory/recordPrintedRecord";
 import { formatPackSearch } from "../search/formatPackSearch";
@@ -18,7 +20,6 @@ import { replacePageSearch } from "../search/replacePageSearch";
 import { browserStore } from "../storage/browserStore";
 import { PracticeForm } from "./PracticeForm";
 
-const pageTitle = document.title;
 const boot = parsePackSearch(window.location.search);
 const booted = boot ? packFromSearch(boot, browserStore()) : null;
 
@@ -32,7 +33,7 @@ export function PracticePackTools() {
     boot?.pageCount ?? defaultPageCount,
   );
   const [challenges, setChallenges] = useState<PackChallengeId[]>(
-    boot?.challenges ?? [...packChallengeIds],
+    boot?.challenges ?? [...defaultPackChallengeIds],
   );
   const [includeAnswers, setIncludeAnswers] = useState(
     boot?.includeAnswers ?? false,
@@ -47,11 +48,12 @@ export function PracticePackTools() {
       sequenceRef.current = undefined;
       setPack(null);
       replacePageSearch("");
-      document.title = pageTitle;
+      document.title = formatPackTabTitle([]);
       return;
     }
     if (challenges.length === 0) {
       setPack(null);
+      document.title = formatPackTabTitle(tables);
       replacePageSearch(
         formatPackSearch({
           tables,
@@ -84,7 +86,7 @@ export function PracticePackTools() {
     seedRef.current = next.pack.seed;
     sequenceRef.current = next.pack.sequence;
     setPack(next.pack);
-    document.title = next.pack.machineId;
+    document.title = formatPackTabTitle(next.pack.tables);
     replacePageSearch(formatPackSearch(next.request));
   }, [
     tables,
@@ -146,20 +148,25 @@ export function PracticePackTools() {
     />
   );
 
-  if (!pack) {
-    return <div className="print-form-solo screen-only">{form}</div>;
-  }
+  const emptyPrompt =
+    tables.length === 0
+      ? "Tick a table. The A4 pages will land here."
+      : "Tick a challenge. The A4 pages will land here.";
 
   return (
     <PrintWorkspace
       form={form}
       preview={
-        <>
-          <PrintPack pack={pack} font={font} colour={colour} />
-          {includeAnswers ? (
-            <AnswerPage pack={pack} font={font} colour={colour} />
-          ) : null}
-        </>
+        pack ? (
+          <>
+            <PrintPack pack={pack} font={font} colour={colour} />
+            {includeAnswers ? (
+              <AnswerPage pack={pack} font={font} colour={colour} />
+            ) : null}
+          </>
+        ) : (
+          <WorkspaceEmpty prompt={emptyPrompt} />
+        )
       }
     />
   );

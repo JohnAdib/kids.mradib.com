@@ -1,5 +1,5 @@
+import { defaultPackChallengeIds } from "../pack/defaultPackChallengeIds";
 import { defaultPageCount } from "../pack/defaultPageCount";
-import { packChallengeIds } from "../pack/packChallengeIds";
 import type { PrintedRecord } from "../printHistory/PrintedRecord";
 import { packTablesFromRecord } from "../printHistory/packTablesFromRecord";
 import { chartPageHref } from "./chartPageHref";
@@ -26,7 +26,7 @@ export function printedRecordHref(record: PrintedRecord) {
     colour: record.colour,
     includeAnswers: record.includeAnswers,
     pageCount: record.pageCount ?? defaultPageCount,
-    challenges: record.challenges ?? [...packChallengeIds],
+    challenges: record.challenges ?? [...defaultPackChallengeIds],
     seed: record.seed,
     sequence: record.sequence,
   });

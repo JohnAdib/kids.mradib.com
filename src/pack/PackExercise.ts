@@ -12,6 +12,7 @@ import type { WheelSpec } from "../exercises/wheel/WheelSpec";
 import type { CompareItem } from "../exercises/whichIsMore/CompareItem";
 
 export type PackExercise =
+  | { type: "timesFacts"; items: MissingNumberItem[] }
   | { type: "missingNumber"; items: MissingNumberItem[] }
   | { type: "wheel"; wheels: WheelSpec[] }
   | { type: "matchLines"; pairs: MatchPair[] }

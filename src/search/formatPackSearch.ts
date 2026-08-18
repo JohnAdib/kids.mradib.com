@@ -1,5 +1,5 @@
+import { defaultPackChallengeIds } from "../pack/defaultPackChallengeIds";
 import { defaultPageCount } from "../pack/defaultPageCount";
-import { packChallengeIds } from "../pack/packChallengeIds";
 import { sameIdSet } from "../pack/sameIdSet";
 import { formatChallengesParam } from "./formatChallengesParam";
 import { formatTablesParam } from "./formatTablesParam";
@@ -14,7 +14,7 @@ export function formatPackSearch(request: PackSearch) {
   if (request.pageCount !== defaultPageCount) {
     params.set("pages", String(request.pageCount));
   }
-  if (!sameIdSet(request.challenges, packChallengeIds)) {
+  if (!sameIdSet(request.challenges, defaultPackChallengeIds)) {
     params.set("do", formatChallengesParam(request.challenges));
   }
   if (request.font !== "clear") {

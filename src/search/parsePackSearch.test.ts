@@ -1,4 +1,5 @@
 import { expect, test } from "vitest";
+import { defaultPackChallengeIds } from "../pack/defaultPackChallengeIds";
 import { formatPackSearch } from "./formatPackSearch";
 import { parsePackSearch } from "./parsePackSearch";
 
@@ -12,19 +13,7 @@ test("a typed tables list is a pack request", () => {
     seed: undefined,
     sequence: undefined,
     pageCount: 4,
-    challenges: [
-      "missingNumber",
-      "wheel",
-      "matchLines",
-      "colourMultiples",
-      "factFamily",
-      "skipCount",
-      "arrayDots",
-      "partialSquare",
-      "oddOneOut",
-      "whichIsMore",
-      "multiplesPath",
-    ],
+    challenges: defaultPackChallengeIds,
   });
 });
 
@@ -38,19 +27,7 @@ test("round trips a generated pack link", () => {
     seed: "k4p9",
     sequence: 4,
     pageCount: 4,
-    challenges: [
-      "missingNumber",
-      "wheel",
-      "matchLines",
-      "colourMultiples",
-      "factFamily",
-      "skipCount",
-      "arrayDots",
-      "partialSquare",
-      "oddOneOut",
-      "whichIsMore",
-      "multiplesPath",
-    ],
+    challenges: defaultPackChallengeIds,
   });
   expect(search).toBe(
     "tables=1-3&stage=mixed&font=handwriting&colour=colour&answers=1&seed=k4p9&n=4",

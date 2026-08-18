@@ -10,6 +10,7 @@ export function collectAnswers(exercises: PackExercise[]) {
 
 function answersFor(exercise: PackExercise): string[] {
   switch (exercise.type) {
+    case "timesFacts":
     case "missingNumber":
       return exercise.items.map(
         (item) =>

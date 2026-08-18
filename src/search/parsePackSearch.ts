@@ -1,5 +1,5 @@
 import type { Stage } from "../facts/Stage";
-import { packChallengeIds } from "../pack/packChallengeIds";
+import { defaultPackChallengeIds } from "../pack/defaultPackChallengeIds";
 import type { PrintColour } from "../print/PrintColour";
 import type { PrintFont } from "../print/PrintFont";
 import type { PackSearch } from "./PackSearch";
@@ -31,7 +31,7 @@ export function parsePackSearch(search: string): PackSearch | null {
     includeAnswers: params.get("answers") === "1",
     pageCount: parsePageCount(params.get("pages")),
     challenges: [
-      ...(parseChallengesParam(params.get("do")) ?? packChallengeIds),
+      ...(parseChallengesParam(params.get("do")) ?? defaultPackChallengeIds),
     ],
     seed: params.get("seed") || undefined,
     sequence: readPositiveInteger(params.get("n")),
