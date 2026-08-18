@@ -1,4 +1,5 @@
 import type { Stage } from "../facts/Stage";
+import { formatTableSet } from "./formatTableSet";
 
 const stageMarks: Record<Stage, string> = {
   multiply: "M",
@@ -6,6 +7,10 @@ const stageMarks: Record<Stage, string> = {
   mixed: "Mix",
 };
 
-export function formatPackLabel(focus: number, stage: Stage, sequence: number) {
-  return `${focus}× ${stageMarks[stage]} #${sequence}`;
+export function formatPackLabel(
+  tables: number[],
+  stage: Stage,
+  sequence: number,
+) {
+  return `${formatTableSet(tables)}× ${stageMarks[stage]} #${sequence}`;
 }

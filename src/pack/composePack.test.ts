@@ -3,16 +3,14 @@ import { composePack } from "./composePack";
 
 test("a pack is four pages and reprintable from the same seed", () => {
   const first = composePack({
-    focus: 7,
+    tables: [7],
     stage: "mixed",
-    includePrior: true,
     seed: "k4p9",
     sequence: 17,
   });
   const second = composePack({
-    focus: 7,
+    tables: [7],
     stage: "mixed",
-    includePrior: true,
     seed: "k4p9",
     sequence: 17,
   });
@@ -24,9 +22,8 @@ test("a pack is four pages and reprintable from the same seed", () => {
 
 test("each page is one activity, never a true-or-false quiz", () => {
   const pack = composePack({
-    focus: 2,
+    tables: [2],
     stage: "multiply",
-    includePrior: true,
     seed: "a4",
     sequence: 1,
   });
@@ -41,15 +38,25 @@ test("each page is one activity, never a true-or-false quiz", () => {
   expect(types).not.toContain("whichIsMore");
 });
 
-test("every focus table and stage finishes", () => {
+test("a 1, 2 and 3 pack is labelled as that quiz", () => {
+  const pack = composePack({
+    tables: [3, 1, 2],
+    stage: "multiply",
+    seed: "quiz",
+    sequence: 4,
+  });
+  expect(pack.tables).toEqual([1, 2, 3]);
+  expect(pack.label).toBe("1–3× M #4");
+});
+
+test("every table and stage finishes", () => {
   const stages = ["multiply", "divide", "mixed"] as const;
-  for (const focus of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]) {
+  for (const table of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]) {
     for (const stage of stages) {
       const pack = composePack({
-        focus,
+        tables: [table],
         stage,
-        includePrior: true,
-        seed: `f${focus}-${stage}`,
+        seed: `f${table}-${stage}`,
         sequence: 1,
       });
       expect(pack.pages).toHaveLength(4);

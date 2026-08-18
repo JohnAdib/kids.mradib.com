@@ -8,12 +8,11 @@ export function TimesTablesPage() {
     <div className="site-shell screen-only">
       <SiteHeader current="tables" />
       <main>
-        <section className="hero">
+        <section className="hero hero-compact">
           <p className="kicker">Maths · Times tables</p>
-          <h1>Four A4 pages of practice.</h1>
+          <h1>Practice pack</h1>
           <p className="lede">
-            Fill in the blanks. Name at the top, a suggested time, and a score
-            box for afterwards. The times table is a separate page.
+            Tick 1, 2 and 3 for a quiz of just those tables. Four A4 pages.
           </p>
           <TimesTablesSubnav current="pack" />
         </section>

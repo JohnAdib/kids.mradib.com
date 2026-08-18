@@ -1,51 +1,28 @@
-import { formatSuggestedTime } from "../pack/formatSuggestedTime";
-
 type Props = {
   brand: string;
   label: string;
-  machineId: string;
-  suggestedSeconds?: number;
   itemCount?: number;
   showScore: boolean;
 };
 
-export function PageHeader({
-  brand,
-  label,
-  machineId,
-  suggestedSeconds,
-  itemCount,
-  showScore,
-}: Props) {
+export function PageHeader({ brand, label, itemCount, showScore }: Props) {
   return (
     <header className="print-header">
-      <div className="print-brand">
-        <span>{brand}</span>
-        <span>
-          {label} · {machineId}
-        </span>
-      </div>
-      <div className="print-meta">
-        <span>
-          Name:{" "}
-          <span className="print-line">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <div className="print-meta-line">
+        <span className="print-brand-mark">{brand}</span>
+        <span className="print-pack-label">{label}</span>
+        <span className="print-name">
+          Name{" "}
+          <span className="print-line print-line-name">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           </span>
         </span>
         {showScore ? (
-          <span>Score: Correct ______ Incorrect ______ / {itemCount}</span>
-        ) : (
-          <span>Keep this chart nearby.</span>
-        )}
-        {showScore && suggestedSeconds !== undefined ? (
-          <span>Suggested time: {formatSuggestedTime(suggestedSeconds)}</span>
-        ) : null}
-        {showScore ? (
-          <span>
-            Time taken:{" "}
-            <span className="print-line">
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            </span>
+          <span className="print-score">
+            <span className="print-line print-line-score">
+              &nbsp;&nbsp;&nbsp;&nbsp;
+            </span>{" "}
+            / {itemCount}
           </span>
         ) : null}
       </div>

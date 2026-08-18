@@ -21,8 +21,6 @@ export function PrintPack({ pack, font, colour }: Props) {
           <PageHeader
             brand="Kids"
             label={pack.label}
-            machineId={pack.machineId}
-            suggestedSeconds={pack.suggestedSeconds}
             itemCount={pack.itemCount}
             showScore
           />

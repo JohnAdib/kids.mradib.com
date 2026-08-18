@@ -2,28 +2,16 @@ import { expect, test } from "vitest";
 import { createSeededRandom } from "../rng/createSeededRandom";
 import { pickMultiplicationFacts } from "./pickMultiplicationFacts";
 
-test("a 7 pack is about half 7 and half earlier tables", () => {
+test("a quiz of 1, 2 and 3 stays on those tables", () => {
   const facts = pickMultiplicationFacts({
-    focus: 7,
-    includePrior: true,
-    count: 100,
-    next: createSeededRandom("seven"),
-  });
-  const focusCount = facts.filter(
-    (fact) => fact.a === 7 || fact.b === 7,
-  ).length;
-  expect(focusCount).toBeGreaterThan(40);
-  expect(focusCount).toBeLessThan(70);
-  expect(facts.some((fact) => fact.a !== 7 && fact.b !== 7)).toBe(true);
-  expect(facts.some((fact) => fact.a === 2 || fact.b === 2)).toBe(true);
-});
-
-test("switching prior off yields only the focus table", () => {
-  const facts = pickMultiplicationFacts({
-    focus: 7,
-    includePrior: false,
+    tables: [1, 2, 3],
     count: 40,
-    next: createSeededRandom("only-seven"),
+    next: createSeededRandom("one-two-three"),
   });
-  expect(facts.every((fact) => fact.a === 7 || fact.b === 7)).toBe(true);
+  const allowed = new Set([1, 2, 3]);
+  expect(
+    facts.every((fact) => allowed.has(fact.a) || allowed.has(fact.b)),
+  ).toBe(true);
+  expect(facts.some((fact) => fact.a === 1 || fact.b === 1)).toBe(true);
+  expect(facts.some((fact) => fact.a === 3 || fact.b === 3)).toBe(true);
 });

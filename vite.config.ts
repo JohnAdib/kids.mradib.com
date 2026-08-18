@@ -17,6 +17,7 @@ export default defineConfig({
           import.meta.dirname,
           "maths/times-tables/charts/index.html",
         ),
+        prints: resolve(import.meta.dirname, "prints/index.html"),
       },
     },
   },

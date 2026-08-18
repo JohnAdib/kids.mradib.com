@@ -35,12 +35,9 @@ export function ChartForm({
   canPrint,
 }: Props) {
   return (
-    <section className="tool-panel">
+    <section className="tool-panel tool-panel-compact">
       <h2>Times table</h2>
-      <p>
-        One A4 square. Read along a row and a column to find the product. Not a
-        list of sums, and not a test.
-      </p>
+      <p>One A4 square. Row times column.</p>
       <div className="field-row">
         <label>
           Up to

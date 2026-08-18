@@ -1,5 +1,7 @@
+import { PrintsNavLink } from "./PrintsNavLink";
+
 type SiteHeaderProps = {
-  current: "home" | "maths" | "tables";
+  current: "home" | "maths" | "tables" | "prints";
 };
 
 export function SiteHeader({ current }: SiteHeaderProps) {
@@ -24,6 +26,7 @@ export function SiteHeader({ current }: SiteHeaderProps) {
         >
           Times tables
         </a>
+        <PrintsNavLink current={current === "prints"} />
       </nav>
     </header>
   );

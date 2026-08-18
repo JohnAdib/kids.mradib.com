@@ -17,12 +17,7 @@ export function PrintChart({ chart, font, colour }: Props) {
       className={`print-root is-preview print-font-${font} print-colour-${colour}`}
     >
       <PrintPage>
-        <PageHeader
-          brand="Kids"
-          label={chart.label}
-          machineId={chart.machineId}
-          showScore={false}
-        />
+        <PageHeader brand="Kids" label={chart.label} showScore={false} />
         <TimesTableGrid factors={chart.tables} colouring={chart.colouring} />
       </PrintPage>
     </div>

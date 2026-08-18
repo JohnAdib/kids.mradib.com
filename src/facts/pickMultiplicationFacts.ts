@@ -1,40 +1,20 @@
-import { priorTables } from "../curriculum/priorTables";
 import { shuffleCopy } from "../rng/shuffleCopy";
 import { buildFactPool } from "./buildFactPool";
-import { focusShare } from "./focusShare";
 import type { MultiplicationFact } from "./MultiplicationFact";
 
 type PickFactsInput = {
-  focus: number;
-  includePrior: boolean;
+  tables: number[];
   count: number;
   next: () => number;
 };
 
 export function pickMultiplicationFacts({
-  focus,
-  includePrior,
+  tables,
   count,
   next,
 }: PickFactsInput): MultiplicationFact[] {
-  const focusFacts = shuffleCopy(buildFactPool([focus]), next);
-  if (!includePrior) {
-    return takeCycled(focusFacts, count);
-  }
-  const prior = priorTables(focus);
-  if (prior.length === 0) {
-    return takeCycled(focusFacts, count);
-  }
-  const priorFacts = shuffleCopy(buildFactPool(prior), next);
-  const focusCount = Math.round(count * focusShare(focus));
-  const priorCount = count - focusCount;
-  return shuffleCopy(
-    [
-      ...takeCycled(focusFacts, focusCount),
-      ...takeCycled(priorFacts, priorCount),
-    ],
-    next,
-  );
+  const usable = tables.length > 0 ? tables : [2];
+  return takeCycled(shuffleCopy(buildFactPool(usable), next), count);
 }
 
 function takeCycled<T>(items: T[], count: number) {

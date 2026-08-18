@@ -10,28 +10,21 @@ import type { PrintFont } from "../print/PrintFont";
 import { PrintPack } from "../print/PrintPack";
 import { PrintPortal } from "../print/PrintPortal";
 import { PrintPreviewBar } from "../print/PrintPreviewBar";
-import { listPrintedRecordsByKind } from "../printHistory/listPrintedRecordsByKind";
-import type { PrintedRecord } from "../printHistory/PrintedRecord";
+import { notifyPrintedHistory } from "../printHistory/notifyPrintedHistory";
 import { recordPrintedRecord } from "../printHistory/recordPrintedRecord";
 import { createSeededRandom } from "../rng/createSeededRandom";
 import { makeShortSeed } from "../rng/makeShortSeed";
 import { browserStore } from "../storage/browserStore";
-import { PedagogySection } from "./PedagogySection";
 import { PracticeForm } from "./PracticeForm";
-import { PrintHistoryList } from "./PrintHistoryList";
 
 export function PracticePackTools() {
   const store = browserStore();
-  const [focus, setFocus] = useState(2);
+  const [tables, setTables] = useState<number[]>([2, 5, 10]);
   const [stage, setStage] = useState<Stage>("multiply");
-  const [includePrior, setIncludePrior] = useState(true);
   const [includeAnswers, setIncludeAnswers] = useState(false);
   const [font, setFont] = useState<PrintFont>("clear");
   const [colour, setColour] = useState<PrintColour>("ink");
   const [pack, setPack] = useState<PracticePack | null>(null);
-  const [history, setHistory] = useState<PrintedRecord[]>(() =>
-    listPrintedRecordsByKind(store, "pack"),
-  );
 
   useEffect(() => {
     const onAfterPrint = () => {
@@ -45,7 +38,7 @@ export function PracticePackTools() {
         seed: pack.seed,
         sequence: pack.sequence,
         focus: pack.focus,
-        tables: [pack.focus],
+        tables: pack.tables,
         stage: pack.stage,
         includePrior: pack.includePrior,
         includeAnswers,
@@ -53,7 +46,7 @@ export function PracticePackTools() {
         colour,
         printedAt: new Date().toISOString(),
       });
-      setHistory(listPrintedRecordsByKind(store, "pack"));
+      notifyPrintedHistory();
     };
     window.addEventListener("afterprint", onAfterPrint);
     return () => window.removeEventListener("afterprint", onAfterPrint);
@@ -68,20 +61,15 @@ export function PracticePackTools() {
       ?.scrollIntoView({ block: "start" });
   }, [pack]);
 
-  function generatePack(from?: PrintedRecord) {
-    const nextFocus = from?.focus ?? focus;
-    const nextStage = from?.stage ?? stage;
-    const nextPrior = from?.includePrior ?? includePrior;
-    const sequence =
-      from?.sequence ??
-      nextSequence(store, sequenceKey("pack", nextFocus, nextStage));
-    const seed =
-      from?.seed ??
-      makeShortSeed(createSeededRandom(`${Date.now()}-${sequence}`));
+  function generatePack() {
+    const sequence = nextSequence(
+      store,
+      sequenceKey("pack", tables.join("-"), stage),
+    );
+    const seed = makeShortSeed(createSeededRandom(`${Date.now()}-${sequence}`));
     const nextPack = composePack({
-      focus: nextFocus,
-      stage: nextStage,
-      includePrior: nextPrior,
+      tables,
+      stage,
       seed,
       sequence,
     });
@@ -89,46 +77,23 @@ export function PracticePackTools() {
     document.title = nextPack.machineId;
   }
 
-  function reprint(record: PrintedRecord) {
-    setFont(record.font);
-    setColour(record.colour);
-    setIncludeAnswers(record.includeAnswers);
-    if (record.focus && record.stage) {
-      setFocus(record.focus);
-      setStage(record.stage);
-      setIncludePrior(record.includePrior);
-    }
-    generatePack(record);
-  }
-
   return (
     <>
       <PracticeForm
-        focus={focus}
+        tables={tables}
         stage={stage}
-        includePrior={includePrior}
         includeAnswers={includeAnswers}
         font={font}
         colour={colour}
-        onFocus={setFocus}
+        onTables={setTables}
         onStage={setStage}
-        onIncludePrior={setIncludePrior}
         onIncludeAnswers={setIncludeAnswers}
         onFont={setFont}
         onColour={setColour}
-        onGenerate={() => generatePack()}
+        onGenerate={generatePack}
         onPrint={() => window.print()}
         canPrint={Boolean(pack)}
       />
-      <div className="stack-gap">
-        <PrintHistoryList
-          heading="Printed packs"
-          empty="Nothing printed yet on this browser. History is saved after you print."
-          records={history}
-          onReprint={reprint}
-        />
-      </div>
-      <PedagogySection />
       {pack ? (
         <PrintPortal>
           <PrintPreviewBar

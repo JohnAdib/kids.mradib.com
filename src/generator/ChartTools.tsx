@@ -11,15 +11,12 @@ import type { PrintColour } from "../print/PrintColour";
 import type { PrintFont } from "../print/PrintFont";
 import { PrintPortal } from "../print/PrintPortal";
 import { PrintPreviewBar } from "../print/PrintPreviewBar";
-import { listPrintedRecordsByKind } from "../printHistory/listPrintedRecordsByKind";
-import type { PrintedRecord } from "../printHistory/PrintedRecord";
+import { notifyPrintedHistory } from "../printHistory/notifyPrintedHistory";
 import { recordPrintedRecord } from "../printHistory/recordPrintedRecord";
 import { createSeededRandom } from "../rng/createSeededRandom";
 import { makeShortSeed } from "../rng/makeShortSeed";
 import { browserStore } from "../storage/browserStore";
 import { ChartForm } from "./ChartForm";
-import { PrintHistoryList } from "./PrintHistoryList";
-import { YearMap } from "./YearMap";
 
 export function ChartTools() {
   const store = browserStore();
@@ -29,9 +26,6 @@ export function ChartTools() {
   const [lastFactor, setLastFactor] = useState(12);
   const [colouring, setColouring] = useState<ChartColouring>("squares");
   const [chart, setChart] = useState<ReferenceChart | null>(null);
-  const [history, setHistory] = useState<PrintedRecord[]>(() =>
-    listPrintedRecordsByKind(store, "chart"),
-  );
 
   useEffect(() => {
     const onAfterPrint = () => {
@@ -52,7 +46,7 @@ export function ChartTools() {
         colour,
         printedAt: new Date().toISOString(),
       });
-      setHistory(listPrintedRecordsByKind(store, "chart"));
+      notifyPrintedHistory();
     };
     window.addEventListener("afterprint", onAfterPrint);
     return () => window.removeEventListener("afterprint", onAfterPrint);
@@ -67,40 +61,25 @@ export function ChartTools() {
       ?.scrollIntoView({ block: "start" });
   }, [chart]);
 
-  function generateChart(from?: PrintedRecord) {
-    const nextIncludeZero = from?.tables.includes(0) ?? includeZero;
-    const nextLast =
-      from && from.tables.length > 0 ? Math.max(...from.tables) : lastFactor;
-    const factors = composeChart({
-      includeZero: nextIncludeZero,
-      lastFactor: nextLast,
-    });
-    const nextColouring = from?.colouring ?? colouring;
-    const sequence =
-      from?.sequence ??
-      nextSequence(store, sequenceKey("chart", factors.join("-"), "all"));
-    const seed =
-      from?.seed ??
-      makeShortSeed(createSeededRandom(`${Date.now()}-chart-${sequence}`));
+  function generateChart() {
+    const factors = composeChart({ includeZero, lastFactor });
+    const sequence = nextSequence(
+      store,
+      sequenceKey("chart", factors.join("-"), "all"),
+    );
+    const seed = makeShortSeed(
+      createSeededRandom(`${Date.now()}-chart-${sequence}`),
+    );
     const nextChart: ReferenceChart = {
       label: formatChartLabel(factors, sequence),
       machineId: formatChartMachineId(factors, sequence, seed),
       seed,
       sequence,
       tables: factors,
-      colouring: nextColouring,
+      colouring,
     };
-    setIncludeZero(nextIncludeZero);
-    setLastFactor(nextLast === 10 ? 10 : 12);
-    setColouring(nextColouring);
     setChart(nextChart);
     document.title = nextChart.machineId;
-  }
-
-  function reprint(record: PrintedRecord) {
-    setFont(record.font);
-    setColour(record.colour);
-    generateChart(record);
   }
 
   return (
@@ -116,19 +95,10 @@ export function ChartTools() {
         onColouring={setColouring}
         onFont={setFont}
         onColour={setColour}
-        onGenerate={() => generateChart()}
+        onGenerate={generateChart}
         onPrint={() => window.print()}
         canPrint={Boolean(chart)}
       />
-      <div className="stack-gap">
-        <PrintHistoryList
-          heading="Printed tables"
-          empty="Nothing printed yet on this browser. History is saved after you print."
-          records={history}
-          onReprint={reprint}
-        />
-      </div>
-      <YearMap />
       {chart ? (
         <PrintPortal>
           <PrintPreviewBar

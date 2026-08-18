@@ -6,6 +6,7 @@ export type PracticePack = {
   machineId: string;
   seed: string;
   sequence: number;
+  tables: number[];
   focus: number;
   stage: Stage;
   includePrior: boolean;

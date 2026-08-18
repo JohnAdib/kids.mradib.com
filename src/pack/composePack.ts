@@ -1,4 +1,3 @@
-import { priorTables } from "../curriculum/priorTables";
 import { createArrayDotsExercise } from "../exercises/arrayDots/createArrayDotsExercise";
 import { createColourMultiplesExercise } from "../exercises/colourMultiples/createColourMultiplesExercise";
 import { createFactFamilyExercise } from "../exercises/factFamily/createFactFamilyExercise";
@@ -14,6 +13,7 @@ import { createWhichIsMoreExercise } from "../exercises/whichIsMore/createWhichI
 import { pickDivisionFacts } from "../facts/pickDivisionFacts";
 import { pickMultiplicationFacts } from "../facts/pickMultiplicationFacts";
 import type { Stage } from "../facts/Stage";
+import { sortedUniqueNumbers } from "../numbers/sortedUniqueNumbers";
 import { createSeededRandom } from "../rng/createSeededRandom";
 import { collectAnswers } from "./collectAnswers";
 import { countMarkableItems } from "./countMarkableItems";
@@ -24,33 +24,31 @@ import type { PracticePack } from "./PracticePack";
 import { suggestSeconds } from "./suggestSeconds";
 
 type Input = {
-  focus: number;
+  tables: number[];
   stage: Stage;
-  includePrior: boolean;
   seed: string;
   sequence: number;
 };
 
 export function composePack(input: Input): PracticePack {
+  const tables = sortedUniqueNumbers(input.tables);
+  const chosen = tables.length > 0 ? tables : [2];
+  const focus = chosen.reduce((max, table) => Math.max(max, table), 1);
   const next = createSeededRandom(input.seed);
   const multiply = pickMultiplicationFacts({
-    focus: input.focus,
-    includePrior: input.includePrior,
+    tables: chosen,
     count: 40,
     next,
   });
   const divide = pickDivisionFacts(multiply, next);
-  const reviewTables = input.includePrior
-    ? [input.focus, ...priorTables(input.focus)]
-    : [input.focus];
   const pages = layouts(input.stage).map((kinds) => ({
     exercises: kinds.map((kind) =>
       buildExercise(kind, {
-        focus: input.focus,
+        focus,
         stage: input.stage,
         multiply,
         divide,
-        reviewTables,
+        reviewTables: chosen,
         next,
       }),
     ),
@@ -58,18 +56,19 @@ export function composePack(input: Input): PracticePack {
   const exercises = pages.flatMap((page) => page.exercises);
   const itemCount = countMarkableItems(exercises);
   return {
-    label: formatPackLabel(input.focus, input.stage, input.sequence),
+    label: formatPackLabel(chosen, input.stage, input.sequence),
     machineId: formatPackMachineId(
-      input.focus,
+      chosen,
       input.stage,
       input.sequence,
       input.seed,
     ),
     seed: input.seed,
     sequence: input.sequence,
-    focus: input.focus,
+    tables: chosen,
+    focus,
     stage: input.stage,
-    includePrior: input.includePrior,
+    includePrior: chosen.length > 1,
     suggestedSeconds: suggestSeconds(itemCount, input.stage),
     itemCount,
     pages,
@@ -108,7 +107,7 @@ function buildExercise(
           multiply: ctx.multiply,
           divide: ctx.divide,
           stage: ctx.stage,
-          count: 8,
+          count: 12,
           next: ctx.next,
         }),
       };
@@ -129,7 +128,7 @@ function buildExercise(
           multiply: ctx.multiply,
           divide: ctx.divide,
           stage: ctx.stage,
-          count: 6,
+          count: 8,
           next: ctx.next,
         }),
       };
@@ -164,7 +163,7 @@ function buildExercise(
         type: "skipCount",
         items: createSkipCountExercise({
           tables: ctx.reviewTables,
-          count: 4,
+          count: 6,
           next: ctx.next,
         }),
       };

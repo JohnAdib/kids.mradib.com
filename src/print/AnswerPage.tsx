@@ -19,7 +19,6 @@ export function AnswerPage({ pack, font, colour }: Props) {
         <PageHeader
           brand="Kids · answers"
           label={pack.label}
-          machineId={pack.machineId}
           showScore={false}
         />
         <h3 className="exercise-title">Answer sheet</h3>

@@ -8,12 +8,11 @@ export function TimesTablesChartsPage() {
     <div className="site-shell screen-only">
       <SiteHeader current="tables" />
       <main>
-        <section className="hero">
+        <section className="hero hero-compact">
           <p className="kicker">Maths · Times table</p>
-          <h1>The square, on one A4 page.</h1>
+          <h1>Times table</h1>
           <p className="lede">
-            A multiplication table. Row times column. Switch the colouring if
-            you want the squares, the shells, or a plain grid.
+            One A4 multiplication square. Switch the colouring if you like.
           </p>
           <TimesTablesSubnav current="chart" />
         </section>

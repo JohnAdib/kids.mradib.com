@@ -7,10 +7,11 @@ const stageCodes: Record<Stage, string> = {
 };
 
 export function formatPackMachineId(
-  focus: number,
+  tables: number[],
   stage: Stage,
   sequence: number,
   seed: string,
 ) {
+  const focus = tables.length > 0 ? tables.join("-") : "2";
   return `${focus}-${stageCodes[stage]}-${sequence}-${seed}`;
 }

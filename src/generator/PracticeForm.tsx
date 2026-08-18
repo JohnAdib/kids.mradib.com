@@ -1,18 +1,17 @@
 import type { Stage } from "../facts/Stage";
+import { toggleSortedNumber } from "../numbers/toggleSortedNumber";
 import type { PrintColour } from "../print/PrintColour";
 import type { PrintFont } from "../print/PrintFont";
 import { PrintSettings } from "./PrintSettings";
 
 type Props = {
-  focus: number;
+  tables: number[];
   stage: Stage;
-  includePrior: boolean;
   includeAnswers: boolean;
   font: PrintFont;
   colour: PrintColour;
-  onFocus: (focus: number) => void;
+  onTables: (tables: number[]) => void;
   onStage: (stage: Stage) => void;
-  onIncludePrior: (value: boolean) => void;
   onIncludeAnswers: (value: boolean) => void;
   onFont: (font: PrintFont) => void;
   onColour: (colour: PrintColour) => void;
@@ -22,15 +21,13 @@ type Props = {
 };
 
 export function PracticeForm({
-  focus,
+  tables,
   stage,
-  includePrior,
   includeAnswers,
   font,
   colour,
-  onFocus,
+  onTables,
   onStage,
-  onIncludePrior,
   onIncludeAnswers,
   onFont,
   onColour,
@@ -39,26 +36,22 @@ export function PracticeForm({
   canPrint,
 }: Props) {
   return (
-    <section className="tool-panel">
+    <section className="tool-panel tool-panel-compact">
       <h2>Practice pack</h2>
-      <p>
-        Four A4 pages. One activity on each page. Earlier tables stay in the mix
-        unless you switch them off.
-      </p>
+      <p>Tick the tables for this quiz. Four A4 pages.</p>
+      <div className="table-picks">
+        {Array.from({ length: 12 }, (_, i) => i + 1).map((table) => (
+          <label key={table}>
+            <input
+              type="checkbox"
+              checked={tables.includes(table)}
+              onChange={() => onTables(toggleSortedNumber(tables, table))}
+            />
+            {table}
+          </label>
+        ))}
+      </div>
       <div className="field-row">
-        <label>
-          Focus table
-          <select
-            value={focus}
-            onChange={(event) => onFocus(Number(event.target.value))}
-          >
-            {Array.from({ length: 12 }, (_, i) => i + 1).map((table) => (
-              <option value={table} key={table}>
-                {table} times table
-              </option>
-            ))}
-          </select>
-        </label>
         <label>
           Stage
           <select
@@ -71,14 +64,12 @@ export function PracticeForm({
           </select>
         </label>
       </div>
-      <label className="check-row">
-        <input
-          type="checkbox"
-          checked={includePrior}
-          onChange={(event) => onIncludePrior(event.target.checked)}
-        />
-        Keep practising earlier tables
-      </label>
+      <PrintSettings
+        font={font}
+        colour={colour}
+        onFont={onFont}
+        onColour={onColour}
+      />
       <label className="check-row">
         <input
           type="checkbox"
@@ -87,14 +78,13 @@ export function PracticeForm({
         />
         Include answer sheet
       </label>
-      <PrintSettings
-        font={font}
-        colour={colour}
-        onFont={onFont}
-        onColour={onColour}
-      />
       <div className="actions">
-        <button className="primary-button" type="button" onClick={onGenerate}>
+        <button
+          className="primary-button"
+          type="button"
+          onClick={onGenerate}
+          disabled={tables.length === 0}
+        >
           Generate pack
         </button>
         <button
