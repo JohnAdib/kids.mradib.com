@@ -12,7 +12,7 @@ export function WhichIsMoreExercise({ items }: Props) {
       <ExerciseHeading kind="whichIsMore">
         Write &gt;, &lt; or = in the box.
       </ExerciseHeading>
-      <div className="missing-grid">
+      <div className="compare-grid">
         {items.map((item, index) => (
           <div className="compare-item" key={`${item.leftText}-${index}`}>
             <span>{item.leftText}</span>
