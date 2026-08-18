@@ -1,39 +1,38 @@
 # Kids
 
-Home practice for UK primary children. First subject: **maths**, starting with times tables and division.
+Printable home practice for UK primary children. Built for the kitchen table, not for another screen.
 
-Live host later: [kids.mradib.com](https://kids.mradib.com). This repo is the whole site.
+Most times-tables generators dump fifty of the same sum on a page. The child can chant 7 for a week and quietly forget 4. Division is treated as a different subject. There is no name line, no timer, no way to mark the sheet, and no fridge chart of *only* the tables that child actually needs.
 
-## Try it locally
+Kids exists to fix that. A parent picks a table and a stage — multiplication, then division, then mixed — and prints four mixed pages. A pack whose focus is 7 is a lot of 7 **and** a lot of the tables already earned. Last term’s facts stay alive while the new one is learned. Speed is part of mastery, so each sheet has a suggested time, a space for time taken, and a score box.
+
+The site is [kids.mradib.com](https://kids.mradib.com). Maths (times tables) is first. Other subjects can follow as the children grow.
+
+## Pedagogy
+
+A child has mastered a table when three things are true: they answer quickly without counting up, they can undo the fact (division), and they can still do last term’s tables while they learn the new one.
+
+We teach in that order on purpose. Multiplication first. Division next, as the same fact backwards. Then mixed, so the page layout cannot give the answer away. Year 2–6 labels on the site are a map, not a cage.
+
+## Contribute
+
+Issues and pull requests are welcome: another activity type, a clearer print layout, a translation, a bug you hit at the kitchen table. Fork the repo, make a branch, open a PR against `main`. CI runs lint, types, tests, and a production build on every pull request.
+
+## Run it locally
 
 ```bash
+git clone https://github.com/JohnAdib/kids.mradib.com.git
+cd kids.mradib.com
 npm install
 npm run dev
 ```
 
-Open:
-
-- http://localhost:5173/ — hub
-- http://localhost:5173/maths/ — maths
-- http://localhost:5173/maths/times-tables/ — packs and charts
-
-Print from the times tables page. Choose **Save as PDF** in the browser dialog if you want a file. History is stored in this browser after you print, not after you generate.
+Then open [http://localhost:5173/maths/times-tables/](http://localhost:5173/maths/times-tables/). Print from the browser (Save as PDF if you want a file). History is stored in that browser after you print, not after you generate.
 
 ```bash
 npm test
 npm run lint
 npm run build
-npm run preview
 ```
 
-CI (`.github/workflows/ci.yml`) runs lint, types, tests, and build on every pull request and on every push to `main`. A green push to `main` also deploys `dist` to GitHub Pages at [kids.mradib.com](https://kids.mradib.com).
-
-## What it prints
-
-- A four-page practice pack for one focus table (multiplication, division, or mixed), with earlier tables kept in the mix
-- An optional answer page
-- A fridge chart for a year set or any custom set such as 2, 3, 5 and 10
-
-## Pedagogy
-
-A child has mastered a table when they are quick, they can undo the fact (division), and last term’s tables have not gone rusty. A 7 pack is therefore a lot of 7 and a lot of the tables taught before 7.
+A green push to `main` deploys to [kids.mradib.com](https://kids.mradib.com).
