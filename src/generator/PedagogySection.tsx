@@ -27,9 +27,9 @@ export function PedagogySection() {
           the rest stand on. We never ask anyone to divide by zero.
         </p>
         <p>
-          Year labels on this site are a map, not a cage. A family can sit above
-          that map. The generator still follows the same rule: the new table,
-          plus serious practice of what came before.
+          The year map is a guide, not a cage. Skip ahead if a child is ready.
+          The generator still follows the same rule: the new table, plus serious
+          practice of what came before.
         </p>
       </div>
     </section>

@@ -1,7 +1,10 @@
 export function SiteFooter() {
   return (
     <footer className="site-footer">
-      <p>Kids is a home practice shelf for UK primary school. Maths first.</p>
+      <p>
+        Kids is printable times tables for the first years of school. Maths
+        first.
+      </p>
     </footer>
   );
 }
