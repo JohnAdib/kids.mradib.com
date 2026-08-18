@@ -12,8 +12,9 @@ function countOne(exercise: PackExercise) {
       return exercise.wheels.reduce(
         (sum, wheel) =>
           sum +
-          wheel.sectors.filter((sector) => sector.inner === null || sector.outer === null)
-            .length,
+          wheel.sectors.filter(
+            (sector) => sector.inner === null || sector.outer === null,
+          ).length,
         0,
       );
     case "matchLines":
@@ -31,7 +32,8 @@ function countOne(exercise: PackExercise) {
     case "arrayDots":
       return exercise.items.length;
     case "partialSquare":
-      return exercise.square.cells.flat().filter((cell) => cell === null).length;
+      return exercise.square.cells.flat().filter((cell) => cell === null)
+        .length;
     case "oddOneOut":
       return exercise.items.length;
     case "whichIsMore":

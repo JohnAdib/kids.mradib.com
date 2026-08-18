@@ -21,7 +21,8 @@ export function createMissingNumberExercise({
   const items: MissingNumberItem[] = [];
   for (let i = 0; i < count; i += 1) {
     const useDivide =
-      stage === "divide" || (stage === "mixed" && next() < 0.5 && divide.length > 0);
+      stage === "divide" ||
+      (stage === "mixed" && next() < 0.5 && divide.length > 0);
     if (useDivide && divide.length > 0) {
       const fact = divide[i % divide.length];
       if (!fact) {

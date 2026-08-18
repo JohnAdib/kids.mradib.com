@@ -1,19 +1,20 @@
 import { useEffect, useState } from "react";
-import { composeChart } from "../charts/composeChart";
+import { createPortal } from "react-dom";
 import type { ChartGroup } from "../charts/ChartGroup";
-import { formatChartLabel } from "../pack/formatChartLabel";
-import { formatChartMachineId } from "../pack/formatChartMachineId";
+import { composeChart } from "../charts/composeChart";
 import type { ReferenceChart } from "../charts/ReferenceChart";
 import { ukYearTables } from "../curriculum/ukYearTables";
 import type { Stage } from "../facts/Stage";
 import { composePack } from "../pack/composePack";
-import type { PracticePack } from "../pack/PracticePack";
+import { formatChartLabel } from "../pack/formatChartLabel";
+import { formatChartMachineId } from "../pack/formatChartMachineId";
 import { nextSequence } from "../pack/nextSequence";
+import type { PracticePack } from "../pack/PracticePack";
 import { sequenceKey } from "../pack/sequenceKey";
-import type { PrintColour } from "../print/PrintColour";
-import type { PrintFont } from "../print/PrintFont";
 import { AnswerPage } from "../print/AnswerPage";
 import { PrintChart } from "../print/PrintChart";
+import type { PrintColour } from "../print/PrintColour";
+import type { PrintFont } from "../print/PrintFont";
 import { PrintPack } from "../print/PrintPack";
 import { listPrintedRecords } from "../printHistory/listPrintedRecords";
 import type { PrintedRecord } from "../printHistory/PrintedRecord";
@@ -215,13 +216,26 @@ export function TimesTablesTools() {
       </div>
       <PedagogySection />
       <YearMap />
-      {pack ? <PrintPack pack={pack} font={font} colour={colour} /> : null}
-      {pack && includeAnswers ? (
-        <AnswerPage pack={pack} font={font} colour={colour} />
-      ) : null}
-      {chart ? (
-        <PrintChart chart={chart} groups={groups} font={font} colour={colour} />
-      ) : null}
+      {(pack || chart) &&
+        createPortal(
+          <>
+            {pack ? (
+              <PrintPack pack={pack} font={font} colour={colour} />
+            ) : null}
+            {pack && includeAnswers ? (
+              <AnswerPage pack={pack} font={font} colour={colour} />
+            ) : null}
+            {chart ? (
+              <PrintChart
+                chart={chart}
+                groups={groups}
+                font={font}
+                colour={colour}
+              />
+            ) : null}
+          </>,
+          document.body,
+        )}
     </>
   );
 }

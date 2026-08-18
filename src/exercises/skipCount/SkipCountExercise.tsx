@@ -14,7 +14,10 @@ export function SkipCountExercise({ items }: Props) {
         {items.map((item, index) => (
           <div className="skip-card" key={`${item.step}-${index}`}>
             {item.values.map((value, i) => (
-              <span key={i}>{value === null ? <Blank /> : value}{i < item.values.length - 1 ? ", " : ""}</span>
+              <span key={i}>
+                {value === null ? <Blank /> : value}
+                {i < item.values.length - 1 ? ", " : ""}
+              </span>
             ))}
           </div>
         ))}

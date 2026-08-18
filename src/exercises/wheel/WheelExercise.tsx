@@ -30,7 +30,13 @@ function WheelSvg({ wheel }: { wheel: WheelSpec }) {
   const inner = 48;
   const sectors = wheel.sectors.length;
   return (
-    <svg className="wheel-svg" viewBox={`0 0 ${size} ${size}`}>
+    <svg
+      className="wheel-svg"
+      viewBox={`0 0 ${size} ${size}`}
+      role="img"
+      aria-label={`${wheel.center} times table wheel`}
+    >
+      <title>{`${wheel.center} times table wheel`}</title>
       {wheel.sectors.map((sector, index) => {
         const start = (index / sectors) * Math.PI * 2 - Math.PI / 2;
         const end = ((index + 1) / sectors) * Math.PI * 2 - Math.PI / 2;
@@ -94,6 +100,7 @@ function annulus(
   end: number,
 ) {
   const large = end - start > Math.PI ? 1 : 0;
-  const p = (r: number, a: number) => `${cx + Math.cos(a) * r},${cy + Math.sin(a) * r}`;
+  const p = (r: number, a: number) =>
+    `${cx + Math.cos(a) * r},${cy + Math.sin(a) * r}`;
   return `M ${p(r2, start)} A ${r2} ${r2} 0 ${large} 1 ${p(r2, end)} L ${p(r1, end)} A ${r1} ${r1} 0 ${large} 0 ${p(r1, start)} Z`;
 }

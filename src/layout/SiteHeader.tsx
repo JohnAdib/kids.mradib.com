@@ -12,7 +12,10 @@ export function SiteHeader({ current }: SiteHeaderProps) {
         <a href="/" aria-current={current === "home" ? "page" : undefined}>
           Home
         </a>
-        <a href="/maths/" aria-current={current === "maths" ? "page" : undefined}>
+        <a
+          href="/maths/"
+          aria-current={current === "maths" ? "page" : undefined}
+        >
           Maths
         </a>
         <a

@@ -1,0 +1,9 @@
+name: Build
+description: Typecheck and build the static site into dist
+
+runs:
+  using: composite
+  steps:
+    - name: Build
+      shell: bash
+      run: npm run build

@@ -12,7 +12,10 @@ export function ArrayDotsExercise({ items }: Props) {
       <p className="exercise-help">Count the dots, then write the fact.</p>
       <div className="array-row">
         {items.map((item, index) => (
-          <div className="array-card" key={`${item.rows}x${item.cols}-${index}`}>
+          <div
+            className="array-card"
+            key={`${item.rows}x${item.cols}-${index}`}
+          >
             <div
               style={{
                 display: "grid",

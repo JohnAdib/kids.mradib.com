@@ -1,4 +1,4 @@
-import { ukYearTables } from "../curriculum/ukYearTables";
+import type { ukYearTables } from "../curriculum/ukYearTables";
 
 type Props = {
   year: keyof typeof ukYearTables | "custom";

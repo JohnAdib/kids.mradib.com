@@ -1,0 +1,14 @@
+name: Deploy Pages
+description: Deploy the uploaded Pages artifact
+
+outputs:
+  page_url:
+    description: Published site URL
+    value: ${{ steps.deployment.outputs.page_url }}
+
+runs:
+  using: composite
+  steps:
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4

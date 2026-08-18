@@ -1,0 +1,9 @@
+name: Test
+description: Run the Vitest suite
+
+runs:
+  using: composite
+  steps:
+    - name: Run tests
+      shell: bash
+      run: npm test

@@ -12,7 +12,10 @@ export function MissingNumberExercise({ items }: Props) {
       <p className="exercise-help">Any part of the fact can be empty.</p>
       <div className="missing-grid">
         {items.map((item, index) => (
-          <div className="missing-item" key={`${item.left}-${item.right}-${index}`}>
+          <div
+            className="missing-item"
+            key={`${item.left}-${item.right}-${index}`}
+          >
             <span>{cell(item, "left")}</span>
             <span>{item.symbol}</span>
             <span>{cell(item, "right")}</span>

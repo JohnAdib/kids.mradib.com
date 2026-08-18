@@ -1,0 +1,9 @@
+name: Typecheck
+description: Run the TypeScript compiler with noEmit
+
+runs:
+  using: composite
+  steps:
+    - name: Check types
+      shell: bash
+      run: npm run typecheck
