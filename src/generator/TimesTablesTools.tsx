@@ -202,7 +202,7 @@ export function TimesTablesTools() {
           canPrint={Boolean(chart)}
         />
       </div>
-      <section className="tool-panel" style={{ marginTop: "1rem" }}>
+      <section className="tool-panel stack-gap">
         <h2>Print look</h2>
         <PrintSettings
           font={font}
@@ -211,7 +211,7 @@ export function TimesTablesTools() {
           onColour={setColour}
         />
       </section>
-      <div style={{ marginTop: "1rem" }}>
+      <div className="stack-gap">
         <PrintHistoryList records={history} onReprint={reprint} />
       </div>
       <PedagogySection />

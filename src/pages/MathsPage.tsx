@@ -26,13 +26,13 @@ export function MathsPage() {
           </a>
         </div>
         <section className="section">
-          <h2>Pedagogy</h2>
+          <h2>How we teach</h2>
           <div className="pedagogy-block">
             <p>
-              A child has mastered a table when three things are true: they can
-              answer quickly without counting up, they can undo the fact
-              (division), and they can still do last term’s tables while they
-              learn the new one.
+              The pedagogy is the same wherever you are. A child has mastered a
+              table when three things are true: they can answer quickly without
+              counting up, they can undo the fact (division), and they can still
+              do last term’s tables while they learn the new one.
             </p>
             <p>
               That is why a 7 pack is not a 7-only test. It is a lot of 7, and a

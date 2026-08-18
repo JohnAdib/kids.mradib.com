@@ -1,11 +1,12 @@
 export function PedagogySection() {
   return (
-    <section className="section" id="pedagogy">
-      <h2>Pedagogy</h2>
+    <section className="section" id="how-we-teach">
+      <h2>How we teach</h2>
       <div className="pedagogy-block">
         <p>
-          Times tables are not a poem to chant and forget. They are the tools
-          for almost every later bit of maths — money, time, fractions, long
+          The pedagogy is simple, and it is the whole point of this site. Times
+          tables are not a poem to chant and forget. They are the tools for
+          almost every later bit of maths — money, time, fractions, long
           multiplication. A child is a master of a table when three things are
           true: they can answer quickly without counting up, they can undo the
           fact (division), and they can still do last term’s tables while they

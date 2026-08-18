@@ -51,14 +51,20 @@
     display: grid;
     gap: 1.5rem;
     margin: 2rem auto 4rem;
-    width: min(210mm, 100%);
+    width: min(210mm, calc(100% - 1.5rem));
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 0.5rem;
   }
 
   .print-page {
     background: white;
     min-height: 270mm;
+    width: 210mm;
+    max-width: 210mm;
     padding: 12mm;
     box-shadow: 0 12px 40px rgb(42 36 32 / 12%);
+    box-sizing: border-box;
   }
 }
 
@@ -181,12 +187,44 @@
   gap: 5mm;
 }
 
+.family-row,
+.skip-row,
+.array-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5mm;
+}
+
 .family-card,
 .skip-card,
 .array-card {
   border: 1px solid currentColor;
   border-radius: 3mm;
   padding: 4mm;
+}
+
+@media screen and (max-width: 720px) {
+  .print-brand,
+  .print-meta,
+  .missing-grid,
+  .wheel-row,
+  .match-board,
+  .family-row,
+  .skip-row,
+  .array-row,
+  .chart-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .print-header,
+  .print-brand {
+    display: grid;
+  }
+
+  .wheel-svg {
+    width: min(88mm, 100%);
+    height: auto;
+  }
 }
 
 .partial-square {

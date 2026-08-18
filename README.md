@@ -8,9 +8,9 @@ A parent picks a table and a stage — multiplication, then division, then mixed
 
 The site is [kids.mradib.com](https://kids.mradib.com). Times tables first. Other subjects can follow as the children grow.
 
-## Pedagogy
+## How we teach
 
-A child has mastered a table when three things are true: they answer quickly without counting up, they can undo the fact (division), and they can still do last term’s tables while they learn the new one.
+The pedagogy is simple. A child has mastered a table when three things are true: they answer quickly without counting up, they can undo the fact (division), and they can still do last term’s tables while they learn the new one.
 
 We teach in that order on purpose. Multiplication first. Division next, as the same fact backwards. Then mixed, so the page layout cannot give the answer away.
 
