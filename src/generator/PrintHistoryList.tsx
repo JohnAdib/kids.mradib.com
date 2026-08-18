@@ -1,24 +1,29 @@
 import type { PrintedRecord } from "../printHistory/PrintedRecord";
 
 type Props = {
+  heading: string;
+  empty: string;
   records: PrintedRecord[];
   onReprint: (record: PrintedRecord) => void;
 };
 
-export function PrintHistoryList({ records, onReprint }: Props) {
+export function PrintHistoryList({
+  heading,
+  empty,
+  records,
+  onReprint,
+}: Props) {
   if (records.length === 0) {
     return (
       <section className="tool-panel">
-        <h2>Print history</h2>
-        <p>
-          Nothing printed yet on this browser. History is saved after you print.
-        </p>
+        <h2>{heading}</h2>
+        <p>{empty}</p>
       </section>
     );
   }
   return (
     <section className="tool-panel">
-      <h2>Print history</h2>
+      <h2>{heading}</h2>
       <p>
         These stayed on this computer. Reprint the same sheet from the seed.
       </p>
@@ -28,9 +33,7 @@ export function PrintHistoryList({ records, onReprint }: Props) {
             <span>
               {record.label}
               <br />
-              <small>
-                {record.kind} · {new Date(record.printedAt).toLocaleString()}
-              </small>
+              <small>{new Date(record.printedAt).toLocaleString()}</small>
             </span>
             <button
               className="ghost-button"

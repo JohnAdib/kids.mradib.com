@@ -1,14 +1,21 @@
 import type { ukYearTables } from "../curriculum/ukYearTables";
+import type { PrintColour } from "../print/PrintColour";
+import type { PrintFont } from "../print/PrintFont";
+import { PrintSettings } from "./PrintSettings";
 
 type Props = {
   year: keyof typeof ukYearTables | "custom";
   tables: number[];
   includeZeroAndOne: boolean;
   includeInverses: boolean;
+  font: PrintFont;
+  colour: PrintColour;
   onYear: (year: keyof typeof ukYearTables | "custom") => void;
   onToggleTable: (table: number) => void;
   onIncludeZeroAndOne: (value: boolean) => void;
   onIncludeInverses: (value: boolean) => void;
+  onFont: (font: PrintFont) => void;
+  onColour: (colour: PrintColour) => void;
   onGenerate: () => void;
   onPrint: () => void;
   canPrint: boolean;
@@ -19,10 +26,14 @@ export function ChartForm({
   tables,
   includeZeroAndOne,
   includeInverses,
+  font,
+  colour,
   onYear,
   onToggleTable,
   onIncludeZeroAndOne,
   onIncludeInverses,
+  onFont,
+  onColour,
   onGenerate,
   onPrint,
   canPrint,
@@ -31,8 +42,8 @@ export function ChartForm({
     <section className="tool-panel">
       <h2>Reference chart</h2>
       <p>
-        The full table, not a test. Pick a year group, or tick only 2, 3, 5 and
-        10.
+        A fridge sheet of the tables you choose. Not practice, and not a test —
+        just the facts to keep nearby.
       </p>
       <div className="field-row">
         <label>
@@ -84,6 +95,12 @@ export function ChartForm({
         />
         Show division next to each fact
       </label>
+      <PrintSettings
+        font={font}
+        colour={colour}
+        onFont={onFont}
+        onColour={onColour}
+      />
       <div className="actions">
         <button className="primary-button" type="button" onClick={onGenerate}>
           Generate chart

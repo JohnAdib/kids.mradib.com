@@ -1,3 +1,4 @@
+import { takeAscendingOutside } from "../../numbers/takeAscendingOutside";
 import { pickInteger } from "../../rng/pickInteger";
 import type { PathCell } from "./PathCell";
 
@@ -10,16 +11,16 @@ export function createMultiplesPathExercise({
   focus,
   next,
 }: Input): PathCell[] {
+  const table = new Set(Array.from({ length: 13 }, (_, i) => focus * i));
+  const decoys = takeAscendingOutside(table, 24);
   return Array.from({ length: 16 }, (_, index) => {
     const onPath = index === 0 || next() < 0.45;
     if (onPath) {
-      const multiple = focus * pickInteger(next, 1, 12);
-      return { value: multiple, onPath: true };
+      return { value: focus * pickInteger(next, 1, 12), onPath: true };
     }
-    let decoy = pickInteger(next, 1, focus * 12);
-    while (decoy % focus === 0) {
-      decoy = pickInteger(next, 1, focus * 12 + 7);
-    }
-    return { value: decoy, onPath: false };
+    return {
+      value: decoys[pickInteger(next, 0, decoys.length - 1)] ?? 1,
+      onPath: false,
+    };
   });
 }

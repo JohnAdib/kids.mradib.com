@@ -17,11 +17,19 @@ export function MathsPage() {
         </section>
         <div className="card-grid">
           <a className="pastel-card sky" href="/maths/times-tables/">
-            <span className="chip">Print</span>
+            <span className="chip">Practice</span>
             <h2>Times tables</h2>
             <p>
-              Practice packs and reference charts for 0 to 12, with division as
-              the same fact backwards.
+              Four A4 pages. One activity on each page. Multiplication, then
+              division, then mixed.
+            </p>
+          </a>
+          <a className="pastel-card butter" href="/maths/times-tables/charts/">
+            <span className="chip">Chart</span>
+            <h2>Reference chart</h2>
+            <p>
+              A fridge sheet of only the tables you want. The facts, not a
+              worksheet.
             </p>
           </a>
         </div>
@@ -35,8 +43,8 @@ export function MathsPage() {
               do last term’s tables while they learn the new one.
             </p>
             <p>
-              That is why a 7 pack is not a 7-only test. It is a lot of 7, and a
-              lot of 2, 3, 4, 5, 6, 8 and 10, on the same four pages.
+              That is why a 7 pack is not 7-only. It is a lot of 7, and a lot of
+              2, 3, 4, 5, 6, 8 and 10, on the same four pages.
             </p>
           </div>
         </section>

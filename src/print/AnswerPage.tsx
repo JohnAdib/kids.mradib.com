@@ -2,6 +2,7 @@ import type { PracticePack } from "../pack/PracticePack";
 import { PageHeader } from "./PageHeader";
 import type { PrintColour } from "./PrintColour";
 import type { PrintFont } from "./PrintFont";
+import { PrintPage } from "./PrintPage";
 
 type Props = {
   pack: PracticePack;
@@ -14,7 +15,7 @@ export function AnswerPage({ pack, font, colour }: Props) {
     <div
       className={`print-root is-preview print-font-${font} print-colour-${colour}`}
     >
-      <article className="print-page">
+      <PrintPage>
         <PageHeader
           brand="Kids · answers"
           label={pack.label}
@@ -28,7 +29,7 @@ export function AnswerPage({ pack, font, colour }: Props) {
             <li key={`${answer}-${index}`}>{answer}</li>
           ))}
         </ol>
-      </article>
+      </PrintPage>
     </div>
   );
 }

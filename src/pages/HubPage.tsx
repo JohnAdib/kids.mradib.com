@@ -23,7 +23,7 @@ export function HubPage() {
           <a className="pastel-card peach" href="/maths/times-tables/">
             <span className="chip">Ready now</span>
             <h2>Times tables</h2>
-            <p>Four-page packs, fridge charts, and a score box for you.</p>
+            <p>Four A4 practice pages, and a fridge chart next door.</p>
           </a>
         </div>
       </main>

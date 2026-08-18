@@ -36,7 +36,7 @@ export function composePack(input: Input): PracticePack {
   const multiply = pickMultiplicationFacts({
     focus: input.focus,
     includePrior: input.includePrior,
-    count: 90,
+    count: 40,
     next,
   });
   const divide = pickDivisionFacts(multiply, next);
@@ -81,27 +81,12 @@ type Kind = PackExercise["type"];
 
 function layouts(stage: Stage): Kind[][] {
   if (stage === "divide") {
-    return [
-      ["wheel", "missingNumber"],
-      ["matchLines", "trueFalse"],
-      ["factFamily", "missingNumber"],
-      ["oddOneOut", "whichIsMore"],
-    ];
+    return [["missingNumber"], ["wheel"], ["matchLines"], ["factFamily"]];
   }
   if (stage === "mixed") {
-    return [
-      ["wheel", "missingNumber"],
-      ["matchLines", "colourMultiples"],
-      ["skipCount", "partialSquare"],
-      ["factFamily", "trueFalse", "multiplesPath"],
-    ];
+    return [["missingNumber"], ["wheel"], ["matchLines"], ["skipCount"]];
   }
-  return [
-    ["wheel", "missingNumber"],
-    ["matchLines", "colourMultiples"],
-    ["skipCount", "arrayDots", "missingNumber"],
-    ["factFamily", "trueFalse", "whichIsMore"],
-  ];
+  return [["missingNumber"], ["wheel"], ["matchLines"], ["colourMultiples"]];
 }
 
 function buildExercise(
@@ -123,7 +108,7 @@ function buildExercise(
           multiply: ctx.multiply,
           divide: ctx.divide,
           stage: ctx.stage,
-          count: 9,
+          count: 8,
           next: ctx.next,
         }),
       };
@@ -133,7 +118,7 @@ function buildExercise(
         wheels: createWheelExercise({
           focus: ctx.focus,
           stage: ctx.stage,
-          count: 2,
+          count: 1,
           next: ctx.next,
         }),
       };
@@ -144,7 +129,7 @@ function buildExercise(
           multiply: ctx.multiply,
           divide: ctx.divide,
           stage: ctx.stage,
-          count: 8,
+          count: 6,
           next: ctx.next,
         }),
       };

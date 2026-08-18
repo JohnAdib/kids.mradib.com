@@ -1,6 +1,7 @@
-import { TimesTablesTools } from "../generator/TimesTablesTools";
+import { PracticePackTools } from "../generator/PracticePackTools";
 import { SiteFooter } from "../layout/SiteFooter";
 import { SiteHeader } from "../layout/SiteHeader";
+import { TimesTablesSubnav } from "../layout/TimesTablesSubnav";
 
 export function TimesTablesPage() {
   return (
@@ -9,14 +10,14 @@ export function TimesTablesPage() {
       <main>
         <section className="hero">
           <p className="kicker">Maths · Times tables</p>
-          <h1>Print the practice. Keep the old facts alive.</h1>
+          <h1>Four A4 pages of practice.</h1>
           <p className="lede">
-            Two tools: a four-page mixed pack, and a fridge chart of only the
-            tables you want. Write a name at the top, time the work, then mark
-            how many were true.
+            Fill in the blanks. Name at the top, a suggested time, and a score
+            box for afterwards. The fridge chart is a separate page.
           </p>
+          <TimesTablesSubnav current="pack" />
         </section>
-        <TimesTablesTools />
+        <PracticePackTools />
       </main>
       <SiteFooter />
     </div>

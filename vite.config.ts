@@ -13,6 +13,10 @@ export default defineConfig({
           import.meta.dirname,
           "maths/times-tables/index.html",
         ),
+        timesTablesCharts: resolve(
+          import.meta.dirname,
+          "maths/times-tables/charts/index.html",
+        ),
       },
     },
   },

@@ -4,6 +4,7 @@ import type { ReferenceChart } from "../charts/ReferenceChart";
 import { PageHeader } from "./PageHeader";
 import type { PrintColour } from "./PrintColour";
 import type { PrintFont } from "./PrintFont";
+import { PrintPage } from "./PrintPage";
 
 type Props = {
   chart: ReferenceChart;
@@ -19,7 +20,7 @@ export function PrintChart({ chart, groups, font, colour }: Props) {
       className={`print-root is-preview print-font-${font} print-colour-${colour}`}
     >
       {pages.map((pageGroups, pageIndex) => (
-        <article className="print-page" key={pageIndex}>
+        <PrintPage key={pageIndex}>
           <PageHeader
             brand="Kids"
             label={chart.label}
@@ -39,7 +40,7 @@ export function PrintChart({ chart, groups, font, colour }: Props) {
               </section>
             ))}
           </div>
-        </article>
+        </PrintPage>
       ))}
     </div>
   );
