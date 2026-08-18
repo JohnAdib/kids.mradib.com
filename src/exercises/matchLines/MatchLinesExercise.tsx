@@ -1,4 +1,5 @@
 import { ExerciseHeading } from "../../print/ExerciseHeading";
+import { rowLetter } from "../../print/rowLetter";
 import type { MatchPair } from "./MatchPair";
 
 type Props = {
@@ -6,25 +7,28 @@ type Props = {
 };
 
 export function MatchLinesExercise({ pairs }: Props) {
-  const left = [...pairs].sort((a, b) => a.leftOffset - b.leftOffset);
-  const right = [...pairs].sort((a, b) => a.rightOffset - b.rightOffset);
+  const facts = [...pairs].sort((a, b) => a.leftOffset - b.leftOffset);
+  const answers = [...pairs].sort((a, b) => a.rightOffset - b.rightOffset);
   return (
     <section>
       <ExerciseHeading kind="matchLines">
-        Draw a line from each fact to the matching number.
+        Draw a line from each fact to its answer.
       </ExerciseHeading>
       <div className="match-board">
-        <div className="match-col">
-          {left.map((pair) => (
-            <div className="match-chip" key={pair.left}>
-              {pair.left}
+        <div className="match-col match-col-facts">
+          {facts.map((pair, index) => (
+            <div className="match-row" key={`fact-${pair.leftOffset}`}>
+              <span className="match-mark">{rowLetter(index)}</span>
+              <span className="match-chip">{pair.left}</span>
+              <span className="match-dot" />
             </div>
           ))}
         </div>
-        <div className="match-col">
-          {right.map((pair) => (
-            <div className="match-chip" key={pair.right}>
-              {pair.right}
+        <div className="match-col match-col-answers">
+          {answers.map((pair) => (
+            <div className="match-row" key={`answer-${pair.rightOffset}`}>
+              <span className="match-dot" />
+              <span className="match-chip">{pair.right}</span>
             </div>
           ))}
         </div>

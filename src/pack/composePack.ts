@@ -140,7 +140,7 @@ function buildExercise(
           multiply: ctx.multiply,
           divide: ctx.divide,
           stage: ctx.stage,
-          count: shared ? 6 : 8,
+          count: shared ? 6 : 10,
           next: ctx.next,
         }),
       };

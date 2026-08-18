@@ -1,8 +1,10 @@
 import type { DivisionFact } from "../../facts/DivisionFact";
 import type { MultiplicationFact } from "../../facts/MultiplicationFact";
 import type { Stage } from "../../facts/Stage";
+import { takeDistinctBy } from "../../numbers/takeDistinctBy";
 import { shuffleCopy } from "../../rng/shuffleCopy";
 import type { MatchPair } from "./MatchPair";
+import { matchPairCandidates } from "./matchPairCandidates";
 
 type Input = {
   multiply: MultiplicationFact[];
@@ -19,39 +21,20 @@ export function createMatchLinesExercise({
   count,
   next,
 }: Input): MatchPair[] {
-  const pairs: MatchPair[] = [];
-  for (let i = 0; i < count; i += 1) {
-    const useDivide =
-      stage === "divide" ||
-      (stage === "mixed" && next() < 0.4 && divide.length > 0);
-    if (useDivide && divide.length > 0) {
-      const fact = divide[i % divide.length];
-      if (!fact) {
-        continue;
-      }
-      pairs.push({
-        left: `${fact.dividend} ÷ ${fact.divisor}`,
-        right: String(fact.quotient),
-        leftOffset: 0,
-        rightOffset: 0,
-      });
-      continue;
-    }
-    const fact = multiply[i % multiply.length];
-    if (!fact) {
-      continue;
-    }
-    pairs.push({
-      left: `${fact.a} × ${fact.b}`,
-      right: String(fact.product),
-      leftOffset: 0,
-      rightOffset: 0,
-    });
-  }
-  const leftOrder = shuffleCopy(pairs, next);
-  const rightOrder = shuffleCopy(pairs, next);
-  return pairs.map((pair) => ({
-    ...pair,
+  const candidates = shuffleCopy(
+    matchPairCandidates({ multiply, divide, stage }),
+    next,
+  );
+  const distinct = takeDistinctBy(
+    candidates,
+    (pair) => [`left:${pair.left}`, `right:${pair.right}`],
+    count,
+  );
+  const leftOrder = shuffleCopy(distinct, next);
+  const rightOrder = shuffleCopy(distinct, next);
+  return distinct.map((pair) => ({
+    left: pair.left,
+    right: pair.right,
     leftOffset: leftOrder.indexOf(pair),
     rightOffset: rightOrder.indexOf(pair),
   }));
