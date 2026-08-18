@@ -13,6 +13,7 @@ import { PrintWorkspace } from "../print/PrintWorkspace";
 import { WorkspaceEmpty } from "../print/WorkspaceEmpty";
 import { notifyPrintedHistory } from "../printHistory/notifyPrintedHistory";
 import { recordPrintedRecord } from "../printHistory/recordPrintedRecord";
+import { nextPackSeed } from "../rng/nextPackSeed";
 import { formatPackSearch } from "../search/formatPackSearch";
 import { packFromSearch } from "../search/packFromSearch";
 import { parsePackSearch } from "../search/parsePackSearch";
@@ -26,7 +27,6 @@ const booted = boot ? packFromSearch(boot, browserStore()) : null;
 
 export function PracticePackTools() {
   const store = browserStore();
-  const seedRef = useRef(booted?.pack.seed);
   const sequenceRef = useRef(booted?.pack.sequence);
   const [tables, setTables] = useState<number[]>(boot?.tables ?? []);
   const [stage, setStage] = useState<Stage>(boot?.stage ?? "multiply");
@@ -42,14 +42,17 @@ export function PracticePackTools() {
   const [font, setFont] = useState<PrintFont>(boot?.font ?? "clear");
   const [colour, setColour] = useState<PrintColour>(boot?.colour ?? "ink");
   const [pack, setPack] = useState<PracticePack | null>(booted?.pack ?? null);
+  const [seed, setSeed] = useState(booted?.pack.seed);
 
   useEffect(() => {
     if (tables.length === 0) {
-      seedRef.current = undefined;
       sequenceRef.current = undefined;
       setPack(null);
       replacePageSearch("");
       document.title = formatPackTabTitle([]);
+      if (seed !== undefined) {
+        setSeed(undefined);
+      }
       return;
     }
     if (challenges.length === 0) {
@@ -64,7 +67,7 @@ export function PracticePackTools() {
           includeAnswers,
           pageCount,
           challenges,
-          seed: seedRef.current,
+          seed,
           sequence: sequenceRef.current,
         }),
       );
@@ -79,16 +82,18 @@ export function PracticePackTools() {
         includeAnswers,
         pageCount,
         challenges,
-        seed: seedRef.current,
+        seed,
         sequence: sequenceRef.current,
       },
       store,
     );
-    seedRef.current = next.pack.seed;
     sequenceRef.current = next.pack.sequence;
     setPack(next.pack);
     document.title = formatPackTabTitle(next.pack.tables);
     replacePageSearch(formatPackSearch(next.request));
+    if (next.pack.seed !== seed) {
+      setSeed(next.pack.seed);
+    }
   }, [
     tables,
     stage,
@@ -98,6 +103,7 @@ export function PracticePackTools() {
     font,
     colour,
     store,
+    seed,
   ]);
 
   useEffect(() => {
@@ -153,23 +159,33 @@ export function PracticePackTools() {
       : "Tick a challenge. The A4 pages will land here.";
 
   return (
-    <PrintWorkspace
-      toolbar={
-        <PrintBar canPrint={pack !== null} onPrint={() => window.print()} />
-      }
-      form={form}
-      preview={
-        pack ? (
-          <>
-            <PrintPack pack={pack} font={font} colour={colour} />
-            {includeAnswers ? (
-              <AnswerPage pack={pack} font={font} colour={colour} />
-            ) : null}
-          </>
-        ) : (
-          <WorkspaceEmpty prompt={emptyPrompt} />
-        )
-      }
-    />
+    <>
+      <div className="page-heading screen-only">
+        <h1>Practice pack</h1>
+        <PrintBar
+          canPrint={pack !== null}
+          onPrint={() => window.print()}
+          onNewSheet={() => {
+            sequenceRef.current = (sequenceRef.current ?? 0) + 1;
+            setSeed(nextPackSeed());
+          }}
+        />
+      </div>
+      <PrintWorkspace
+        form={form}
+        preview={
+          pack ? (
+            <>
+              <PrintPack pack={pack} font={font} colour={colour} />
+              {includeAnswers ? (
+                <AnswerPage pack={pack} font={font} colour={colour} />
+              ) : null}
+            </>
+          ) : (
+            <WorkspaceEmpty prompt={emptyPrompt} />
+          )
+        }
+      />
+    </>
   );
 }

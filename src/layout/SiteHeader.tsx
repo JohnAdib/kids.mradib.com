@@ -1,7 +1,7 @@
 import { PrintsNavLink } from "./PrintsNavLink";
 
 type SiteHeaderProps = {
-  current: "home" | "maths" | "tables" | "prints";
+  current: "home" | "maths" | "pack" | "chart" | "prints";
 };
 
 export function SiteHeader({ current }: SiteHeaderProps) {
@@ -22,9 +22,15 @@ export function SiteHeader({ current }: SiteHeaderProps) {
         </a>
         <a
           href="/maths/times-tables/"
-          aria-current={current === "tables" ? "page" : undefined}
+          aria-current={current === "pack" ? "page" : undefined}
         >
-          Times tables
+          Practice pack
+        </a>
+        <a
+          href="/maths/times-tables/charts/"
+          aria-current={current === "chart" ? "page" : undefined}
+        >
+          Times table
         </a>
         <PrintsNavLink current={current === "prints"} />
       </nav>

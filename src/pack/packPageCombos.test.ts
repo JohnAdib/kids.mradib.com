@@ -14,7 +14,7 @@ test("one chosen challenge keeps a page to itself", () => {
 
 test("two shareable challenges sit together on a page", () => {
   const pages = packPageCombos(
-    ["timesFacts", "skipCount"],
+    ["missingNumber", "skipCount"],
     4,
     createSeededRandom("pair"),
   );
@@ -22,7 +22,9 @@ test("two shareable challenges sit together on a page", () => {
   for (const page of pages) {
     expect(page).toHaveLength(2);
   }
-  expect(new Set(pages.flat())).toEqual(new Set(["timesFacts", "skipCount"]));
+  expect(new Set(pages.flat())).toEqual(
+    new Set(["missingNumber", "skipCount"]),
+  );
 });
 
 test("a colour hunt keeps the whole page", () => {

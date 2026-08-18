@@ -11,10 +11,10 @@ type Input = {
 export function createMultiplesPathExercise({
   focus,
   next,
-  cellCount = 64,
+  cellCount = 80,
 }: Input): PathCell[] {
   const table = new Set(Array.from({ length: 12 }, (_, i) => focus * (i + 1)));
-  const decoys = takeAscendingOutside(table, 36);
+  const decoys = takeAscendingOutside(table, 48);
   return Array.from({ length: cellCount }, (_, index) => {
     const onPath = index === 0 || next() < 0.45;
     if (onPath) {

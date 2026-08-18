@@ -8,6 +8,7 @@ import { createOddOneOutExercise } from "../exercises/oddOneOut/createOddOneOutE
 import { createPartialSquareExercise } from "../exercises/partialSquare/createPartialSquareExercise";
 import { createSkipCountExercise } from "../exercises/skipCount/createSkipCountExercise";
 import { createTimesFactsExercise } from "../exercises/timesFacts/createTimesFactsExercise";
+import { timesFactsBandSize } from "../exercises/timesFacts/timesFactsBandSize";
 import { createTrueFalseExercise } from "../exercises/trueFalse/createTrueFalseExercise";
 import { createWheelExercise } from "../exercises/wheel/createWheelExercise";
 import { createWhichIsMoreExercise } from "../exercises/whichIsMore/createWhichIsMoreExercise";
@@ -107,7 +108,7 @@ function buildExercise(
           multiply: ctx.multiply,
           divide: ctx.divide,
           stage: ctx.stage,
-          count: shared ? 24 : 72,
+          count: shared ? timesFactsBandSize : timesFactsBandSize * 4,
           next: ctx.next,
         }),
       };
@@ -128,7 +129,7 @@ function buildExercise(
         wheels: createWheelExercise({
           focus: ctx.focus,
           stage: ctx.stage,
-          count: shared ? 2 : 4,
+          count: shared ? 3 : 6,
           next: ctx.next,
         }),
       };

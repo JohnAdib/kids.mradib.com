@@ -6,6 +6,7 @@ export function challengeFillsPage(kind: PackChallengeId) {
     kind === "partialSquare" ||
     kind === "multiplesPath" ||
     kind === "wheel" ||
-    kind === "arrayDots"
+    kind === "arrayDots" ||
+    kind === "timesFacts"
   );
 }

@@ -82,23 +82,28 @@ export function ChartTools() {
   }, [chart, font, colour, store]);
 
   return (
-    <PrintWorkspace
-      toolbar={<PrintBar canPrint onPrint={() => window.print()} />}
-      form={
-        <ChartForm
-          includeZero={includeZero}
-          lastFactor={lastFactor}
-          colouring={colouring}
-          font={font}
-          colour={colour}
-          onIncludeZero={setIncludeZero}
-          onLastFactor={setLastFactor}
-          onColouring={setColouring}
-          onFont={setFont}
-          onColour={setColour}
-        />
-      }
-      preview={<PrintChart chart={chart} font={font} colour={colour} />}
-    />
+    <>
+      <div className="page-heading screen-only">
+        <h1>Times table</h1>
+        <PrintBar canPrint onPrint={() => window.print()} />
+      </div>
+      <PrintWorkspace
+        form={
+          <ChartForm
+            includeZero={includeZero}
+            lastFactor={lastFactor}
+            colouring={colouring}
+            font={font}
+            colour={colour}
+            onIncludeZero={setIncludeZero}
+            onLastFactor={setLastFactor}
+            onColouring={setColouring}
+            onFont={setFont}
+            onColour={setColour}
+          />
+        }
+        preview={<PrintChart chart={chart} font={font} colour={colour} />}
+      />
+    </>
   );
 }

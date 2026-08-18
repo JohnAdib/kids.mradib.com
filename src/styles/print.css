@@ -45,13 +45,21 @@
 }
 
 @media print {
-  .print-root {
+  .print-root,
+  .print-root.is-preview {
     display: block;
   }
 
   .print-page-shell {
     break-after: page;
     page-break-after: always;
+    overflow: visible;
+    box-shadow: none;
+    background: white;
+    border-radius: 0;
+    width: auto;
+    height: auto;
+    aspect-ratio: auto;
   }
 
   .print-root:last-of-type .print-page-shell:last-child {
@@ -62,11 +70,17 @@
   .print-page {
     width: auto;
     height: auto;
-    min-height: 0;
+    min-height: 270mm;
     padding: 0;
     overflow: visible;
     box-shadow: none;
     transform: none;
+  }
+
+  .print-page > section {
+    flex: 1 1 auto;
+    min-height: auto;
+    overflow: visible;
   }
 }
 
@@ -172,13 +186,15 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 3.6ch;
-  min-height: 1.2em;
-  padding: 0 0.8mm;
+  min-width: 6.6ch;
+  min-height: 1.9em;
+  padding: 0.6mm 1.4mm;
   border: 1px solid currentColor;
   border-radius: 0.8mm;
   background: #eeeae3;
   vertical-align: middle;
+  print-color-adjust: exact;
+  -webkit-print-color-adjust: exact;
 }
 
 .compare-item .write-box {
@@ -186,20 +202,27 @@
   min-height: 6mm;
 }
 
+.times-facts-bands {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 5mm;
+  flex: 1;
+  min-height: 0;
+}
+
 .times-facts-grid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  gap: 1.2mm 3mm;
-  flex: 1;
-  align-content: start;
+  gap: 2.4mm 5mm;
 }
 
 .times-fact {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  gap: 1mm;
-  font-size: 11pt;
+  gap: 1.2mm;
+  font-size: 12pt;
   min-height: 0;
   padding: 0;
   font-variant-numeric: tabular-nums;
@@ -240,8 +263,8 @@
 
 .wheel-row {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 2mm;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3mm;
   flex: 1;
   align-content: start;
   justify-items: center;
@@ -249,6 +272,7 @@
 
 .wheel-svg {
   width: 100%;
+  max-width: 64mm;
   height: auto;
 }
 
@@ -430,27 +454,34 @@
 }
 
 .family-row,
-.skip-row,
 .array-row {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 2mm;
   flex: 1;
-  align-content: stretch;
+  align-content: start;
+  align-items: start;
+}
+
+.skip-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2mm 6mm;
+  flex: 1;
+  align-content: start;
 }
 
 .family-card,
-.skip-card,
 .array-card {
   border: 1px solid currentColor;
   border-radius: 2mm;
-  padding: 2mm;
-  min-height: 0;
+  padding: 1mm 1.4mm;
+  height: fit-content;
 }
 
 .family-card p,
 .array-card p {
-  margin: 0.5mm 0;
+  margin: 0.35mm 0;
   font-size: 10pt;
 }
 
@@ -458,8 +489,9 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0.6mm;
-  font-size: 10.5pt;
+  gap: 0.8mm;
+  font-size: 11pt;
+  padding: 0.4mm 0;
 }
 
 .skip-step {
@@ -506,42 +538,41 @@
 
 .path-grid {
   display: grid;
-  grid-template-columns: repeat(8, 1fr);
+  grid-template-columns: repeat(10, 1fr);
   gap: 1mm;
   flex: 1;
-  align-content: stretch;
+  align-content: start;
 }
 
 .path-cell {
   border: 1px solid currentColor;
+  aspect-ratio: 1;
   min-height: 0;
   display: grid;
   place-items: center;
-  font-size: 10pt;
+  font-size: 9pt;
 }
 
 .odd-list {
   display: grid;
-  gap: 1.6mm;
+  gap: 2.2mm;
   flex: 1;
   align-content: start;
 }
 
 .odd-item {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 1.2mm;
-  padding: 1mm 1.4mm;
-  border: 1px solid currentColor;
-  border-radius: 1.2mm;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2mm;
+  align-items: stretch;
 }
 
 .odd-option {
   border: 1px solid currentColor;
   border-radius: 999px;
-  padding: 0.5mm 1.8mm;
-  font-size: 9.5pt;
+  padding: 1.2mm 2mm;
+  font-size: 10pt;
+  text-align: center;
   font-variant-numeric: tabular-nums;
 }
 
@@ -566,5 +597,5 @@
 }
 
 .print-colour-ink .wheel-fill {
-  fill: white;
+  fill: #eeeae3;
 }

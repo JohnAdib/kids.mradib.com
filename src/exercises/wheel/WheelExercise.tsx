@@ -25,9 +25,9 @@ function WheelSvg({ wheel }: { wheel: WheelSpec }) {
   const size = 320;
   const cx = size / 2;
   const cy = size / 2;
-  const outer = 150;
-  const mid = 100;
-  const inner = 48;
+  const outer = 152;
+  const mid = 86;
+  const inner = 40;
   const sectors = wheel.sectors.length;
   return (
     <svg
@@ -46,21 +46,27 @@ function WheelSvg({ wheel }: { wheel: WheelSpec }) {
             <path
               className="wheel-fill"
               d={annulus(cx, cy, mid, outer, start, end)}
+            />
+            <line
+              x1={cx + Math.cos(start) * mid}
+              y1={cy + Math.sin(start) * mid}
+              x2={cx + Math.cos(start) * outer}
+              y2={cy + Math.sin(start) * outer}
               stroke="currentColor"
-              strokeWidth="1.5"
+              strokeWidth="1.2"
             />
             <path
               d={annulus(cx, cy, inner, mid, start, end)}
               fill="white"
               stroke="currentColor"
-              strokeWidth="1.5"
+              strokeWidth="1.2"
             />
             <text
               x={cx + Math.cos(labelAngle) * ((mid + outer) / 2)}
               y={cy + Math.sin(labelAngle) * ((mid + outer) / 2)}
               textAnchor="middle"
               dominantBaseline="middle"
-              fontSize="16"
+              fontSize="15"
             >
               {sector.outer ?? ""}
             </text>
@@ -69,7 +75,7 @@ function WheelSvg({ wheel }: { wheel: WheelSpec }) {
               y={cy + Math.sin(labelAngle) * ((inner + mid) / 2)}
               textAnchor="middle"
               dominantBaseline="middle"
-              fontSize="15"
+              fontSize="14"
             >
               {sector.inner ?? ""}
             </text>
@@ -82,7 +88,7 @@ function WheelSvg({ wheel }: { wheel: WheelSpec }) {
         y={cy}
         textAnchor="middle"
         dominantBaseline="middle"
-        fontSize="22"
+        fontSize="20"
         fontWeight="700"
       >
         {wheel.center}×

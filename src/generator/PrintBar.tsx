@@ -1,14 +1,22 @@
 type Props = {
   canPrint: boolean;
   onPrint: () => void;
+  onNewSheet?: () => void;
 };
 
-export function PrintBar({ canPrint, onPrint }: Props) {
+export function PrintBar({ canPrint, onPrint, onNewSheet }: Props) {
   return (
-    <div className="print-bar">
-      <p className="print-bar-copy">
-        Print these pages, or save them as a PDF.
-      </p>
+    <div className="page-heading-actions">
+      {onNewSheet ? (
+        <button
+          className="ghost-button"
+          type="button"
+          onClick={onNewSheet}
+          disabled={!canPrint}
+        >
+          New sheet
+        </button>
+      ) : null}
       <button
         className="primary-button"
         type="button"

@@ -5,10 +5,10 @@ test("multiplication wheels hide the outer ring", () => {
   const wheels = createWheelExercise({
     focus: 4,
     stage: "multiply",
-    count: 4,
+    count: 6,
     next: () => 0.3,
   });
-  expect(wheels).toHaveLength(4);
+  expect(wheels).toHaveLength(6);
   expect(wheels[0]?.sectors.every((sector) => sector.outer === null)).toBe(
     true,
   );

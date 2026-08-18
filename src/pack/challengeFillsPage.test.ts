@@ -7,6 +7,6 @@ test("big picture challenges keep the whole A4 to themselves", () => {
   expect(challengeFillsPage("partialSquare")).toBe(true);
   expect(challengeFillsPage("multiplesPath")).toBe(true);
   expect(challengeFillsPage("arrayDots")).toBe(true);
-  expect(challengeFillsPage("timesFacts")).toBe(false);
+  expect(challengeFillsPage("timesFacts")).toBe(true);
   expect(challengeFillsPage("matchLines")).toBe(false);
 });

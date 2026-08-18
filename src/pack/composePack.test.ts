@@ -57,7 +57,11 @@ test("times pop can fill a whole pack", () => {
     pageCount: 1,
     challenges: ["timesFacts"],
   });
-  expect(pack.pages[0]?.exercises[0]?.type).toBe("timesFacts");
+  const exercise = pack.pages[0]?.exercises[0];
+  expect(exercise?.type).toBe("timesFacts");
+  if (exercise?.type === "timesFacts") {
+    expect(exercise.items).toHaveLength(80);
+  }
 });
 
 test("ten pizza wheels is ten pages of that challenge", () => {
@@ -73,6 +77,10 @@ test("ten pizza wheels is ten pages of that challenge", () => {
   expect(pack.pages.map((page) => page.exercises[0]?.type)).toEqual(
     Array(10).fill("wheel"),
   );
+  const first = pack.pages[0]?.exercises[0];
+  if (first?.type === "wheel") {
+    expect(first.wheels).toHaveLength(6);
+  }
 });
 
 test("a mix of two compact challenges can share a page", () => {
@@ -82,7 +90,7 @@ test("a mix of two compact challenges can share a page", () => {
     seed: "mix6",
     sequence: 2,
     pageCount: 6,
-    challenges: ["timesFacts", "skipCount"],
+    challenges: ["missingNumber", "skipCount"],
   });
   expect(pack.pages).toHaveLength(6);
   for (const page of pack.pages) {
@@ -91,7 +99,7 @@ test("a mix of two compact challenges can share a page", () => {
   const types = pack.pages.flatMap((page) =>
     page.exercises.map((exercise) => exercise.type),
   );
-  expect(new Set(types)).toEqual(new Set(["timesFacts", "skipCount"]));
+  expect(new Set(types)).toEqual(new Set(["missingNumber", "skipCount"]));
 });
 
 test("every table and stage finishes", () => {
