@@ -1,4 +1,5 @@
 import { Blank } from "../../print/Blank";
+import { ExerciseHeading } from "../../print/ExerciseHeading";
 import type { MissingNumberItem } from "./MissingNumberItem";
 
 type Props = {
@@ -8,8 +9,9 @@ type Props = {
 export function MissingNumberExercise({ items }: Props) {
   return (
     <section>
-      <h3 className="exercise-title">Fill in the missing number</h3>
-      <p className="exercise-help">Any part of the fact can be empty.</p>
+      <ExerciseHeading kind="missingNumber">
+        Any part of the fact can be empty.
+      </ExerciseHeading>
       <div className="missing-grid">
         {items.map((item, index) => (
           <div

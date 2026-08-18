@@ -1,4 +1,5 @@
 import { Blank } from "../../print/Blank";
+import { ExerciseHeading } from "../../print/ExerciseHeading";
 import type { ArrayItem } from "./ArrayItem";
 
 type Props = {
@@ -8,8 +9,9 @@ type Props = {
 export function ArrayDotsExercise({ items }: Props) {
   return (
     <section>
-      <h3 className="exercise-title">Arrays</h3>
-      <p className="exercise-help">Count the dots, then write the fact.</p>
+      <ExerciseHeading kind="arrayDots">
+        Count the dots, then write the fact.
+      </ExerciseHeading>
       <div className="array-row">
         {items.map((item, index) => (
           <div

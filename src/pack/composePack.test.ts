@@ -35,7 +35,6 @@ test("each page is one activity, never a true-or-false quiz", () => {
     page.exercises.map((exercise) => exercise.type),
   );
   expect(types).not.toContain("trueFalse");
-  expect(types).not.toContain("whichIsMore");
 });
 
 test("a 1, 2 and 3 pack is labelled as that quiz", () => {
@@ -47,6 +46,35 @@ test("a 1, 2 and 3 pack is labelled as that quiz", () => {
   });
   expect(pack.tables).toEqual([1, 2, 3]);
   expect(pack.label).toBe("1–3× M #4");
+});
+
+test("ten pizza wheels is ten pages of that challenge", () => {
+  const pack = composePack({
+    tables: [4],
+    stage: "multiply",
+    seed: "wheels",
+    sequence: 1,
+    pageCount: 10,
+    challenges: ["wheel"],
+  });
+  expect(pack.pages).toHaveLength(10);
+  expect(pack.pages.map((page) => page.exercises[0]?.type)).toEqual(
+    Array(10).fill("wheel"),
+  );
+});
+
+test("a mix of two challenges can fill six pages", () => {
+  const pack = composePack({
+    tables: [5],
+    stage: "mixed",
+    seed: "mix6",
+    sequence: 2,
+    pageCount: 6,
+    challenges: ["wheel", "skipCount"],
+  });
+  expect(pack.pages).toHaveLength(6);
+  const types = pack.pages.map((page) => page.exercises[0]?.type);
+  expect(new Set(types)).toEqual(new Set(["wheel", "skipCount"]));
 });
 
 test("every table and stage finishes", () => {

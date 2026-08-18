@@ -1,44 +1,58 @@
 import type { Stage } from "../facts/Stage";
 import { toggleSortedNumber } from "../numbers/toggleSortedNumber";
+import type { PackChallengeId } from "../pack/PackChallengeId";
+import { pageCounts } from "../pack/pageCounts";
 import type { PrintColour } from "../print/PrintColour";
 import type { PrintFont } from "../print/PrintFont";
+import { ChallengePicks } from "./ChallengePicks";
+import { PrintActions } from "./PrintActions";
 import { PrintSettings } from "./PrintSettings";
 
 type Props = {
   tables: number[];
   stage: Stage;
+  pageCount: number;
+  challenges: PackChallengeId[];
   includeAnswers: boolean;
   font: PrintFont;
   colour: PrintColour;
+  canPrint: boolean;
   onTables: (tables: number[]) => void;
   onStage: (stage: Stage) => void;
+  onPageCount: (pageCount: number) => void;
+  onChallenges: (challenges: PackChallengeId[]) => void;
   onIncludeAnswers: (value: boolean) => void;
   onFont: (font: PrintFont) => void;
   onColour: (colour: PrintColour) => void;
-  onGenerate: () => void;
   onPrint: () => void;
-  canPrint: boolean;
 };
 
 export function PracticeForm({
   tables,
   stage,
+  pageCount,
+  challenges,
   includeAnswers,
   font,
   colour,
+  canPrint,
   onTables,
   onStage,
+  onPageCount,
+  onChallenges,
   onIncludeAnswers,
   onFont,
   onColour,
-  onGenerate,
   onPrint,
-  canPrint,
 }: Props) {
   return (
-    <section className="tool-panel tool-panel-compact">
+    <section className="tool-panel tool-panel-compact tool-panel-pinned">
       <h2>Practice pack</h2>
-      <p>Tick the tables for this quiz. The address bar becomes the link.</p>
+      <p>
+        {canPrint
+          ? "Change a setting and the pages update at once."
+          : "Tick the tables to quiz. Pages appear as soon as you pick one."}
+      </p>
       <div className="table-picks">
         {Array.from({ length: 12 }, (_, i) => i + 1).map((table) => (
           <label key={table}>
@@ -63,7 +77,21 @@ export function PracticeForm({
             <option value="mixed">Mixed</option>
           </select>
         </label>
+        <label>
+          Pages
+          <select
+            value={pageCount}
+            onChange={(event) => onPageCount(Number(event.target.value))}
+          >
+            {pageCounts.map((count) => (
+              <option key={count} value={count}>
+                {count}
+              </option>
+            ))}
+          </select>
+        </label>
       </div>
+      <ChallengePicks challenges={challenges} onChange={onChallenges} />
       <PrintSettings
         font={font}
         colour={colour}
@@ -78,24 +106,7 @@ export function PracticeForm({
         />
         Include answer sheet
       </label>
-      <div className="actions">
-        <button
-          className="primary-button"
-          type="button"
-          onClick={onGenerate}
-          disabled={tables.length === 0}
-        >
-          Generate pack
-        </button>
-        <button
-          className="ghost-button"
-          type="button"
-          onClick={onPrint}
-          disabled={!canPrint}
-        >
-          Print / Save as PDF
-        </button>
-      </div>
+      <PrintActions canPrint={canPrint} onPrint={onPrint} />
     </section>
   );
 }

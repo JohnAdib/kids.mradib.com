@@ -1,3 +1,4 @@
+import { ExerciseHeading } from "../../print/ExerciseHeading";
 import type { OddOneOutItem } from "./OddOneOutItem";
 
 type Props = {
@@ -7,8 +8,9 @@ type Props = {
 export function OddOneOutExercise({ items }: Props) {
   return (
     <section>
-      <h3 className="exercise-title">Odd one out</h3>
-      <p className="exercise-help">Circle the fact that is wrong.</p>
+      <ExerciseHeading kind="oddOneOut">
+        Circle the fact that is wrong.
+      </ExerciseHeading>
       <div className="skip-row">
         {items.map((item, index) => (
           <div className="odd-item" key={index}>

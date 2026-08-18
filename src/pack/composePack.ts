@@ -17,10 +17,14 @@ import { sortedUniqueNumbers } from "../numbers/sortedUniqueNumbers";
 import { createSeededRandom } from "../rng/createSeededRandom";
 import { collectAnswers } from "./collectAnswers";
 import { countMarkableItems } from "./countMarkableItems";
+import { defaultPageCount } from "./defaultPageCount";
+import { fillPageKinds } from "./fillPageKinds";
 import { formatPackLabel } from "./formatPackLabel";
 import { formatPackMachineId } from "./formatPackMachineId";
+import type { PackChallengeId } from "./PackChallengeId";
 import type { PackExercise } from "./PackExercise";
 import type { PracticePack } from "./PracticePack";
+import { packChallengeIds } from "./packChallengeIds";
 import { suggestSeconds } from "./suggestSeconds";
 
 type Input = {
@@ -28,21 +32,25 @@ type Input = {
   stage: Stage;
   seed: string;
   sequence: number;
+  pageCount?: number;
+  challenges?: PackChallengeId[];
 };
 
 export function composePack(input: Input): PracticePack {
   const tables = sortedUniqueNumbers(input.tables);
   const chosen = tables.length > 0 ? tables : [2];
   const focus = chosen.reduce((max, table) => Math.max(max, table), 1);
+  const pageCount = input.pageCount ?? defaultPageCount;
+  const challenges = [...(input.challenges ?? packChallengeIds)];
   const next = createSeededRandom(input.seed);
   const multiply = pickMultiplicationFacts({
     tables: chosen,
-    count: 40,
+    count: Math.max(40, pageCount * 12),
     next,
   });
   const divide = pickDivisionFacts(multiply, next);
-  const pages = layouts(input.stage).map((kinds) => ({
-    exercises: kinds.map((kind) =>
+  const pages = fillPageKinds(challenges, pageCount, next).map((kind) => ({
+    exercises: [
       buildExercise(kind, {
         focus,
         stage: input.stage,
@@ -51,7 +59,7 @@ export function composePack(input: Input): PracticePack {
         reviewTables: chosen,
         next,
       }),
-    ),
+    ],
   }));
   const exercises = pages.flatMap((page) => page.exercises);
   const itemCount = countMarkableItems(exercises);
@@ -71,25 +79,15 @@ export function composePack(input: Input): PracticePack {
     includePrior: chosen.length > 1,
     suggestedSeconds: suggestSeconds(itemCount, input.stage),
     itemCount,
+    pageCount: pages.length,
+    challenges,
     pages,
     answers: collectAnswers(exercises),
   };
 }
 
-type Kind = PackExercise["type"];
-
-function layouts(stage: Stage): Kind[][] {
-  if (stage === "divide") {
-    return [["missingNumber"], ["wheel"], ["matchLines"], ["factFamily"]];
-  }
-  if (stage === "mixed") {
-    return [["missingNumber"], ["wheel"], ["matchLines"], ["skipCount"]];
-  }
-  return [["missingNumber"], ["wheel"], ["matchLines"], ["colourMultiples"]];
-}
-
 function buildExercise(
-  kind: Kind,
+  kind: PackExercise["type"],
   ctx: {
     focus: number;
     stage: Stage;

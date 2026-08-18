@@ -27,6 +27,8 @@ export function packFromSearch(request: PackSearch, store: Store) {
     stage: request.stage,
     seed,
     sequence,
+    pageCount: request.pageCount,
+    challenges: request.challenges,
   });
   return {
     pack,
@@ -36,6 +38,8 @@ export function packFromSearch(request: PackSearch, store: Store) {
       stage: pack.stage,
       seed: pack.seed,
       sequence: pack.sequence,
+      pageCount: pack.pageCount,
+      challenges: pack.challenges,
     },
   };
 }

@@ -1,6 +1,7 @@
 import type { ChartColouring } from "../charts/ChartColouring";
 import type { PrintColour } from "../print/PrintColour";
 import type { PrintFont } from "../print/PrintFont";
+import { PrintActions } from "./PrintActions";
 import { PrintSettings } from "./PrintSettings";
 
 type Props = {
@@ -14,9 +15,7 @@ type Props = {
   onColouring: (value: ChartColouring) => void;
   onFont: (font: PrintFont) => void;
   onColour: (colour: PrintColour) => void;
-  onGenerate: () => void;
   onPrint: () => void;
-  canPrint: boolean;
 };
 
 export function ChartForm({
@@ -30,14 +29,12 @@ export function ChartForm({
   onColouring,
   onFont,
   onColour,
-  onGenerate,
   onPrint,
-  canPrint,
 }: Props) {
   return (
-    <section className="tool-panel tool-panel-compact">
+    <section className="tool-panel tool-panel-compact tool-panel-pinned">
       <h2>Times table</h2>
-      <p>One A4 square. Row times column.</p>
+      <p>Change the grid or colouring and the page updates at once.</p>
       <div className="field-row">
         <label>
           Up to
@@ -78,19 +75,7 @@ export function ChartForm({
         onFont={onFont}
         onColour={onColour}
       />
-      <div className="actions">
-        <button className="primary-button" type="button" onClick={onGenerate}>
-          Generate table
-        </button>
-        <button
-          className="ghost-button"
-          type="button"
-          onClick={onPrint}
-          disabled={!canPrint}
-        >
-          Print / Save as PDF
-        </button>
-      </div>
+      <PrintActions canPrint onPrint={onPrint} />
     </section>
   );
 }

@@ -1,4 +1,5 @@
 import { Blank } from "../../print/Blank";
+import { ExerciseHeading } from "../../print/ExerciseHeading";
 import type { FactFamilyCard } from "./FactFamilyCard";
 
 type Props = {
@@ -8,10 +9,9 @@ type Props = {
 export function FactFamilyExercise({ cards }: Props) {
   return (
     <section>
-      <h3 className="exercise-title">Fact families</h3>
-      <p className="exercise-help">
+      <ExerciseHeading kind="factFamily">
         Four facts live together. Fill the empty one.
-      </p>
+      </ExerciseHeading>
       <div className="family-row">
         {cards.map((card, index) => (
           <div className="family-card" key={`${card.a}-${card.b}-${index}`}>

@@ -27,7 +27,7 @@ npm install
 npm run dev
 ```
 
-Then open [http://localhost:5173/maths/times-tables/](http://localhost:5173/maths/times-tables/). Print from the browser (Save as PDF if you want a file). History is stored in that browser after you print, not after you generate.
+Then open [http://localhost:5173/maths/times-tables/](http://localhost:5173/maths/times-tables/). Tick a table and the A4 pages appear beside the form. Print from the browser (Save as PDF if you want a file). History is stored in that browser after you print.
 
 ```bash
 npm test

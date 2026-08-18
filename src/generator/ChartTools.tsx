@@ -1,11 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { ChartColouring } from "../charts/ChartColouring";
 import type { ReferenceChart } from "../charts/ReferenceChart";
 import { PrintChart } from "../print/PrintChart";
 import type { PrintColour } from "../print/PrintColour";
 import type { PrintFont } from "../print/PrintFont";
-import { PrintPortal } from "../print/PrintPortal";
-import { PrintPreviewBar } from "../print/PrintPreviewBar";
+import { PrintWorkspace } from "../print/PrintWorkspace";
 import { notifyPrintedHistory } from "../printHistory/notifyPrintedHistory";
 import { recordPrintedRecord } from "../printHistory/recordPrintedRecord";
 import type { ChartSearch } from "../search/ChartSearch";
@@ -16,39 +15,50 @@ import { replacePageSearch } from "../search/replacePageSearch";
 import { browserStore } from "../storage/browserStore";
 import { ChartForm } from "./ChartForm";
 
-const boot = parseChartSearch(
-  typeof window === "undefined" ? "" : window.location.search,
-);
-const booted =
-  boot && typeof localStorage !== "undefined"
-    ? chartFromSearch(boot, localStorage)
-    : null;
+const fallback: ChartSearch = {
+  lastFactor: 12,
+  includeZero: false,
+  colouring: "squares",
+  font: "clear",
+  colour: "ink",
+};
+
+const boot = parseChartSearch(window.location.search) ?? fallback;
+const booted = chartFromSearch(boot, browserStore());
 
 export function ChartTools() {
   const store = browserStore();
-  const [font, setFont] = useState<PrintFont>(boot?.font ?? "clear");
-  const [colour, setColour] = useState<PrintColour>(boot?.colour ?? "ink");
-  const [includeZero, setIncludeZero] = useState(boot?.includeZero ?? false);
-  const [lastFactor, setLastFactor] = useState(boot?.lastFactor ?? 12);
-  const [colouring, setColouring] = useState<ChartColouring>(
-    boot?.colouring ?? "squares",
-  );
-  const [chart, setChart] = useState<ReferenceChart | null>(
-    booted?.chart ?? null,
-  );
+  const seedRef = useRef(booted.chart.seed);
+  const sequenceRef = useRef(booted.chart.sequence);
+  const [font, setFont] = useState<PrintFont>(boot.font);
+  const [colour, setColour] = useState<PrintColour>(boot.colour);
+  const [includeZero, setIncludeZero] = useState(boot.includeZero);
+  const [lastFactor, setLastFactor] = useState(boot.lastFactor);
+  const [colouring, setColouring] = useState<ChartColouring>(boot.colouring);
+  const [chart, setChart] = useState<ReferenceChart>(booted.chart);
 
   useEffect(() => {
-    if (booted) {
-      document.title = booted.chart.machineId;
-      replacePageSearch(formatChartSearch(booted.request));
-    }
-  }, []);
+    const next = chartFromSearch(
+      {
+        lastFactor,
+        includeZero,
+        colouring,
+        font,
+        colour,
+        seed: seedRef.current,
+        sequence: sequenceRef.current,
+      },
+      store,
+    );
+    seedRef.current = next.chart.seed;
+    sequenceRef.current = next.chart.sequence;
+    setChart(next.chart);
+    document.title = next.chart.machineId;
+    replacePageSearch(formatChartSearch(next.request));
+  }, [lastFactor, includeZero, colouring, font, colour, store]);
 
   useEffect(() => {
     const onAfterPrint = () => {
-      if (!chart) {
-        return;
-      }
       recordPrintedRecord(store, {
         kind: "chart",
         label: chart.label,
@@ -69,61 +79,24 @@ export function ChartTools() {
     return () => window.removeEventListener("afterprint", onAfterPrint);
   }, [chart, font, colour, store]);
 
-  useEffect(() => {
-    if (!chart) {
-      return;
-    }
-    document
-      .querySelector(".print-toolbar")
-      ?.scrollIntoView({ block: "start" });
-  }, [chart]);
-
-  function showRequest(request: ChartSearch) {
-    const next = chartFromSearch(request, store);
-    setIncludeZero(request.includeZero);
-    setLastFactor(request.lastFactor);
-    setColouring(request.colouring);
-    setFont(request.font);
-    setColour(request.colour);
-    setChart(next.chart);
-    document.title = next.chart.machineId;
-    replacePageSearch(formatChartSearch(next.request));
-  }
-
   return (
-    <>
-      <ChartForm
-        includeZero={includeZero}
-        lastFactor={lastFactor}
-        colouring={colouring}
-        font={font}
-        colour={colour}
-        onIncludeZero={setIncludeZero}
-        onLastFactor={setLastFactor}
-        onColouring={setColouring}
-        onFont={setFont}
-        onColour={setColour}
-        onGenerate={() =>
-          showRequest({
-            lastFactor,
-            includeZero,
-            colouring,
-            font,
-            colour,
-          })
-        }
-        onPrint={() => window.print()}
-        canPrint={Boolean(chart)}
-      />
-      {chart ? (
-        <PrintPortal>
-          <PrintPreviewBar
-            label="This link is the table. Print it, or save as PDF."
-            onPrint={() => window.print()}
-          />
-          <PrintChart chart={chart} font={font} colour={colour} />
-        </PrintPortal>
-      ) : null}
-    </>
+    <PrintWorkspace
+      form={
+        <ChartForm
+          includeZero={includeZero}
+          lastFactor={lastFactor}
+          colouring={colouring}
+          font={font}
+          colour={colour}
+          onIncludeZero={setIncludeZero}
+          onLastFactor={setLastFactor}
+          onColouring={setColouring}
+          onFont={setFont}
+          onColour={setColour}
+          onPrint={() => window.print()}
+        />
+      }
+      preview={<PrintChart chart={chart} font={font} colour={colour} />}
+    />
   );
 }

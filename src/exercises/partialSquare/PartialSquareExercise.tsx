@@ -1,4 +1,5 @@
 import { Blank } from "../../print/Blank";
+import { ExerciseHeading } from "../../print/ExerciseHeading";
 import type { PartialSquare } from "./PartialSquare";
 
 type Props = {
@@ -8,8 +9,9 @@ type Props = {
 export function PartialSquareExercise({ square }: Props) {
   return (
     <section>
-      <h3 className="exercise-title">Finish the square</h3>
-      <p className="exercise-help">Fill every empty cell.</p>
+      <ExerciseHeading kind="partialSquare">
+        Fill every empty cell.
+      </ExerciseHeading>
       <table className="partial-square">
         <thead>
           <tr>

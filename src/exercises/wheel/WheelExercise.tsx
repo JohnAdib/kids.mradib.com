@@ -1,3 +1,4 @@
+import { ExerciseHeading } from "../../print/ExerciseHeading";
 import type { WheelSpec } from "./WheelSpec";
 
 type Props = {
@@ -7,11 +8,10 @@ type Props = {
 export function WheelExercise({ wheels }: Props) {
   return (
     <section>
-      <h3 className="exercise-title">Complete the wheel</h3>
-      <p className="exercise-help">
+      <ExerciseHeading kind="wheel">
         Multiply the centre by the inner ring to fill the outer ring. If the
         inner ring is empty, work backwards.
-      </p>
+      </ExerciseHeading>
       <div className="wheel-row">
         {wheels.map((wheel, index) => (
           <WheelSvg wheel={wheel} key={`${wheel.center}-${index}`} />

@@ -1,3 +1,4 @@
+import { ExerciseHeading } from "../../print/ExerciseHeading";
 import type { MatchPair } from "./MatchPair";
 
 type Props = {
@@ -9,10 +10,9 @@ export function MatchLinesExercise({ pairs }: Props) {
   const right = [...pairs].sort((a, b) => a.rightOffset - b.rightOffset);
   return (
     <section>
-      <h3 className="exercise-title">Draw a line</h3>
-      <p className="exercise-help">
+      <ExerciseHeading kind="matchLines">
         Join each expression to the matching number.
-      </p>
+      </ExerciseHeading>
       <div className="match-board">
         <div className="match-col">
           {left.map((pair) => (

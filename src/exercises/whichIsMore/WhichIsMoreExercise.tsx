@@ -1,4 +1,5 @@
 import { Blank } from "../../print/Blank";
+import { ExerciseHeading } from "../../print/ExerciseHeading";
 import type { CompareItem } from "./CompareItem";
 
 type Props = {
@@ -8,8 +9,9 @@ type Props = {
 export function WhichIsMoreExercise({ items }: Props) {
   return (
     <section>
-      <h3 className="exercise-title">Which is more?</h3>
-      <p className="exercise-help">Write &gt;, &lt; or = in the middle.</p>
+      <ExerciseHeading kind="whichIsMore">
+        Write &gt;, &lt; or = in the middle.
+      </ExerciseHeading>
       <div className="missing-grid">
         {items.map((item, index) => (
           <div className="compare-item" key={`${item.leftText}-${index}`}>

@@ -1,4 +1,5 @@
 import { Blank } from "../../print/Blank";
+import { ExerciseHeading } from "../../print/ExerciseHeading";
 import type { SkipCountItem } from "./SkipCountItem";
 
 type Props = {
@@ -8,8 +9,9 @@ type Props = {
 export function SkipCountExercise({ items }: Props) {
   return (
     <section>
-      <h3 className="exercise-title">Skip counting</h3>
-      <p className="exercise-help">Fill the gaps in each count.</p>
+      <ExerciseHeading kind="skipCount">
+        Fill the gaps in each count.
+      </ExerciseHeading>
       <div className="skip-row">
         {items.map((item, index) => (
           <div className="skip-card" key={`${item.step}-${index}`}>

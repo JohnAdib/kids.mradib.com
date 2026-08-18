@@ -1,3 +1,4 @@
+import { ExerciseHeading } from "../../print/ExerciseHeading";
 import type { PathCell } from "./PathCell";
 
 type Props = {
@@ -8,10 +9,9 @@ type Props = {
 export function MultiplesPathExercise({ focus, cells }: Props) {
   return (
     <section>
-      <h3 className="exercise-title">Follow the multiples</h3>
-      <p className="exercise-help">
+      <ExerciseHeading kind="multiplesPath">
         Colour a path using only numbers in the {focus} times table.
-      </p>
+      </ExerciseHeading>
       <div className="path-grid">
         {cells.map((cell, index) => (
           <div className="path-cell" key={`${cell.value}-${index}`}>

@@ -1,3 +1,4 @@
+import { ExerciseHeading } from "../../print/ExerciseHeading";
 import type { ColourGrid } from "./ColourGrid";
 
 type Props = {
@@ -7,10 +8,9 @@ type Props = {
 export function ColourMultiplesExercise({ grid }: Props) {
   return (
     <section>
-      <h3 className="exercise-title">Colour the multiples</h3>
-      <p className="exercise-help">
+      <ExerciseHeading kind="colourMultiples">
         Colour every box that belongs to the {grid.focus} times table.
-      </p>
+      </ExerciseHeading>
       <div className="colour-grid">
         {grid.cells.map((cell, index) => (
           <div className="colour-cell" key={`${cell}-${index}`}>

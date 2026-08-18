@@ -70,27 +70,16 @@
 }
 
 @media screen {
-  .print-toolbar {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.75rem;
-    width: min(100% - 1.5rem, 210mm);
-    margin: 1.5rem auto 0;
-  }
-
-  .print-toolbar-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.6rem;
-  }
-
   .print-root.is-preview {
     display: grid;
     gap: 1.25rem;
     width: min(100% - 1.5rem, 210mm);
     margin: 1rem auto 4rem;
+  }
+
+  .print-workspace-preview .print-root.is-preview {
+    width: 100%;
+    margin: 0 0 1.25rem;
   }
 
   .print-page-shell {
