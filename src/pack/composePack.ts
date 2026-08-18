@@ -107,7 +107,7 @@ function buildExercise(
           multiply: ctx.multiply,
           divide: ctx.divide,
           stage: ctx.stage,
-          count: shared ? 18 : 36,
+          count: shared ? 24 : 72,
           next: ctx.next,
         }),
       };
@@ -118,7 +118,7 @@ function buildExercise(
           multiply: ctx.multiply,
           divide: ctx.divide,
           stage: ctx.stage,
-          count: shared ? 12 : 24,
+          count: shared ? 15 : 30,
           next: ctx.next,
         }),
       };
@@ -128,7 +128,7 @@ function buildExercise(
         wheels: createWheelExercise({
           focus: ctx.focus,
           stage: ctx.stage,
-          count: 1,
+          count: shared ? 2 : 4,
           next: ctx.next,
         }),
       };
@@ -139,7 +139,7 @@ function buildExercise(
           multiply: ctx.multiply,
           divide: ctx.divide,
           stage: ctx.stage,
-          count: shared ? 6 : 10,
+          count: shared ? 6 : 8,
           next: ctx.next,
         }),
       };
@@ -156,7 +156,7 @@ function buildExercise(
         type: "factFamily",
         cards: createFactFamilyExercise({
           facts: ctx.multiply,
-          count: shared ? 4 : 6,
+          count: shared ? 6 : 9,
           next: ctx.next,
         }),
       };
@@ -174,7 +174,7 @@ function buildExercise(
         type: "skipCount",
         items: createSkipCountExercise({
           tables: ctx.reviewTables,
-          count: shared ? 4 : 8,
+          count: shared ? 6 : 10,
           next: ctx.next,
         }),
       };
@@ -183,7 +183,7 @@ function buildExercise(
         type: "arrayDots",
         items: createArrayDotsExercise({
           facts: ctx.multiply,
-          count: shared ? 4 : 6,
+          count: shared ? 6 : 9,
         }),
       };
     case "partialSquare":
@@ -199,7 +199,7 @@ function buildExercise(
         type: "oddOneOut",
         items: createOddOneOutExercise({
           facts: ctx.multiply,
-          count: shared ? 4 : 8,
+          count: shared ? 4 : 10,
           next: ctx.next,
         }),
       };
@@ -208,7 +208,7 @@ function buildExercise(
         type: "whichIsMore",
         items: createWhichIsMoreExercise({
           facts: ctx.multiply,
-          count: shared ? 6 : 12,
+          count: shared ? 8 : 15,
         }),
       };
     case "multiplesPath":

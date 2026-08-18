@@ -7,6 +7,7 @@ type Props = {
 };
 
 export function TimesTableGrid({ factors, colouring }: Props) {
+  const empty = colouring === "blank";
   return (
     <div className="times-table-frame">
       <table className="times-table">
@@ -24,10 +25,10 @@ export function TimesTableGrid({ factors, colouring }: Props) {
               <th>{row}</th>
               {factors.map((column) => (
                 <td
-                  className={`shade-${chartCellShade(row, column, colouring)}`}
+                  className={`shade-${chartCellShade(row, column, colouring)}${empty ? " is-empty" : ""}`}
                   key={column}
                 >
-                  {row * column}
+                  {empty ? null : row * column}
                 </td>
               ))}
             </tr>

@@ -10,7 +10,7 @@ export function TimesFactsExercise({ items }: Props) {
   return (
     <section>
       <ExerciseHeading kind="timesFacts">
-        Write the answer. Keep going down the page.
+        Write the product in the box.
       </ExerciseHeading>
       <div className="times-facts-grid">
         {items.map((item, index) => (

@@ -11,11 +11,7 @@ export function TimesTablesChartsPage() {
       </div>
       <main>
         <section className="hero hero-compact screen-only">
-          <p className="kicker">Maths · Times table</p>
           <h1>Times table</h1>
-          <p className="lede">
-            One A4 square, or type <code>?to=10</code> in the address bar.
-          </p>
           <TimesTablesSubnav current="chart" />
         </section>
         <ChartTools />

@@ -11,12 +11,7 @@ export function TimesTablesPage() {
       </div>
       <main>
         <section className="hero hero-compact screen-only">
-          <p className="kicker">Maths · Times tables</p>
           <h1>Practice pack</h1>
-          <p className="lede">
-            Tick the tables, or type them in the address bar:
-            <code> ?tables=1,2,3</code>
-          </p>
           <TimesTablesSubnav current="pack" />
         </section>
         <PracticePackTools />

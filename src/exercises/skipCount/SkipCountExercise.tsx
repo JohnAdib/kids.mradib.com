@@ -10,15 +10,15 @@ export function SkipCountExercise({ items }: Props) {
   return (
     <section>
       <ExerciseHeading kind="skipCount">
-        Fill the gaps in each count.
+        Count on by the table. Fill each empty box.
       </ExerciseHeading>
       <div className="skip-row">
         {items.map((item, index) => (
           <div className="skip-card" key={`${item.step}-${index}`}>
             {item.values.map((value, i) => (
-              <span key={i}>
+              <span className="skip-step" key={i}>
                 {value === null ? <Blank /> : value}
-                {i < item.values.length - 1 ? ", " : ""}
+                {i < item.values.length - 1 ? <span>, </span> : null}
               </span>
             ))}
           </div>

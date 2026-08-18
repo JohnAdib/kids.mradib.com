@@ -15,6 +15,7 @@ import { parseChartSearch } from "../search/parseChartSearch";
 import { replacePageSearch } from "../search/replacePageSearch";
 import { browserStore } from "../storage/browserStore";
 import { ChartForm } from "./ChartForm";
+import { PrintBar } from "./PrintBar";
 
 const fallback: ChartSearch = {
   lastFactor: 12,
@@ -82,6 +83,7 @@ export function ChartTools() {
 
   return (
     <PrintWorkspace
+      toolbar={<PrintBar canPrint onPrint={() => window.print()} />}
       form={
         <ChartForm
           includeZero={includeZero}
@@ -94,7 +96,6 @@ export function ChartTools() {
           onColouring={setColouring}
           onFont={setFont}
           onColour={setColour}
-          onPrint={() => window.print()}
         />
       }
       preview={<PrintChart chart={chart} font={font} colour={colour} />}

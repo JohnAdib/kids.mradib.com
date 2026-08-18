@@ -5,15 +5,17 @@ import type { PathCell } from "./PathCell";
 type Input = {
   focus: number;
   next: () => number;
+  cellCount?: number;
 };
 
 export function createMultiplesPathExercise({
   focus,
   next,
+  cellCount = 64,
 }: Input): PathCell[] {
-  const table = new Set(Array.from({ length: 13 }, (_, i) => focus * i));
-  const decoys = takeAscendingOutside(table, 24);
-  return Array.from({ length: 16 }, (_, index) => {
+  const table = new Set(Array.from({ length: 12 }, (_, i) => focus * (i + 1)));
+  const decoys = takeAscendingOutside(table, 36);
+  return Array.from({ length: cellCount }, (_, index) => {
     const onPath = index === 0 || next() < 0.45;
     if (onPath) {
       return { value: focus * pickInteger(next, 1, 12), onPath: true };

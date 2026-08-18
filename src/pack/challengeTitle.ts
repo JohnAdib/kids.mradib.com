@@ -5,28 +5,28 @@ export function challengeTitle(kind: PackExercise["type"]) {
     case "timesFacts":
       return "Times pop";
     case "missingNumber":
-      return "Sneaky blanks";
+      return "Missing number";
     case "wheel":
-      return "Pizza wheel";
+      return "Pizza wheels";
     case "matchLines":
-      return "Join the pals";
+      return "Match up";
     case "colourMultiples":
-      return "Paint hunt";
+      return "Colour the multiples";
     case "factFamily":
-      return "Fact house";
+      return "Fact family";
     case "trueFalse":
       return "Yes or no";
     case "skipCount":
-      return "Frog hops";
+      return "Skip counting";
     case "arrayDots":
-      return "Egg boxes";
+      return "Arrays";
     case "partialSquare":
-      return "Broken grid";
+      return "Complete the square";
     case "oddOneOut":
-      return "Odd sock";
+      return "Odd one out";
     case "whichIsMore":
-      return "Bigger pile";
+      return "Which is more?";
     case "multiplesPath":
-      return "Treasure trail";
+      return "Follow the path";
   }
 }

@@ -11,11 +11,11 @@ export function OddOneOutExercise({ items }: Props) {
       <ExerciseHeading kind="oddOneOut">
         Circle the fact that is wrong.
       </ExerciseHeading>
-      <div className="skip-row">
+      <div className="odd-list">
         {items.map((item, index) => (
           <div className="odd-item" key={index}>
-            {item.options.map((option) => (
-              <span key={option} style={{ marginRight: "6mm" }}>
+            {item.options.map((option, optionIndex) => (
+              <span className="odd-option" key={`${option}-${optionIndex}`}>
                 {option}
               </span>
             ))}

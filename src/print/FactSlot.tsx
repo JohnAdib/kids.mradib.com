@@ -3,9 +3,8 @@ type Props = {
 };
 
 export function FactSlot({ value }: Props) {
-  return (
-    <span className={value === null ? "fact-slot is-blank" : "fact-slot"}>
-      {value === null ? "\u00a0" : value}
-    </span>
-  );
+  if (value === null) {
+    return <span className="write-box">&nbsp;</span>;
+  }
+  return <span className="fact-slot">{value}</span>;
 }

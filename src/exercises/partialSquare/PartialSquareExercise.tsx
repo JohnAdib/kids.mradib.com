@@ -10,7 +10,7 @@ export function PartialSquareExercise({ square }: Props) {
   return (
     <section>
       <ExerciseHeading kind="partialSquare">
-        Fill every empty cell.
+        Complete this times table. Fill every empty box.
       </ExerciseHeading>
       <table className="partial-square">
         <thead>
@@ -23,7 +23,7 @@ export function PartialSquareExercise({ square }: Props) {
         </thead>
         <tbody>
           {square.rows.map((row, r) => (
-            <tr key={row}>
+            <tr key={`${row}-${r}`}>
               <th>{row}</th>
               {square.cells[r]?.map((cell, c) => (
                 <td key={c}>{cell === null ? <Blank /> : cell}</td>

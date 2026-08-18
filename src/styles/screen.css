@@ -101,10 +101,16 @@ a:hover {
 
 .print-workspace {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 20.5rem;
-  grid-template-areas: "preview form";
-  gap: 1.25rem 1.5rem;
+  grid-template-columns: minmax(0, 1fr) 18.5rem;
+  grid-template-areas:
+    "toolbar toolbar"
+    "preview form";
+  gap: 0.85rem 1.25rem;
   align-items: start;
+}
+
+.print-workspace-toolbar {
+  grid-area: toolbar;
 }
 
 .print-workspace-preview {
@@ -122,6 +128,7 @@ a:hover {
   .print-workspace {
     grid-template-columns: 1fr;
     grid-template-areas:
+      "toolbar"
       "form"
       "preview";
   }
@@ -137,7 +144,7 @@ a:hover {
   justify-content: space-between;
   gap: 0.85rem 1.25rem;
   flex-wrap: wrap;
-  margin-bottom: 2.5rem;
+  margin-bottom: 1.1rem;
 }
 
 .wordmark {
@@ -221,8 +228,8 @@ a:hover {
 }
 
 .hero-compact {
-  gap: 0.5rem;
-  margin-bottom: 0.85rem;
+  gap: 0.4rem;
+  margin-bottom: 0.55rem;
 }
 
 .kicker {
@@ -249,7 +256,7 @@ h1 {
 }
 
 .hero-compact h1 {
-  font-size: clamp(1.7rem, 6vw, 2.6rem);
+  font-size: clamp(1.35rem, 4vw, 1.8rem);
   max-width: none;
 }
 
@@ -305,8 +312,8 @@ h2 {
 }
 
 .tool-panel-compact {
-  gap: 0.7rem;
-  padding: 1rem 1.1rem 1.1rem;
+  gap: 0.55rem;
+  padding: 0.85rem 0.95rem 0.95rem;
   border-radius: 1rem;
 }
 
@@ -408,7 +415,7 @@ h2 {
 }
 
 .site-footer {
-  margin-top: 4rem;
+  margin-top: 2.2rem;
   color: var(--ink-soft);
   font-size: 0.92rem;
   display: grid;
@@ -443,11 +450,11 @@ input[type="checkbox"] {
 select,
 input[type="number"] {
   width: 100%;
-  min-height: 2.75rem;
+  min-height: 2.3rem;
   border: 1px solid var(--line);
   background: var(--paper);
   border-radius: 0.7rem;
-  padding: 0.45rem 0.65rem;
+  padding: 0.35rem 0.55rem;
 }
 
 .check-row {
@@ -455,7 +462,7 @@ input[type="number"] {
   align-items: center;
   gap: 0.5rem;
   font-weight: 700;
-  min-height: 2.75rem;
+  min-height: 2.1rem;
 }
 
 .table-picks {
@@ -470,15 +477,15 @@ input[type="number"] {
   gap: 0.35rem;
   background: var(--paper-deep);
   border-radius: 999px;
-  padding: 0.35rem 0.7rem;
-  font-size: 0.9rem;
-  min-height: 2.4rem;
+  padding: 0.2rem 0.55rem;
+  font-size: 0.85rem;
+  min-height: 2rem;
 }
 
 .challenge-chips {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.4rem;
+  gap: 0.3rem;
   margin: 0;
   padding: 0;
   border: 0;
@@ -496,11 +503,11 @@ input[type="number"] {
   border: 1.5px solid var(--line);
   background: var(--paper);
   border-radius: 999px;
-  padding: 0.28rem 0.7rem;
-  min-height: 2rem;
+  padding: 0.18rem 0.55rem;
+  min-height: 1.7rem;
   flex: 0 0 auto;
   font: inherit;
-  font-size: 0.82rem;
+  font-size: 0.76rem;
   font-weight: 700;
   cursor: pointer;
 }
@@ -515,6 +522,85 @@ input[type="number"] {
   display: flex;
   flex-wrap: wrap;
   gap: 0.6rem;
+}
+
+.print-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1rem;
+  flex-wrap: wrap;
+  background: var(--white);
+  border: 2px solid rgb(42 36 32 / 12%);
+  border-radius: 1rem;
+  padding: 0.55rem 0.85rem;
+}
+
+.print-bar-copy {
+  margin: 0;
+  font-weight: 700;
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+}
+
+.stage-picks {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  display: grid;
+  gap: 0.3rem;
+}
+
+.stage-picks-label {
+  font-weight: 700;
+  font-size: 0.92rem;
+  padding: 0;
+}
+
+.stage-options {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.3rem;
+}
+
+.stage-options label {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  min-height: 2.1rem;
+  padding: 0.25rem 0.35rem;
+  border: 1.5px solid var(--line);
+  border-radius: 999px;
+  background: var(--paper);
+  font-size: 0.78rem;
+  cursor: pointer;
+}
+
+.stage-options input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.stage-options label.is-on {
+  background: var(--ink);
+  color: var(--white);
+  border-color: var(--ink);
+}
+
+.more-settings {
+  border-top: 1px solid var(--line);
+  padding-top: 0.55rem;
+  display: grid;
+  gap: 0.65rem;
+}
+
+.more-settings summary {
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 0.92rem;
 }
 
 .primary-button,
@@ -539,6 +625,10 @@ input[type="number"] {
 .ghost-button {
   background: var(--mint);
   color: var(--ink);
+}
+
+.more-settings .ghost-button {
+  width: fit-content;
 }
 
 a.ghost-button {

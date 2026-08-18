@@ -28,7 +28,7 @@ export function createMissingNumberExercise({
       if (!fact) {
         continue;
       }
-      const blank = pickBlank(next, stage === "divide" ? "result" : undefined);
+      const blank = pickBlank(next);
       items.push({
         left: fact.dividend,
         right: fact.divisor,
@@ -43,7 +43,7 @@ export function createMissingNumberExercise({
     if (!fact) {
       continue;
     }
-    const blank = pickBlank(next, stage === "multiply" ? "result" : undefined);
+    const blank = pickBlank(next);
     items.push({
       left: fact.a,
       right: fact.b,
@@ -56,10 +56,7 @@ export function createMissingNumberExercise({
   return items;
 }
 
-function pickBlank(next: () => number, forced?: MissingNumberItem["blank"]) {
-  if (forced && next() < 0.7) {
-    return forced;
-  }
+function pickBlank(next: () => number) {
   const slots: MissingNumberItem["blank"][] = ["left", "right", "result"];
   return slots[Math.floor(next() * slots.length)] ?? "result";
 }

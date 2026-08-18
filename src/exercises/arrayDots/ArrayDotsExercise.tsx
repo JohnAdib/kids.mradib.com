@@ -10,7 +10,7 @@ export function ArrayDotsExercise({ items }: Props) {
   return (
     <section>
       <ExerciseHeading kind="arrayDots">
-        Count the dots, then write the fact.
+        Count the array, then write the product.
       </ExerciseHeading>
       <div className="array-row">
         {items.map((item, index) => (
@@ -19,15 +19,13 @@ export function ArrayDotsExercise({ items }: Props) {
             key={`${item.rows}x${item.cols}-${index}`}
           >
             <div
+              className="dot-array"
               style={{
-                display: "grid",
-                gridTemplateColumns: `repeat(${item.cols}, 6mm)`,
-                gap: "2mm",
-                marginBottom: "3mm",
+                gridTemplateColumns: `repeat(${item.cols}, 3.4mm)`,
               }}
             >
               {Array.from({ length: item.rows * item.cols }, (_, i) => (
-                <span key={i}>●</span>
+                <span className="dot" key={i} />
               ))}
             </div>
             <p>

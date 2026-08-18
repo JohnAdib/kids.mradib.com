@@ -1,7 +1,8 @@
 import type { ChartColouring } from "../charts/ChartColouring";
 import type { PrintColour } from "../print/PrintColour";
 import type { PrintFont } from "../print/PrintFont";
-import { PrintActions } from "./PrintActions";
+import { CopyLinkButton } from "./CopyLinkButton";
+import { MoreSettings } from "./MoreSettings";
 import { PrintSettings } from "./PrintSettings";
 
 type Props = {
@@ -15,7 +16,6 @@ type Props = {
   onColouring: (value: ChartColouring) => void;
   onFont: (font: PrintFont) => void;
   onColour: (colour: PrintColour) => void;
-  onPrint: () => void;
 };
 
 export function ChartForm({
@@ -29,12 +29,9 @@ export function ChartForm({
   onColouring,
   onFont,
   onColour,
-  onPrint,
 }: Props) {
   return (
     <section className="tool-panel tool-panel-compact tool-panel-pinned">
-      <h2>Times table</h2>
-      <p>Change the grid or colouring and the page updates at once.</p>
       <div className="field-row">
         <label>
           Up to
@@ -47,14 +44,15 @@ export function ChartForm({
           </select>
         </label>
         <label>
-          Colouring
+          Grid
           <select
             value={colouring}
             onChange={(event) =>
               onColouring(event.target.value as ChartColouring)
             }
           >
-            <option value="none">None</option>
+            <option value="none">Filled</option>
+            <option value="blank">Empty to fill in</option>
             <option value="squares">Squares only</option>
             <option value="shells">Table shells</option>
             <option value="diagonals">Diagonal bands</option>
@@ -69,13 +67,15 @@ export function ChartForm({
         />
         Include 0
       </label>
-      <PrintSettings
-        font={font}
-        colour={colour}
-        onFont={onFont}
-        onColour={onColour}
-      />
-      <PrintActions canPrint onPrint={onPrint} />
+      <MoreSettings>
+        <PrintSettings
+          font={font}
+          colour={colour}
+          onFont={onFont}
+          onColour={onColour}
+        />
+        <CopyLinkButton />
+      </MoreSettings>
     </section>
   );
 }

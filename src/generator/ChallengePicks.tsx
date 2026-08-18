@@ -2,6 +2,7 @@ import { challengeTitle } from "../pack/challengeTitle";
 import type { PackChallengeId } from "../pack/PackChallengeId";
 import { packChallengeIds } from "../pack/packChallengeIds";
 import { sameIdSet } from "../pack/sameIdSet";
+import { toggleAllChallengeIds } from "../pack/toggleAllChallengeIds";
 import { toggleChallengeId } from "../pack/toggleChallengeId";
 
 type Props = {
@@ -18,7 +19,7 @@ export function ChallengePicks({ challenges, onChange }: Props) {
         type="button"
         className={allOn ? "chip-toggle is-on" : "chip-toggle"}
         aria-pressed={allOn}
-        onClick={() => onChange([...packChallengeIds])}
+        onClick={() => onChange(toggleAllChallengeIds(challenges))}
       >
         All
       </button>

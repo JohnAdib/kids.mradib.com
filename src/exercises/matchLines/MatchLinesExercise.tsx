@@ -11,23 +11,19 @@ export function MatchLinesExercise({ pairs }: Props) {
   return (
     <section>
       <ExerciseHeading kind="matchLines">
-        Join each expression to the matching number.
+        Draw a line from each fact to the matching number.
       </ExerciseHeading>
       <div className="match-board">
         <div className="match-col">
           {left.map((pair) => (
-            <div className="match-chip left" key={pair.left}>
+            <div className="match-chip" key={pair.left}>
               {pair.left}
             </div>
           ))}
         </div>
         <div className="match-col">
           {right.map((pair) => (
-            <div
-              className="match-chip"
-              key={pair.right}
-              style={{ marginTop: `${(pair.rightOffset % 1) * 8}mm` }}
-            >
+            <div className="match-chip" key={pair.right}>
               {pair.right}
             </div>
           ))}

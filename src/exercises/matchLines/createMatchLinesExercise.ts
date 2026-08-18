@@ -50,9 +50,9 @@ export function createMatchLinesExercise({
   }
   const leftOrder = shuffleCopy(pairs, next);
   const rightOrder = shuffleCopy(pairs, next);
-  return pairs.map((pair, index) => ({
+  return pairs.map((pair) => ({
     ...pair,
     leftOffset: leftOrder.indexOf(pair),
-    rightOffset: rightOrder.indexOf(pair) + (index % 2) * 0.4,
+    rightOffset: rightOrder.indexOf(pair),
   }));
 }

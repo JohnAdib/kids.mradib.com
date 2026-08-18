@@ -5,7 +5,7 @@ export function chartCellShade(
   column: number,
   colouring: ChartColouring,
 ) {
-  if (colouring === "none") {
+  if (colouring === "none" || colouring === "blank") {
     return "plain";
   }
   if (colouring === "squares") {

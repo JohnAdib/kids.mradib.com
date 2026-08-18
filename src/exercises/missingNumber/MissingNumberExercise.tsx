@@ -10,7 +10,7 @@ export function MissingNumberExercise({ items }: Props) {
   return (
     <section>
       <ExerciseHeading kind="missingNumber">
-        Any part of the fact can be empty.
+        A factor or the product is missing. Fill the box.
       </ExerciseHeading>
       <div className="missing-grid">
         {items.map((item, index) => (

@@ -5,7 +5,13 @@ import type { ChartSearch } from "./ChartSearch";
 import { readAllowed } from "./readAllowed";
 import { readPositiveInteger } from "./readPositiveInteger";
 
-const colourings: ChartColouring[] = ["none", "squares", "shells", "diagonals"];
+const colourings: ChartColouring[] = [
+  "none",
+  "squares",
+  "shells",
+  "diagonals",
+  "blank",
+];
 const fonts: PrintFont[] = ["clear", "handwriting", "mono"];
 const colours: PrintColour[] = ["ink", "colour"];
 

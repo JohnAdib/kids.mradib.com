@@ -9,8 +9,8 @@ export function WheelExercise({ wheels }: Props) {
   return (
     <section>
       <ExerciseHeading kind="wheel">
-        Multiply the centre by the inner ring to fill the outer ring. If the
-        inner ring is empty, work backwards.
+        Multiply the middle by the inner ring. Write the product in the outer
+        ring.
       </ExerciseHeading>
       <div className="wheel-row">
         {wheels.map((wheel, index) => (
@@ -60,7 +60,7 @@ function WheelSvg({ wheel }: { wheel: WheelSpec }) {
               y={cy + Math.sin(labelAngle) * ((mid + outer) / 2)}
               textAnchor="middle"
               dominantBaseline="middle"
-              fontSize="18"
+              fontSize="16"
             >
               {sector.outer ?? ""}
             </text>
@@ -69,7 +69,7 @@ function WheelSvg({ wheel }: { wheel: WheelSpec }) {
               y={cy + Math.sin(labelAngle) * ((inner + mid) / 2)}
               textAnchor="middle"
               dominantBaseline="middle"
-              fontSize="16"
+              fontSize="15"
             >
               {sector.inner ?? ""}
             </text>

@@ -9,9 +9,12 @@ export function ColourMultiplesExercise({ grid }: Props) {
   return (
     <section>
       <ExerciseHeading kind="colourMultiples">
-        Colour every box that belongs to the {grid.focus} times table.
+        Colour every box that is a multiple of {grid.focus}.
       </ExerciseHeading>
-      <div className="colour-grid">
+      <div
+        className="colour-grid"
+        style={{ gridTemplateColumns: `repeat(${grid.columns}, 1fr)` }}
+      >
         {grid.cells.map((cell, index) => (
           <div className="colour-cell" key={`${cell}-${index}`}>
             {cell}

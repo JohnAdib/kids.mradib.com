@@ -19,6 +19,7 @@ import { parsePackSearch } from "../search/parsePackSearch";
 import { replacePageSearch } from "../search/replacePageSearch";
 import { browserStore } from "../storage/browserStore";
 import { PracticeForm } from "./PracticeForm";
+import { PrintBar } from "./PrintBar";
 
 const boot = parsePackSearch(window.location.search);
 const booted = boot ? packFromSearch(boot, browserStore()) : null;
@@ -136,7 +137,6 @@ export function PracticePackTools() {
       includeAnswers={includeAnswers}
       font={font}
       colour={colour}
-      canPrint={pack !== null}
       onTables={setTables}
       onStage={setStage}
       onPageCount={setPageCount}
@@ -144,7 +144,6 @@ export function PracticePackTools() {
       onIncludeAnswers={setIncludeAnswers}
       onFont={setFont}
       onColour={setColour}
-      onPrint={() => window.print()}
     />
   );
 
@@ -155,6 +154,9 @@ export function PracticePackTools() {
 
   return (
     <PrintWorkspace
+      toolbar={
+        <PrintBar canPrint={pack !== null} onPrint={() => window.print()} />
+      }
       form={form}
       preview={
         pack ? (

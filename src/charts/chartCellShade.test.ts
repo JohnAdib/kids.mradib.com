@@ -6,6 +6,11 @@ test("none is always plain", () => {
   expect(chartCellShade(2, 9, "none")).toBe("plain");
 });
 
+test("an empty grid stays unshaded", () => {
+  expect(chartCellShade(5, 5, "blank")).toBe("plain");
+  expect(chartCellShade(2, 9, "blank")).toBe("plain");
+});
+
 test("squares only marks the diagonal", () => {
   expect(chartCellShade(7, 7, "squares")).toBe("square");
   expect(chartCellShade(7, 8, "squares")).toBe("plain");

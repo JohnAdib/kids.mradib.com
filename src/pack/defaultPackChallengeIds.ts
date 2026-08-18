@@ -1,9 +1,3 @@
-import type { PackChallengeId } from "./PackChallengeId";
+import { packChallengeIds } from "./packChallengeIds";
 
-export const defaultPackChallengeIds: PackChallengeId[] = [
-  "timesFacts",
-  "missingNumber",
-  "wheel",
-  "matchLines",
-  "colourMultiples",
-];
+export const defaultPackChallengeIds = packChallengeIds;

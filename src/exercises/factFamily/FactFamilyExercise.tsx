@@ -10,7 +10,7 @@ export function FactFamilyExercise({ cards }: Props) {
   return (
     <section>
       <ExerciseHeading kind="factFamily">
-        Four facts live together. Fill the empty one.
+        These four facts belong together. Fill the empty box.
       </ExerciseHeading>
       <div className="family-row">
         {cards.map((card, index) => (

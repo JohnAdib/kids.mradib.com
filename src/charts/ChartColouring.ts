@@ -1,1 +1,6 @@
-export type ChartColouring = "none" | "squares" | "shells" | "diagonals";
+export type ChartColouring =
+  | "none"
+  | "squares"
+  | "shells"
+  | "diagonals"
+  | "blank";

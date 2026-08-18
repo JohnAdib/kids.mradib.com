@@ -10,7 +10,7 @@ export function MultiplesPathExercise({ focus, cells }: Props) {
   return (
     <section>
       <ExerciseHeading kind="multiplesPath">
-        Colour a path using only numbers in the {focus} times table.
+        Colour a path of multiples of {focus}. Touching boxes only.
       </ExerciseHeading>
       <div className="path-grid">
         {cells.map((cell, index) => (

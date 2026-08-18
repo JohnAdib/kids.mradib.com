@@ -75,14 +75,14 @@ test("ten pizza wheels is ten pages of that challenge", () => {
   );
 });
 
-test("a mix of two challenges can fill six pages", () => {
+test("a mix of two compact challenges can share a page", () => {
   const pack = composePack({
     tables: [5],
     stage: "mixed",
     seed: "mix6",
     sequence: 2,
     pageCount: 6,
-    challenges: ["wheel", "skipCount"],
+    challenges: ["timesFacts", "skipCount"],
   });
   expect(pack.pages).toHaveLength(6);
   for (const page of pack.pages) {
@@ -91,7 +91,7 @@ test("a mix of two challenges can fill six pages", () => {
   const types = pack.pages.flatMap((page) =>
     page.exercises.map((exercise) => exercise.type),
   );
-  expect(new Set(types)).toEqual(new Set(["wheel", "skipCount"]));
+  expect(new Set(types)).toEqual(new Set(["timesFacts", "skipCount"]));
 });
 
 test("every table and stage finishes", () => {
