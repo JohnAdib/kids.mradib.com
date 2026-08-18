@@ -8,7 +8,6 @@ import { createOddOneOutExercise } from "../exercises/oddOneOut/createOddOneOutE
 import { createPartialSquareExercise } from "../exercises/partialSquare/createPartialSquareExercise";
 import { createSkipCountExercise } from "../exercises/skipCount/createSkipCountExercise";
 import { createTimesFactsExercise } from "../exercises/timesFacts/createTimesFactsExercise";
-import { timesFactsBandSize } from "../exercises/timesFacts/timesFactsBandSize";
 import { createTrueFalseExercise } from "../exercises/trueFalse/createTrueFalseExercise";
 import { createWheelExercise } from "../exercises/wheel/createWheelExercise";
 import { createWhichIsMoreExercise } from "../exercises/whichIsMore/createWhichIsMoreExercise";
@@ -26,6 +25,7 @@ import { formatPackMachineId } from "./formatPackMachineId";
 import type { PackChallengeId } from "./PackChallengeId";
 import type { PackExercise } from "./PackExercise";
 import type { PracticePack } from "./PracticePack";
+import { packExerciseItemCount } from "./packExerciseItemCount";
 import { packPageCombos } from "./packPageCombos";
 import { suggestSeconds } from "./suggestSeconds";
 
@@ -108,7 +108,7 @@ function buildExercise(
           multiply: ctx.multiply,
           divide: ctx.divide,
           stage: ctx.stage,
-          count: shared ? timesFactsBandSize : timesFactsBandSize * 4,
+          count: packExerciseItemCount("timesFacts", shared),
           next: ctx.next,
         }),
       };
@@ -119,7 +119,7 @@ function buildExercise(
           multiply: ctx.multiply,
           divide: ctx.divide,
           stage: ctx.stage,
-          count: shared ? 15 : 30,
+          count: packExerciseItemCount("missingNumber", shared),
           next: ctx.next,
         }),
       };
@@ -129,7 +129,7 @@ function buildExercise(
         wheels: createWheelExercise({
           focus: ctx.focus,
           stage: ctx.stage,
-          count: shared ? 3 : 6,
+          count: packExerciseItemCount("wheel", shared),
           next: ctx.next,
         }),
       };
@@ -140,7 +140,7 @@ function buildExercise(
           multiply: ctx.multiply,
           divide: ctx.divide,
           stage: ctx.stage,
-          count: shared ? 6 : 10,
+          count: packExerciseItemCount("matchLines", shared),
           next: ctx.next,
         }),
       };
@@ -157,7 +157,7 @@ function buildExercise(
         type: "factFamily",
         cards: createFactFamilyExercise({
           facts: ctx.multiply,
-          count: shared ? 6 : 9,
+          count: packExerciseItemCount("factFamily", shared),
           next: ctx.next,
         }),
       };
@@ -166,7 +166,7 @@ function buildExercise(
         type: "trueFalse",
         items: createTrueFalseExercise({
           facts: ctx.multiply,
-          count: shared ? 6 : 12,
+          count: packExerciseItemCount("trueFalse", shared),
           next: ctx.next,
         }),
       };
@@ -175,7 +175,7 @@ function buildExercise(
         type: "skipCount",
         items: createSkipCountExercise({
           tables: ctx.reviewTables,
-          count: shared ? 6 : 10,
+          count: packExerciseItemCount("skipCount", shared),
           next: ctx.next,
         }),
       };
@@ -184,7 +184,7 @@ function buildExercise(
         type: "arrayDots",
         items: createArrayDotsExercise({
           facts: ctx.multiply,
-          count: shared ? 6 : 9,
+          count: packExerciseItemCount("arrayDots", shared),
         }),
       };
     case "partialSquare":
@@ -200,7 +200,7 @@ function buildExercise(
         type: "oddOneOut",
         items: createOddOneOutExercise({
           facts: ctx.multiply,
-          count: shared ? 4 : 10,
+          count: packExerciseItemCount("oddOneOut", shared),
           next: ctx.next,
         }),
       };
@@ -209,7 +209,7 @@ function buildExercise(
         type: "whichIsMore",
         items: createWhichIsMoreExercise({
           facts: ctx.multiply,
-          count: shared ? 8 : 15,
+          count: packExerciseItemCount("whichIsMore", shared),
         }),
       };
     case "multiplesPath":

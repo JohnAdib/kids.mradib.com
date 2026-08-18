@@ -8,9 +8,7 @@ type Props = {
 export function OddOneOutExercise({ items }: Props) {
   return (
     <section>
-      <ExerciseHeading kind="oddOneOut">
-        Circle the fact that is wrong.
-      </ExerciseHeading>
+      <ExerciseHeading>Circle the fact that is wrong.</ExerciseHeading>
       <div className="odd-list">
         {items.map((item, index) => (
           <div className="odd-item" key={index}>

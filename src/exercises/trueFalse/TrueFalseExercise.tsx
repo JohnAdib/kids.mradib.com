@@ -8,7 +8,7 @@ type Props = {
 export function TrueFalseExercise({ items }: Props) {
   return (
     <section>
-      <ExerciseHeading kind="trueFalse">
+      <ExerciseHeading>
         Tick the true facts. Cross the false ones.
       </ExerciseHeading>
       <div className="missing-grid">

@@ -9,7 +9,7 @@ type Props = {
 export function MissingNumberExercise({ items }: Props) {
   return (
     <section>
-      <ExerciseHeading kind="missingNumber">
+      <ExerciseHeading>
         A factor or the product is missing. Fill the box.
       </ExerciseHeading>
       <div className="missing-grid">

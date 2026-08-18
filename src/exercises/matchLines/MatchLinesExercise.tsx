@@ -11,7 +11,7 @@ export function MatchLinesExercise({ pairs }: Props) {
   const answers = [...pairs].sort((a, b) => a.rightOffset - b.rightOffset);
   return (
     <section>
-      <ExerciseHeading kind="matchLines">
+      <ExerciseHeading>
         Draw a line from each fact to its answer.
       </ExerciseHeading>
       <div className="match-board">

@@ -9,7 +9,7 @@ type Props = {
 export function ArrayDotsExercise({ items }: Props) {
   return (
     <section>
-      <ExerciseHeading kind="arrayDots">
+      <ExerciseHeading>
         Count the array, then write the product.
       </ExerciseHeading>
       <div className="array-row">

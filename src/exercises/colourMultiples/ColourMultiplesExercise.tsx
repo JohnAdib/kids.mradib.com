@@ -8,7 +8,7 @@ type Props = {
 export function ColourMultiplesExercise({ grid }: Props) {
   return (
     <section>
-      <ExerciseHeading kind="colourMultiples">
+      <ExerciseHeading>
         Colour every box that is a multiple of {grid.focus}.
       </ExerciseHeading>
       <div

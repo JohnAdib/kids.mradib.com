@@ -9,7 +9,7 @@ type Props = {
 export function FactFamilyExercise({ cards }: Props) {
   return (
     <section>
-      <ExerciseHeading kind="factFamily">
+      <ExerciseHeading>
         These four facts belong together. Fill the empty box.
       </ExerciseHeading>
       <div className="family-row">

@@ -9,7 +9,7 @@ type Props = {
 export function PartialSquareExercise({ square }: Props) {
   return (
     <section>
-      <ExerciseHeading kind="partialSquare">
+      <ExerciseHeading>
         Complete this times table. Fill every empty box.
       </ExerciseHeading>
       <table className="partial-square">

@@ -8,7 +8,7 @@ type Props = {
 export function WheelExercise({ wheels }: Props) {
   return (
     <section>
-      <ExerciseHeading kind="wheel">
+      <ExerciseHeading>
         Multiply the middle by the inner ring. Write the product in the outer
         ring.
       </ExerciseHeading>

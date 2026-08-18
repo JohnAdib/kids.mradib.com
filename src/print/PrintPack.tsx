@@ -23,7 +23,6 @@ export function PrintPack({ pack, font, colour }: Props) {
           <PrintPage key={index}>
             <PageHeader
               title={pageComboTitle(page.exercises.map((item) => item.type))}
-              label={pack.label}
               itemCount={countMarkableItems(page.exercises)}
               showScore
             />

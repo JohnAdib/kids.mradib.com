@@ -9,7 +9,7 @@ type Props = {
 export function MultiplesPathExercise({ focus, cells }: Props) {
   return (
     <section>
-      <ExerciseHeading kind="multiplesPath">
+      <ExerciseHeading>
         Colour a path of multiples of {focus}. Touching boxes only.
       </ExerciseHeading>
       <div className="path-grid">
