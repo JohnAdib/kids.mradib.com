@@ -13,7 +13,7 @@ export function TimesTablesPage() {
           <h1>Four A4 pages of practice.</h1>
           <p className="lede">
             Fill in the blanks. Name at the top, a suggested time, and a score
-            box for afterwards. The fridge chart is a separate page.
+            box for afterwards. The times table is a separate page.
           </p>
           <TimesTablesSubnav current="pack" />
         </section>

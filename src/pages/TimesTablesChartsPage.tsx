@@ -9,11 +9,11 @@ export function TimesTablesChartsPage() {
       <SiteHeader current="tables" />
       <main>
         <section className="hero">
-          <p className="kicker">Maths · Times tables · Chart</p>
-          <h1>The facts, on the fridge.</h1>
+          <p className="kicker">Maths · Times table</p>
+          <h1>The square, on one A4 page.</h1>
           <p className="lede">
-            A reference sheet of only the tables you want. Not a worksheet, and
-            not a test.
+            A multiplication table. Row times column. Switch the colouring if
+            you want the squares, the shells, or a plain grid.
           </p>
           <TimesTablesSubnav current="chart" />
         </section>

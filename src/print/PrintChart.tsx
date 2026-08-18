@@ -1,47 +1,30 @@
-import type { ChartGroup } from "../charts/ChartGroup";
-import { chunkChartGroups } from "../charts/chunkChartGroups";
 import type { ReferenceChart } from "../charts/ReferenceChart";
 import { PageHeader } from "./PageHeader";
 import type { PrintColour } from "./PrintColour";
 import type { PrintFont } from "./PrintFont";
 import { PrintPage } from "./PrintPage";
+import { TimesTableGrid } from "./TimesTableGrid";
 
 type Props = {
   chart: ReferenceChart;
-  groups: ChartGroup[];
   font: PrintFont;
   colour: PrintColour;
 };
 
-export function PrintChart({ chart, groups, font, colour }: Props) {
-  const pages = chunkChartGroups(groups, 6);
+export function PrintChart({ chart, font, colour }: Props) {
   return (
     <div
       className={`print-root is-preview print-font-${font} print-colour-${colour}`}
     >
-      {pages.map((pageGroups, pageIndex) => (
-        <PrintPage key={pageIndex}>
-          <PageHeader
-            brand="Kids"
-            label={chart.label}
-            machineId={chart.machineId}
-            showScore={false}
-          />
-          <div className="chart-grid">
-            {pageGroups.map((group) => (
-              <section className="family-card" key={group.table}>
-                <h3 className="exercise-title">{group.table} times table</h3>
-                {group.rows.map((row) => (
-                  <p key={row.expression}>
-                    {row.expression}
-                    {row.inverse ? ` · ${row.inverse}` : ""}
-                  </p>
-                ))}
-              </section>
-            ))}
-          </div>
-        </PrintPage>
-      ))}
+      <PrintPage>
+        <PageHeader
+          brand="Kids"
+          label={chart.label}
+          machineId={chart.machineId}
+          showScore={false}
+        />
+        <TimesTableGrid factors={chart.tables} colouring={chart.colouring} />
+      </PrintPage>
     </div>
   );
 }

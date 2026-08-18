@@ -1,9 +1,13 @@
 import { expect, test } from "vitest";
 import { composeChart } from "./composeChart";
 
-test("year-style table sets print 0 to 12 for each chosen table", () => {
-  const groups = composeChart({ tables: [2, 5, 10], includeInverses: true });
-  expect(groups).toHaveLength(3);
-  expect(groups[0]?.rows).toHaveLength(13);
-  expect(groups[0]?.rows[2]?.inverse).toBe("4 ÷ 2 = 2");
+test("a times table is a square of consecutive factors", () => {
+  expect(composeChart({ includeZero: false, lastFactor: 12 })).toEqual([
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,
+  ]);
+});
+
+test("zero can sit on the first row and column", () => {
+  expect(composeChart({ includeZero: true, lastFactor: 12 })[0]).toBe(0);
+  expect(composeChart({ includeZero: true, lastFactor: 12 })).toHaveLength(13);
 });

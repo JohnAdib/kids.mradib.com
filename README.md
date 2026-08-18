@@ -4,9 +4,9 @@ Printable times tables for the first years of primary school, anywhere.
 
 I made this for my daughters. The usual generators were not good enough: a wall of the same sum, no division, and last term’s tables gone the moment a new one arrived. So I built a small printer for the kitchen table. If you like it, use it for your own children.
 
-A parent picks a table and a stage — multiplication, then division, then mixed — and prints four A4 pages, one activity on each. A pack whose focus is 7 is a lot of 7 **and** a lot of the tables already earned. Speed is part of mastery, so each sheet has a suggested time, a space for time taken, and a score box. The fridge chart of only the tables you want is a separate page.
+A parent picks a table and a stage — multiplication, then division, then mixed — and prints four A4 pages, one activity on each. A pack whose focus is 7 is a lot of 7 **and** a lot of the tables already earned. Speed is part of mastery, so each sheet has a suggested time, a space for time taken, and a score box. The times table — a multiplication square on one A4 page — is a separate page.
 
-The site is [kids.mradib.com](https://kids.mradib.com). Times tables first. Other subjects can follow as the children grow.
+The site is [kids.mradib.com](https://kids.mradib.com). The source is on [GitHub](https://github.com/JohnAdib/kids.mradib.com). Times tables first. Other subjects can follow as the children grow.
 
 ## How we teach
 

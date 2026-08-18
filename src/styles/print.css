@@ -225,11 +225,136 @@
   font-size: 16pt;
 }
 
-.chart-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 5mm;
+.times-table-frame {
   flex: 1;
+  min-height: 0;
+  display: flex;
+}
+
+.times-table {
+  width: 100%;
+  height: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.times-table th,
+.times-table td {
+  border: 1px solid currentColor;
+  text-align: center;
+  vertical-align: middle;
+  font-variant-numeric: tabular-nums;
+  font-size: 10.5pt;
+  padding: 1.2mm 0;
+}
+
+.times-table th {
+  font-weight: 700;
+  background: #f3eee6;
+}
+
+.print-colour-colour .times-table th {
+  background: #3f7d62;
+  color: #fffaf3;
+}
+
+.shade-plain {
+  background: white;
+}
+
+.print-colour-colour .shade-square,
+.print-colour-colour .shade-diag-0 {
+  background: #d65a4a;
+  color: white;
+  font-weight: 700;
+}
+
+.print-colour-ink .shade-square,
+.print-colour-ink .shade-diag-0 {
+  background: #d9d0c4;
+  font-weight: 700;
+}
+
+.print-colour-colour .shade-shell-0 {
+  background: #f4f0ea;
+}
+.print-colour-colour .shade-shell-1 {
+  background: #d5c6eb;
+}
+.print-colour-colour .shade-shell-2 {
+  background: #cbb6e8;
+}
+.print-colour-colour .shade-shell-3 {
+  background: #b8d4ee;
+}
+.print-colour-colour .shade-shell-4 {
+  background: #9ec4e8;
+}
+.print-colour-colour .shade-shell-5 {
+  background: #b8e0d2;
+}
+.print-colour-colour .shade-shell-6 {
+  background: #8fcbb8;
+}
+.print-colour-colour .shade-shell-7 {
+  background: #f6e6a8;
+}
+.print-colour-colour .shade-shell-8 {
+  background: #ecd078;
+}
+.print-colour-colour .shade-shell-9 {
+  background: #f7c9b8;
+}
+.print-colour-colour .shade-shell-10 {
+  background: #f0b089;
+}
+.print-colour-colour .shade-shell-11 {
+  background: #e8b4c8;
+}
+.print-colour-colour .shade-shell-12 {
+  background: #d48aa8;
+}
+
+.print-colour-colour .shade-diag-1 {
+  background: #f4c7a8;
+}
+.print-colour-colour .shade-diag-2 {
+  background: #f6e6a8;
+}
+.print-colour-colour .shade-diag-3 {
+  background: #cfe8c4;
+}
+.print-colour-colour .shade-diag-4 {
+  background: #b8d4ee;
+}
+.print-colour-colour .shade-diag-5 {
+  background: #d5c6eb;
+}
+.print-colour-colour .shade-diag-6 {
+  background: #f3c1d4;
+}
+.print-colour-colour .shade-diag-7 {
+  background: #e8a0c0;
+}
+.print-colour-colour .shade-diag-8 {
+  background: #f4c7a8;
+}
+.print-colour-colour .shade-diag-9 {
+  background: #f6e6a8;
+}
+.print-colour-colour .shade-diag-10 {
+  background: #cfe8c4;
+}
+.print-colour-colour .shade-diag-11 {
+  background: #b8d4ee;
+}
+.print-colour-colour .shade-diag-12 {
+  background: #d5c6eb;
+}
+
+.print-colour-ink [class^="shade-shell-"],
+.print-colour-ink [class^="shade-diag-"] {
+  filter: grayscale(1);
 }
 
 .family-row,

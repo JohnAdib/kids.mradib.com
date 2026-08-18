@@ -1,0 +1,39 @@
+import type { ChartColouring } from "../charts/ChartColouring";
+import { chartCellShade } from "../charts/chartCellShade";
+
+type Props = {
+  factors: number[];
+  colouring: ChartColouring;
+};
+
+export function TimesTableGrid({ factors, colouring }: Props) {
+  return (
+    <div className="times-table-frame">
+      <table className="times-table">
+        <thead>
+          <tr>
+            <th>×</th>
+            {factors.map((factor) => (
+              <th key={factor}>{factor}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {factors.map((row) => (
+            <tr key={row}>
+              <th>{row}</th>
+              {factors.map((column) => (
+                <td
+                  className={`shade-${chartCellShade(row, column, colouring)}`}
+                  key={column}
+                >
+                  {row * column}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}

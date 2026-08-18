@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
-import type { ChartGroup } from "../charts/ChartGroup";
+import type { ChartColouring } from "../charts/ChartColouring";
 import { composeChart } from "../charts/composeChart";
 import type { ReferenceChart } from "../charts/ReferenceChart";
-import { ukYearTables } from "../curriculum/ukYearTables";
 import { formatChartLabel } from "../pack/formatChartLabel";
 import { formatChartMachineId } from "../pack/formatChartMachineId";
 import { nextSequence } from "../pack/nextSequence";
@@ -20,24 +19,19 @@ import { makeShortSeed } from "../rng/makeShortSeed";
 import { browserStore } from "../storage/browserStore";
 import { ChartForm } from "./ChartForm";
 import { PrintHistoryList } from "./PrintHistoryList";
-import { selectedChartTables } from "./selectedChartTables";
 import { YearMap } from "./YearMap";
 
 export function ChartTools() {
   const store = browserStore();
   const [font, setFont] = useState<PrintFont>("clear");
   const [colour, setColour] = useState<PrintColour>("ink");
-  const [year, setYear] = useState<keyof typeof ukYearTables | "custom">(2);
-  const [customTables, setCustomTables] = useState<number[]>([2, 5, 10]);
-  const [includeZeroAndOne, setIncludeZeroAndOne] = useState(true);
-  const [includeInverses, setIncludeInverses] = useState(true);
+  const [includeZero, setIncludeZero] = useState(false);
+  const [lastFactor, setLastFactor] = useState(12);
+  const [colouring, setColouring] = useState<ChartColouring>("squares");
   const [chart, setChart] = useState<ReferenceChart | null>(null);
-  const [groups, setGroups] = useState<ChartGroup[]>([]);
   const [history, setHistory] = useState<PrintedRecord[]>(() =>
     listPrintedRecordsByKind(store, "chart"),
   );
-
-  const tables = selectedChartTables(year, customTables, includeZeroAndOne);
 
   useEffect(() => {
     const onAfterPrint = () => {
@@ -53,7 +47,7 @@ export function ChartTools() {
         tables: chart.tables,
         includePrior: false,
         includeAnswers: false,
-        includeInverses: chart.includeInverses,
+        colouring: chart.colouring,
         font,
         colour,
         printedAt: new Date().toISOString(),
@@ -74,67 +68,52 @@ export function ChartTools() {
   }, [chart]);
 
   function generateChart(from?: PrintedRecord) {
-    const nextTables = from?.tables ?? tables;
-    if (nextTables.length === 0) {
-      return;
-    }
+    const nextIncludeZero = from?.tables.includes(0) ?? includeZero;
+    const nextLast =
+      from && from.tables.length > 0 ? Math.max(...from.tables) : lastFactor;
+    const factors = composeChart({
+      includeZero: nextIncludeZero,
+      lastFactor: nextLast,
+    });
+    const nextColouring = from?.colouring ?? colouring;
     const sequence =
       from?.sequence ??
-      nextSequence(store, sequenceKey("chart", nextTables.join("-"), "all"));
+      nextSequence(store, sequenceKey("chart", factors.join("-"), "all"));
     const seed =
       from?.seed ??
       makeShortSeed(createSeededRandom(`${Date.now()}-chart-${sequence}`));
     const nextChart: ReferenceChart = {
-      label: formatChartLabel(nextTables, sequence),
-      machineId: formatChartMachineId(nextTables, sequence, seed),
+      label: formatChartLabel(factors, sequence),
+      machineId: formatChartMachineId(factors, sequence, seed),
       seed,
       sequence,
-      tables: nextTables,
-      includeInverses: from?.includeInverses ?? includeInverses,
+      tables: factors,
+      colouring: nextColouring,
     };
+    setIncludeZero(nextIncludeZero);
+    setLastFactor(nextLast === 10 ? 10 : 12);
+    setColouring(nextColouring);
     setChart(nextChart);
-    setGroups(
-      composeChart({
-        tables: nextTables,
-        includeInverses: nextChart.includeInverses,
-      }),
-    );
     document.title = nextChart.machineId;
   }
 
   function reprint(record: PrintedRecord) {
     setFont(record.font);
     setColour(record.colour);
-    setYear("custom");
-    setCustomTables(record.tables);
     generateChart(record);
   }
 
   return (
     <>
       <ChartForm
-        year={year}
-        tables={tables}
-        includeZeroAndOne={includeZeroAndOne}
-        includeInverses={includeInverses}
+        includeZero={includeZero}
+        lastFactor={lastFactor}
+        colouring={colouring}
         font={font}
         colour={colour}
-        onYear={(nextYear) => {
-          setYear(nextYear);
-          if (nextYear !== "custom") {
-            setCustomTables([...ukYearTables[nextYear]]);
-          }
-        }}
-        onToggleTable={(table) => {
-          setYear("custom");
-          setCustomTables((current) =>
-            current.includes(table)
-              ? current.filter((item) => item !== table)
-              : [...current, table].sort((a, b) => a - b),
-          );
-        }}
-        onIncludeZeroAndOne={setIncludeZeroAndOne}
-        onIncludeInverses={setIncludeInverses}
+        onIncludeZero={setIncludeZero}
+        onLastFactor={setLastFactor}
+        onColouring={setColouring}
         onFont={setFont}
         onColour={setColour}
         onGenerate={() => generateChart()}
@@ -143,7 +122,7 @@ export function ChartTools() {
       />
       <div className="stack-gap">
         <PrintHistoryList
-          heading="Printed charts"
+          heading="Printed tables"
           empty="Nothing printed yet on this browser. History is saved after you print."
           records={history}
           onReprint={reprint}
@@ -153,15 +132,10 @@ export function ChartTools() {
       {chart ? (
         <PrintPortal>
           <PrintPreviewBar
-            label="A4 chart pages. Print them, or save as PDF."
+            label="One A4 times table. Print it, or save as PDF."
             onPrint={() => window.print()}
           />
-          <PrintChart
-            chart={chart}
-            groups={groups}
-            font={font}
-            colour={colour}
-          />
+          <PrintChart chart={chart} font={font} colour={colour} />
         </PrintPortal>
       ) : null}
     </>

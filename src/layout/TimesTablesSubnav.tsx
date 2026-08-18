@@ -15,7 +15,7 @@ export function TimesTablesSubnav({ current }: Props) {
         href="/maths/times-tables/charts/"
         aria-current={current === "chart" ? "page" : undefined}
       >
-        Reference chart
+        Times table
       </a>
     </nav>
   );

@@ -18,18 +18,18 @@ export function MathsPage() {
         <div className="card-grid">
           <a className="pastel-card sky" href="/maths/times-tables/">
             <span className="chip">Practice</span>
-            <h2>Times tables</h2>
+            <h2>Practice pack</h2>
             <p>
               Four A4 pages. One activity on each page. Multiplication, then
               division, then mixed.
             </p>
           </a>
           <a className="pastel-card butter" href="/maths/times-tables/charts/">
-            <span className="chip">Chart</span>
-            <h2>Reference chart</h2>
+            <span className="chip">Table</span>
+            <h2>Times table</h2>
             <p>
-              A fridge sheet of only the tables you want. The facts, not a
-              worksheet.
+              One A4 multiplication square. Plain, squares, shells, or diagonal
+              bands.
             </p>
           </a>
         </div>

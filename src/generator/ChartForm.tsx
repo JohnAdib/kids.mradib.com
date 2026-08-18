@@ -1,19 +1,17 @@
-import type { ukYearTables } from "../curriculum/ukYearTables";
+import type { ChartColouring } from "../charts/ChartColouring";
 import type { PrintColour } from "../print/PrintColour";
 import type { PrintFont } from "../print/PrintFont";
 import { PrintSettings } from "./PrintSettings";
 
 type Props = {
-  year: keyof typeof ukYearTables | "custom";
-  tables: number[];
-  includeZeroAndOne: boolean;
-  includeInverses: boolean;
+  includeZero: boolean;
+  lastFactor: number;
+  colouring: ChartColouring;
   font: PrintFont;
   colour: PrintColour;
-  onYear: (year: keyof typeof ukYearTables | "custom") => void;
-  onToggleTable: (table: number) => void;
-  onIncludeZeroAndOne: (value: boolean) => void;
-  onIncludeInverses: (value: boolean) => void;
+  onIncludeZero: (value: boolean) => void;
+  onLastFactor: (value: number) => void;
+  onColouring: (value: ChartColouring) => void;
   onFont: (font: PrintFont) => void;
   onColour: (colour: PrintColour) => void;
   onGenerate: () => void;
@@ -22,16 +20,14 @@ type Props = {
 };
 
 export function ChartForm({
-  year,
-  tables,
-  includeZeroAndOne,
-  includeInverses,
+  includeZero,
+  lastFactor,
+  colouring,
   font,
   colour,
-  onYear,
-  onToggleTable,
-  onIncludeZeroAndOne,
-  onIncludeInverses,
+  onIncludeZero,
+  onLastFactor,
+  onColouring,
   onFont,
   onColour,
   onGenerate,
@@ -40,60 +36,44 @@ export function ChartForm({
 }: Props) {
   return (
     <section className="tool-panel">
-      <h2>Reference chart</h2>
+      <h2>Times table</h2>
       <p>
-        A fridge sheet of the tables you choose. Not practice, and not a test —
-        just the facts to keep nearby.
+        One A4 square. Read along a row and a column to find the product. Not a
+        list of sums, and not a test.
       </p>
       <div className="field-row">
         <label>
-          Year map
+          Up to
           <select
-            value={year}
+            value={lastFactor}
+            onChange={(event) => onLastFactor(Number(event.target.value))}
+          >
+            <option value="10">10</option>
+            <option value="12">12</option>
+          </select>
+        </label>
+        <label>
+          Colouring
+          <select
+            value={colouring}
             onChange={(event) =>
-              onYear(
-                event.target.value === "custom"
-                  ? "custom"
-                  : (Number(event.target.value) as keyof typeof ukYearTables),
-              )
+              onColouring(event.target.value as ChartColouring)
             }
           >
-            <option value="2">Year 2 — 2, 5, 10</option>
-            <option value="3">Year 3 — add 3 and 4</option>
-            <option value="4">Year 4 — add 6 and 8</option>
-            <option value="5">Year 5 — add 7 and 9</option>
-            <option value="6">Year 6 — add 11 and 12</option>
-            <option value="custom">Custom set</option>
+            <option value="none">None</option>
+            <option value="squares">Squares only</option>
+            <option value="shells">Table shells</option>
+            <option value="diagonals">Diagonal bands</option>
           </select>
         </label>
       </div>
-      <div className="table-picks">
-        {Array.from({ length: 11 }, (_, i) => i + 2).map((table) => (
-          <label key={table}>
-            <input
-              type="checkbox"
-              checked={tables.includes(table)}
-              onChange={() => onToggleTable(table)}
-            />
-            {table}
-          </label>
-        ))}
-      </div>
       <label className="check-row">
         <input
           type="checkbox"
-          checked={includeZeroAndOne}
-          onChange={(event) => onIncludeZeroAndOne(event.target.checked)}
+          checked={includeZero}
+          onChange={(event) => onIncludeZero(event.target.checked)}
         />
-        Always include 0 and 1
-      </label>
-      <label className="check-row">
-        <input
-          type="checkbox"
-          checked={includeInverses}
-          onChange={(event) => onIncludeInverses(event.target.checked)}
-        />
-        Show division next to each fact
+        Include 0
       </label>
       <PrintSettings
         font={font}
@@ -103,7 +83,7 @@ export function ChartForm({
       />
       <div className="actions">
         <button className="primary-button" type="button" onClick={onGenerate}>
-          Generate chart
+          Generate table
         </button>
         <button
           className="ghost-button"
