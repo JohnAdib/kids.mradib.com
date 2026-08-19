@@ -45,7 +45,7 @@
 }
 
 .print-page > section:only-of-type {
-  flex: 1 1 auto;
+  flex: 1 1 0;
 }
 
 @media print {
@@ -73,8 +73,8 @@
 
   .print-page {
     width: auto;
-    height: auto;
-    min-height: 270mm;
+    height: 277mm;
+    min-height: 277mm;
     padding: 0;
     overflow: visible;
     box-shadow: none;
@@ -82,7 +82,7 @@
   }
 
   .print-page > section {
-    min-height: auto;
+    min-height: 0;
     overflow: visible;
   }
 }
@@ -372,17 +372,18 @@
 .colour-grid {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, minmax(0, 1fr));
   gap: 1mm;
-  flex: 1;
-  align-content: start;
-  align-items: start;
+  flex: 1 1 0;
+  min-height: 0;
+  width: 100%;
 }
 
 .colour-cell {
   border: 1px solid currentColor;
   border-radius: 0.7mm;
-  height: 7.5mm;
-  min-height: 7.5mm;
+  min-height: 0;
+  height: 100%;
   display: grid;
   place-items: center;
   font-size: 9pt;
