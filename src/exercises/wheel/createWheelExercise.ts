@@ -1,4 +1,5 @@
 import type { Stage } from "../../facts/Stage";
+import { timesTableFactors } from "../../facts/timesTableFactors";
 import { shuffleCopy } from "../../rng/shuffleCopy";
 import type { WheelSpec } from "./WheelSpec";
 
@@ -17,10 +18,7 @@ export function createWheelExercise({
 }: Input): WheelSpec[] {
   const wheels: WheelSpec[] = [];
   for (let w = 0; w < count; w += 1) {
-    const factors = shuffleCopy(
-      [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-      next,
-    ).slice(0, 8);
+    const factors = shuffleCopy(timesTableFactors, next);
     wheels.push({
       center: focus,
       sectors: factors.map((factor, index) => {

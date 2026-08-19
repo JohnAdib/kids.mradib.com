@@ -1,5 +1,6 @@
 import { arrayDotsPageCount } from "../exercises/arrayDots/arrayDotsPageCount";
 import { timesFactsBandSize } from "../exercises/timesFacts/timesFactsBandSize";
+import { wheelPageCount } from "../exercises/wheel/wheelPageCount";
 import { challengeFillsPage } from "./challengeFillsPage";
 import type { PackChallengeId } from "./PackChallengeId";
 
@@ -20,7 +21,7 @@ const layouts: Partial<Record<PackChallengeId, ItemLayout>> = {
   factFamily: { mmPerItem: 11.2, columns: 3 },
   matchLines: { mmPerItem: 10.3, columns: 1 },
   timesFacts: { mmPerItem: 3.1, columns: 20 },
-  wheel: { mmPerItem: 42, columns: 3 },
+  wheel: { mmPerItem: 42, columns: 2 },
   arrayDots: { mmPerItem: 28, columns: 3 },
 };
 
@@ -62,7 +63,7 @@ function fillerCount(kind: PackChallengeId) {
     return timesFactsBandSize * 4;
   }
   if (kind === "wheel") {
-    return 6;
+    return wheelPageCount;
   }
   if (kind === "arrayDots") {
     return arrayDotsPageCount;

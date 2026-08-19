@@ -79,7 +79,7 @@ test("ten pizza wheels is ten pages of that challenge", () => {
   );
   const first = pack.pages[0]?.exercises[0];
   if (first?.type === "wheel") {
-    expect(first.wheels).toHaveLength(6);
+    expect(first.wheels).toHaveLength(8);
   }
 });
 

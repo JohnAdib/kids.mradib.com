@@ -14,7 +14,9 @@ export function WheelExercise({ wheels }: Props) {
       </ExerciseHeading>
       <div className="wheel-row">
         {wheels.map((wheel, index) => (
-          <WheelSvg wheel={wheel} key={`${wheel.center}-${index}`} />
+          <div className="wheel-frame" key={`${wheel.center}-${index}`}>
+            <WheelSvg wheel={wheel} />
+          </div>
         ))}
       </div>
     </section>
@@ -66,7 +68,7 @@ function WheelSvg({ wheel }: { wheel: WheelSpec }) {
               y={cy + Math.sin(labelAngle) * ((mid + outer) / 2)}
               textAnchor="middle"
               dominantBaseline="middle"
-              fontSize="15"
+              fontSize="13"
             >
               {sector.outer ?? ""}
             </text>
@@ -75,7 +77,7 @@ function WheelSvg({ wheel }: { wheel: WheelSpec }) {
               y={cy + Math.sin(labelAngle) * ((inner + mid) / 2)}
               textAnchor="middle"
               dominantBaseline="middle"
-              fontSize="14"
+              fontSize="12"
             >
               {sector.inner ?? ""}
             </text>

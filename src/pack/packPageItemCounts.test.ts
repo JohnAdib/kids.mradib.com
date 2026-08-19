@@ -20,3 +20,7 @@ test("a lone times pop page keeps four full bands", () => {
 test("a lone arrays page has a row for each times-table fact", () => {
   expect(packPageItemCounts(["arrayDots"])).toEqual([12]);
 });
+
+test("a lone pizza page keeps eight wheels", () => {
+  expect(packPageItemCounts(["wheel"])).toEqual([8]);
+});

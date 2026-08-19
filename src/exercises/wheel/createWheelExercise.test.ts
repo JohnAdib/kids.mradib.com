@@ -16,3 +16,19 @@ test("multiplication wheels hide the outer ring", () => {
     true,
   );
 });
+
+test("each pizza wheel has every times-table fact", () => {
+  const [wheel] = createWheelExercise({
+    focus: 3,
+    stage: "multiply",
+    count: 1,
+    next: () => 0.2,
+  });
+  expect(wheel?.sectors).toHaveLength(12);
+  expect(
+    wheel?.sectors
+      .map((sector) => sector.innerAnswer)
+      .slice()
+      .sort((a, b) => a - b),
+  ).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
+});
