@@ -25,8 +25,8 @@ import { formatPackMachineId } from "./formatPackMachineId";
 import type { PackChallengeId } from "./PackChallengeId";
 import type { PackExercise } from "./PackExercise";
 import type { PracticePack } from "./PracticePack";
-import { packExerciseItemCount } from "./packExerciseItemCount";
 import { packPageCombos } from "./packPageCombos";
+import { packPageItemCounts } from "./packPageItemCounts";
 import { suggestSeconds } from "./suggestSeconds";
 
 type Input = {
@@ -51,18 +51,21 @@ export function composePack(input: Input): PracticePack {
     next,
   });
   const divide = pickDivisionFacts(multiply, next);
-  const pages = packPageCombos(challenges, pageCount, next).map((kinds) => ({
-    exercises: kinds.map((kind) =>
-      buildExercise(kind, kinds.length > 1, {
-        focus,
-        stage: input.stage,
-        multiply,
-        divide,
-        reviewTables: chosen,
-        next,
-      }),
-    ),
-  }));
+  const pages = packPageCombos(challenges, pageCount, next).map((kinds) => {
+    const itemCounts = packPageItemCounts(kinds);
+    return {
+      exercises: kinds.map((kind, index) =>
+        buildExercise(kind, itemCounts[index] ?? 0, {
+          focus,
+          stage: input.stage,
+          multiply,
+          divide,
+          reviewTables: chosen,
+          next,
+        }),
+      ),
+    };
+  });
   const exercises = pages.flatMap((page) => page.exercises);
   const itemCount = countMarkableItems(exercises);
   return {
@@ -90,7 +93,7 @@ export function composePack(input: Input): PracticePack {
 
 function buildExercise(
   kind: PackExercise["type"],
-  shared: boolean,
+  count: number,
   ctx: {
     focus: number;
     stage: Stage;
@@ -108,7 +111,7 @@ function buildExercise(
           multiply: ctx.multiply,
           divide: ctx.divide,
           stage: ctx.stage,
-          count: packExerciseItemCount("timesFacts", shared),
+          count: count,
           next: ctx.next,
         }),
       };
@@ -119,7 +122,7 @@ function buildExercise(
           multiply: ctx.multiply,
           divide: ctx.divide,
           stage: ctx.stage,
-          count: packExerciseItemCount("missingNumber", shared),
+          count: count,
           next: ctx.next,
         }),
       };
@@ -129,7 +132,7 @@ function buildExercise(
         wheels: createWheelExercise({
           focus: ctx.focus,
           stage: ctx.stage,
-          count: packExerciseItemCount("wheel", shared),
+          count: count,
           next: ctx.next,
         }),
       };
@@ -140,7 +143,7 @@ function buildExercise(
           multiply: ctx.multiply,
           divide: ctx.divide,
           stage: ctx.stage,
-          count: packExerciseItemCount("matchLines", shared),
+          count: count,
           next: ctx.next,
         }),
       };
@@ -157,7 +160,7 @@ function buildExercise(
         type: "factFamily",
         cards: createFactFamilyExercise({
           facts: ctx.multiply,
-          count: packExerciseItemCount("factFamily", shared),
+          count: count,
           next: ctx.next,
         }),
       };
@@ -166,7 +169,7 @@ function buildExercise(
         type: "trueFalse",
         items: createTrueFalseExercise({
           facts: ctx.multiply,
-          count: packExerciseItemCount("trueFalse", shared),
+          count: count || 12,
           next: ctx.next,
         }),
       };
@@ -175,7 +178,7 @@ function buildExercise(
         type: "skipCount",
         items: createSkipCountExercise({
           tables: ctx.reviewTables,
-          count: packExerciseItemCount("skipCount", shared),
+          count: count,
           next: ctx.next,
         }),
       };
@@ -184,7 +187,7 @@ function buildExercise(
         type: "arrayDots",
         items: createArrayDotsExercise({
           facts: ctx.multiply,
-          count: packExerciseItemCount("arrayDots", shared),
+          count: count,
         }),
       };
     case "partialSquare":
@@ -200,7 +203,7 @@ function buildExercise(
         type: "oddOneOut",
         items: createOddOneOutExercise({
           facts: ctx.multiply,
-          count: packExerciseItemCount("oddOneOut", shared),
+          count: count,
           next: ctx.next,
         }),
       };
@@ -209,7 +212,7 @@ function buildExercise(
         type: "whichIsMore",
         items: createWhichIsMoreExercise({
           facts: ctx.multiply,
-          count: packExerciseItemCount("whichIsMore", shared),
+          count: count,
         }),
       };
     case "multiplesPath":
