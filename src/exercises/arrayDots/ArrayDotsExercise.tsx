@@ -21,7 +21,7 @@ export function ArrayDotsExercise({ items }: Props) {
             <div
               className="dot-array"
               style={{
-                gridTemplateColumns: `repeat(${item.cols}, 3.4mm)`,
+                gridTemplateColumns: `repeat(${item.cols}, minmax(0, 3.4mm))`,
               }}
             >
               {Array.from({ length: item.rows * item.cols }, (_, i) => (

@@ -16,3 +16,7 @@ test("which is more and missing number still share a page", () => {
 test("a lone times pop page keeps four full bands", () => {
   expect(packPageItemCounts(["timesFacts"])).toEqual([80]);
 });
+
+test("a lone arrays page has a row for each times-table fact", () => {
+  expect(packPageItemCounts(["arrayDots"])).toEqual([12]);
+});

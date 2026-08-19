@@ -1,3 +1,4 @@
+import { arrayDotsPageCount } from "../exercises/arrayDots/arrayDotsPageCount";
 import { timesFactsBandSize } from "../exercises/timesFacts/timesFactsBandSize";
 import { challengeFillsPage } from "./challengeFillsPage";
 import type { PackChallengeId } from "./PackChallengeId";
@@ -64,7 +65,7 @@ function fillerCount(kind: PackChallengeId) {
     return 6;
   }
   if (kind === "arrayDots") {
-    return 9;
+    return arrayDotsPageCount;
   }
   return 0;
 }
