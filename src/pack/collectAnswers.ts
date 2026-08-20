@@ -1,3 +1,4 @@
+import { compareExpressionText } from "../exercises/whichIsMore/compareExpressionText";
 import type { PackExercise } from "./PackExercise";
 
 export function collectAnswers(exercises: PackExercise[]) {
@@ -64,8 +65,8 @@ function answersFor(exercise: PackExercise): string[] {
       return exercise.items.map((item) => item.options[item.oddIndex] ?? "");
     case "whichIsMore":
       return exercise.items.map((item) => {
-        const leftText = `${item.left.a} × ${item.left.b}`;
-        const rightText = `${item.right.a} × ${item.right.b}`;
+        const leftText = compareExpressionText(item.left, item.symbol);
+        const rightText = compareExpressionText(item.right, item.symbol);
         if (item.leftValue > item.rightValue) {
           return `${leftText} > ${rightText}`;
         }

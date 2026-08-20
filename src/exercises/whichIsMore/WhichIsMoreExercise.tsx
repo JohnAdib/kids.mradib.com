@@ -17,11 +17,19 @@ export function WhichIsMoreExercise({ items }: Props) {
         {items.map((item, index) => (
           <div
             className="compare-item"
-            key={`${item.left.a}x${item.left.b}-${item.right.a}x${item.right.b}-${index}`}
+            key={`${item.symbol}-${item.left.a}-${item.left.b}-${item.right.a}-${item.right.b}-${index}`}
           >
-            <CompareExpression a={item.left.a} b={item.left.b} />
+            <CompareExpression
+              a={item.left.a}
+              b={item.left.b}
+              symbol={item.symbol}
+            />
             <Blank />
-            <CompareExpression a={item.right.a} b={item.right.b} />
+            <CompareExpression
+              a={item.right.a}
+              b={item.right.b}
+              symbol={item.symbol}
+            />
           </div>
         ))}
       </div>

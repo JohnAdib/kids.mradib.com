@@ -213,8 +213,11 @@ function buildExercise(
       return {
         type: "whichIsMore",
         items: createWhichIsMoreExercise({
-          facts: ctx.multiply,
+          multiply: ctx.multiply,
+          divide: ctx.divide,
+          stage: ctx.stage,
           count: count,
+          next: ctx.next,
         }),
       };
     case "multiplesPath":
