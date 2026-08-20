@@ -161,6 +161,7 @@ function buildExercise(
         cards: createFactFamilyExercise({
           facts: ctx.multiply,
           count: count,
+          stage: ctx.stage,
           next: ctx.next,
         }),
       };

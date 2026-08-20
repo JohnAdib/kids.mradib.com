@@ -25,7 +25,7 @@ function countOne(exercise: PackExercise) {
         (cell) => exercise.grid.focus !== 0 && cell % exercise.grid.focus === 0,
       ).length;
     case "factFamily":
-      return exercise.cards.length;
+      return exercise.cards.reduce((sum, card) => sum + card.lines.length, 0);
     case "trueFalse":
       return exercise.items.length;
     case "skipCount":

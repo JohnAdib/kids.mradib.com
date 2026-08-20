@@ -37,9 +37,8 @@ function answersFor(exercise: PackExercise): string[] {
           .join(", "),
       ];
     case "factFamily":
-      return exercise.cards.map(
-        (card) =>
-          `${card.a} × ${card.b} = ${card.product}, ${card.product} ÷ ${card.a} = ${card.b}`,
+      return exercise.cards.flatMap((card) =>
+        card.lines.map((line) => line.answer),
       );
     case "trueFalse":
       return exercise.items.map(
