@@ -9,7 +9,7 @@ type Props = {
 export function TimesTableGrid({ factors, colouring }: Props) {
   const empty = colouring === "blank";
   return (
-    <div className="times-table-frame">
+    <div className="times-table-frame sheet-body">
       <table className="times-table">
         <thead>
           <tr>

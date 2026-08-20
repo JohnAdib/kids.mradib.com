@@ -1,4 +1,5 @@
 import { ExerciseHeading } from "../../print/ExerciseHeading";
+import { fillGridTracks } from "../../print/fillGridTracks";
 import type { ColourGrid } from "./ColourGrid";
 
 type Props = {
@@ -12,8 +13,11 @@ export function ColourMultiplesExercise({ grid }: Props) {
         Colour every box that is a multiple of {grid.focus}.
       </ExerciseHeading>
       <div
-        className="colour-grid"
-        style={{ gridTemplateColumns: `repeat(${grid.columns}, 1fr)` }}
+        className="colour-grid sheet-body"
+        style={fillGridTracks(
+          grid.columns,
+          Math.ceil(grid.cells.length / grid.columns),
+        )}
       >
         {grid.cells.map((cell, index) => (
           <div className="colour-cell" key={`${cell}-${index}`}>

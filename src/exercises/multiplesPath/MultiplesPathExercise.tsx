@@ -1,5 +1,7 @@
 import { ExerciseHeading } from "../../print/ExerciseHeading";
+import { fillGridTracks } from "../../print/fillGridTracks";
 import type { PathCell } from "./PathCell";
+import { pathGrid } from "./pathGrid";
 
 type Props = {
   focus: number;
@@ -12,7 +14,10 @@ export function MultiplesPathExercise({ focus, cells }: Props) {
       <ExerciseHeading>
         Colour a path of multiples of {focus}. Touching boxes only.
       </ExerciseHeading>
-      <div className="path-grid">
+      <div
+        className="path-grid sheet-body"
+        style={fillGridTracks(pathGrid.columns, pathGrid.rows)}
+      >
         {cells.map((cell, index) => (
           <div className="path-cell" key={`${cell.value}-${index}`}>
             {cell.value}

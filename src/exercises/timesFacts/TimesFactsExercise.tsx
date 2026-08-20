@@ -13,7 +13,7 @@ export function TimesFactsExercise({ items }: Props) {
   return (
     <section>
       <ExerciseHeading>Write the product in the box.</ExerciseHeading>
-      <div className="times-facts-bands">
+      <div className="times-facts-bands sheet-body">
         {bands.map((band, bandIndex) => (
           <div className="times-facts-grid" key={bandIndex}>
             {band.map((item, index) => (

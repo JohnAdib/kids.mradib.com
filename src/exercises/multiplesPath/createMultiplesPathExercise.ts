@@ -1,6 +1,7 @@
 import { takeAscendingOutside } from "../../numbers/takeAscendingOutside";
 import { pickInteger } from "../../rng/pickInteger";
 import type { PathCell } from "./PathCell";
+import { pathGrid } from "./pathGrid";
 
 type Input = {
   focus: number;
@@ -11,7 +12,7 @@ type Input = {
 export function createMultiplesPathExercise({
   focus,
   next,
-  cellCount = 80,
+  cellCount = pathGrid.columns * pathGrid.rows,
 }: Input): PathCell[] {
   const table = new Set(Array.from({ length: 12 }, (_, i) => focus * (i + 1)));
   const decoys = takeAscendingOutside(table, 48);

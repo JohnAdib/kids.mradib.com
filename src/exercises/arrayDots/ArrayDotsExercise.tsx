@@ -1,5 +1,6 @@
 import { Blank } from "../../print/Blank";
 import { ExerciseHeading } from "../../print/ExerciseHeading";
+import { fillGridTracks } from "../../print/fillGridTracks";
 import type { ArrayItem } from "./ArrayItem";
 
 type Props = {
@@ -12,7 +13,10 @@ export function ArrayDotsExercise({ items }: Props) {
       <ExerciseHeading>
         Count the array, then write the product.
       </ExerciseHeading>
-      <div className="array-row">
+      <div
+        className="array-row sheet-body"
+        style={fillGridTracks(3, Math.ceil(items.length / 3))}
+      >
         {items.map((item, index) => (
           <div
             className="array-card"

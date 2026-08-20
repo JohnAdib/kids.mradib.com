@@ -12,7 +12,7 @@ export function WheelExercise({ wheels }: Props) {
         Multiply the middle by the inner ring. Write the product in the outer
         ring.
       </ExerciseHeading>
-      <div className="wheel-row">
+      <div className="wheel-row sheet-body">
         {wheels.map((wheel, index) => (
           <div className="wheel-frame" key={`${wheel.center}-${index}`}>
             <WheelSvg wheel={wheel} />
