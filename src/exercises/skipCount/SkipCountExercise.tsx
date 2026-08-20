@@ -1,6 +1,6 @@
-import { Blank } from "../../print/Blank";
 import { ExerciseHeading } from "../../print/ExerciseHeading";
 import type { SkipCountItem } from "./SkipCountItem";
+import { SkipCountStep } from "./SkipCountStep";
 
 type Props = {
   items: SkipCountItem[];
@@ -16,10 +16,11 @@ export function SkipCountExercise({ items }: Props) {
         {items.map((item, index) => (
           <div className="skip-card" key={`${item.step}-${index}`}>
             {item.values.map((value, i) => (
-              <span className="skip-step" key={i}>
-                {value === null ? <Blank /> : value}
-                {i < item.values.length - 1 ? <span>, </span> : null}
-              </span>
+              <SkipCountStep
+                key={i}
+                value={value}
+                showComma={i < item.values.length - 1}
+              />
             ))}
           </div>
         ))}

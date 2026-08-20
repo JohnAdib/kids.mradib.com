@@ -636,16 +636,34 @@
 
 .skip-card {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: center;
-  gap: 0.8mm;
   font-size: 11pt;
   padding: 0.4mm 0;
+  font-variant-numeric: tabular-nums;
 }
 
 .skip-step {
-  display: inline-flex;
+  display: grid;
+  grid-template-columns: 6.6ch 1.2ch;
   align-items: center;
+}
+
+.skip-slot {
+  display: flex;
+  justify-content: center;
+  width: 6.6ch;
+  font-variant-numeric: tabular-nums;
+}
+
+.skip-slot .write-box {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.skip-comma {
+  text-align: left;
 }
 
 .dot-array {
