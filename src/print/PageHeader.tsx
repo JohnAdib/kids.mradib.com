@@ -19,14 +19,15 @@ export function PageHeader({ title, itemCount, showScore }: Props) {
       {showScore ? (
         <span className="print-meta">
           <span className="print-score">
-            <span className="print-fill print-fill-score" /> / {itemCount}
+            <span className="print-fill print-fill-score">
+              <span className="print-fill-hint">{itemCount}</span>
+            </span>{" "}
+            / {itemCount}
           </span>
           <span className="print-record">
             Record
             <span className="print-fill print-fill-time">
-              <span className="print-time-gap" />
-              <span className="print-time-sep">:</span>
-              <span className="print-time-gap" />
+              <span className="print-fill-hint">mm:ss</span>
             </span>
           </span>
         </span>

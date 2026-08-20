@@ -219,25 +219,14 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0;
-  min-width: 16mm;
-  padding: 0 1mm;
-}
-
-.print-time-gap {
-  flex: 1 1 0;
-  min-width: 4mm;
-  min-height: 1.2em;
-}
-
-.print-time-sep {
-  flex: none;
-  padding: 0 0.4mm;
-  font-weight: 600;
+  min-width: 18mm;
+  padding: 0 1.2mm;
 }
 
 .print-fill {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   background: #eeeae3;
   border: 0;
   border-radius: 0.8mm;
@@ -245,6 +234,17 @@
   print-color-adjust: exact;
   -webkit-print-color-adjust: exact;
   vertical-align: middle;
+}
+
+.print-fill-hint {
+  color: #d9d3cb;
+  font-size: 8pt;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  user-select: none;
+  print-color-adjust: exact;
+  -webkit-print-color-adjust: exact;
 }
 
 .print-fill-name {
