@@ -202,7 +202,9 @@ function buildExercise(
       return {
         type: "oddOneOut",
         items: createOddOneOutExercise({
-          facts: ctx.multiply,
+          multiply: ctx.multiply,
+          divide: ctx.divide,
+          stage: ctx.stage,
           count: count,
           next: ctx.next,
         }),
