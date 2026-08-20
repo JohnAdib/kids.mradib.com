@@ -1,5 +1,6 @@
 import { ExerciseHeading } from "../../print/ExerciseHeading";
 import type { OddOneOutItem } from "./OddOneOutItem";
+import { oddOneOutHelpText } from "./oddOneOutHelpText";
 
 type Props = {
   items: OddOneOutItem[];
@@ -9,7 +10,7 @@ export function OddOneOutExercise({ items }: Props) {
   return (
     <section>
       <ExerciseHeading title="Odd one out">
-        Circle the fact that is wrong.
+        {oddOneOutHelpText(items)}
       </ExerciseHeading>
       <div className="odd-list">
         {items.map((item, index) => (

@@ -1,6 +1,7 @@
 import type { DivisionFact } from "../../facts/DivisionFact";
 import type { MultiplicationFact } from "../../facts/MultiplicationFact";
 import type { Stage } from "../../facts/Stage";
+import { toDivisionFacts } from "../../facts/toDivisionFacts";
 import { pickFrom } from "../../rng/pickFrom";
 import { pickInteger } from "../../rng/pickInteger";
 import type { OddOneOutItem } from "./OddOneOutItem";
@@ -20,12 +21,18 @@ export function createOddOneOutExercise({
   count,
   next,
 }: Input): OddOneOutItem[] {
+  const dividePool =
+    divide.length > 0
+      ? divide
+      : multiply
+          .flatMap((fact) => toDivisionFacts(fact))
+          .filter((fact) => fact.divisor !== 0);
   return Array.from({ length: count }, () => {
-    const useDivide =
-      stage === "divide" ||
-      (stage === "mixed" && next() < 0.5 && divide.length > 0);
-    if (useDivide && divide.length > 0) {
-      return divideItem(divide, next);
+    if (stage === "divide") {
+      return divideItem(dividePool, next);
+    }
+    if (stage === "mixed" && dividePool.length > 0 && next() < 0.5) {
+      return divideItem(dividePool, next);
     }
     return multiplyItem(multiply, next);
   });

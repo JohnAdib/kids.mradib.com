@@ -144,7 +144,10 @@ export function PracticePackTools() {
       font={font}
       colour={colour}
       onTables={setTables}
-      onStage={setStage}
+      onStage={(nextStage) => {
+        setSeed(undefined);
+        setStage(nextStage);
+      }}
       onPageCount={setPageCount}
       onChallenges={setChallenges}
       onIncludeAnswers={setIncludeAnswers}

@@ -48,3 +48,23 @@ test("multiply stage stays on multiplication facts", () => {
     items.every((item) => item.options.every((option) => option.includes("×"))),
   ).toBe(true);
 });
+
+test("mixed stage can include both multiply and divide rows", () => {
+  const next = createSeededRandom("odd-mixed-both");
+  const multiply = pickMultiplicationFacts({
+    tables: [3],
+    count: 40,
+    next,
+  });
+  const divide = pickDivisionFacts(multiply, next);
+  const items = createOddOneOutExercise({
+    multiply,
+    divide,
+    stage: "mixed",
+    count: 40,
+    next,
+  });
+  const joined = items.flatMap((item) => item.options).join(" ");
+  expect(joined.includes("×")).toBe(true);
+  expect(joined.includes("÷")).toBe(true);
+});
