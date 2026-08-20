@@ -651,13 +651,21 @@
   background: currentColor;
 }
 
+.partial-square-frame {
+  min-height: 0;
+  display: flex;
+}
+
 .partial-square {
   border-collapse: collapse;
   width: 100%;
-  height: auto;
-  flex: none;
-  align-self: start;
+  height: 100%;
   table-layout: fixed;
+}
+
+.partial-square thead tr,
+.partial-square tbody tr {
+  height: calc(100% / 13);
 }
 
 .partial-square th,
@@ -667,7 +675,6 @@
   vertical-align: middle;
   font-size: 10pt;
   padding: 1.2mm 0;
-  height: 11mm;
 }
 
 .partial-square .write-box {
