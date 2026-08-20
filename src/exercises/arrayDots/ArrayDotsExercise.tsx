@@ -1,4 +1,5 @@
 import { ExerciseHeading } from "../../print/ExerciseHeading";
+import { fillGridTracks } from "../../print/fillGridTracks";
 import type { ArrayItem } from "./ArrayItem";
 import { ArrayPrompt } from "./ArrayPrompt";
 import { arrayDotsHelpText } from "./arrayDotsHelpText";
@@ -7,6 +8,8 @@ type Props = {
   items: ArrayItem[];
 };
 
+const arrayColumns = 3;
+
 export function ArrayDotsExercise({ items }: Props) {
   return (
     <section>
@@ -14,10 +17,11 @@ export function ArrayDotsExercise({ items }: Props) {
         {arrayDotsHelpText(items)}
       </ExerciseHeading>
       <div
-        className="array-row"
-        style={{
-          gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
-        }}
+        className="array-row sheet-body"
+        style={fillGridTracks(
+          arrayColumns,
+          Math.ceil(items.length / arrayColumns),
+        )}
       >
         {items.map((item, index) => (
           <div
