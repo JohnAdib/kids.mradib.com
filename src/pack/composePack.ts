@@ -195,7 +195,6 @@ function buildExercise(
         type: "partialSquare",
         square: createPartialSquareExercise({
           tables: ctx.reviewTables,
-          next: ctx.next,
         }),
       };
     case "oddOneOut":
