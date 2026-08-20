@@ -200,6 +200,42 @@
   white-space: nowrap;
 }
 
+.print-meta {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 3.2mm;
+  min-width: 0;
+}
+
+.print-record {
+  display: flex;
+  align-items: center;
+  gap: 1.4mm;
+  white-space: nowrap;
+}
+
+.print-fill-time {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  min-width: 16mm;
+  padding: 0 1mm;
+}
+
+.print-time-gap {
+  flex: 1 1 0;
+  min-width: 4mm;
+  min-height: 1.2em;
+}
+
+.print-time-sep {
+  flex: none;
+  padding: 0 0.4mm;
+  font-weight: 600;
+}
+
 .print-fill {
   display: inline-block;
   background: #eeeae3;
@@ -224,6 +260,11 @@
 .exercise-help {
   margin: 0 0 1.4mm;
   font-size: 9pt;
+}
+
+.exercise-title {
+  font-size: inherit;
+  font-weight: 700;
 }
 
 .write-box {
@@ -700,7 +741,7 @@
 
 .partial-square thead tr,
 .partial-square tbody tr {
-  height: calc(100% / 13);
+  height: calc(100% / 14);
 }
 
 .partial-square th,
@@ -721,6 +762,7 @@
 .path-grid {
   display: grid;
   gap: 0;
+  width: 100%;
   border-top: 1px solid currentColor;
   border-left: 1px solid currentColor;
 }
@@ -729,6 +771,7 @@
   border-right: 1px solid currentColor;
   border-bottom: 1px solid currentColor;
   min-height: 0;
+  padding: 1.4mm 0.6mm;
   display: grid;
   place-items: center;
   font-size: 9pt;

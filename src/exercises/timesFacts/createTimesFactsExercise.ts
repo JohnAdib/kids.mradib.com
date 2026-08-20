@@ -1,6 +1,7 @@
 import type { DivisionFact } from "../../facts/DivisionFact";
 import type { MultiplicationFact } from "../../facts/MultiplicationFact";
 import type { Stage } from "../../facts/Stage";
+import { pickFrom } from "../../rng/pickFrom";
 import type { MissingNumberItem } from "../missingNumber/MissingNumberItem";
 
 type Input = {
@@ -24,7 +25,7 @@ export function createTimesFactsExercise({
       stage === "divide" ||
       (stage === "mixed" && next() < 0.5 && divide.length > 0);
     if (useDivide && divide.length > 0) {
-      const fact = divide[i % divide.length];
+      const fact = pickFrom(divide, next);
       if (!fact) {
         continue;
       }
@@ -38,7 +39,7 @@ export function createTimesFactsExercise({
       });
       continue;
     }
-    const fact = multiply[i % multiply.length];
+    const fact = pickFrom(multiply, next);
     if (!fact) {
       continue;
     }

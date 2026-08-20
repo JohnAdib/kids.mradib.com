@@ -10,7 +10,9 @@ type Props = {
 export function WhichIsMoreExercise({ items }: Props) {
   return (
     <section>
-      <ExerciseHeading>Write &gt;, &lt; or = in the box.</ExerciseHeading>
+      <ExerciseHeading title="Which is more?">
+        Write &gt;, &lt; or = in the box.
+      </ExerciseHeading>
       <div className="compare-grid">
         {items.map((item, index) => (
           <div

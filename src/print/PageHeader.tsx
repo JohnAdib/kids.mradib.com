@@ -1,7 +1,7 @@
 import { siteHost } from "../site/siteHost";
 
 type Props = {
-  title: string;
+  title?: string;
   itemCount?: number;
   showScore: boolean;
 };
@@ -13,15 +13,25 @@ export function PageHeader({ title, itemCount, showScore }: Props) {
         Name <span className="print-fill print-fill-name" />
       </span>
       <div className="print-header-centre">
-        <h2 className="print-page-title">{title}</h2>
+        {title ? <h2 className="print-page-title">{title}</h2> : null}
         <span className="print-site">{siteHost}</span>
       </div>
       {showScore ? (
-        <span className="print-score">
-          <span className="print-fill print-fill-score" /> / {itemCount}
+        <span className="print-meta">
+          <span className="print-score">
+            <span className="print-fill print-fill-score" /> / {itemCount}
+          </span>
+          <span className="print-record">
+            Record
+            <span className="print-fill print-fill-time">
+              <span className="print-time-gap" />
+              <span className="print-time-sep">:</span>
+              <span className="print-time-gap" />
+            </span>
+          </span>
         </span>
       ) : (
-        <span className="print-score" />
+        <span className="print-meta" />
       )}
     </header>
   );

@@ -9,7 +9,7 @@ type Props = {
 export function SkipCountExercise({ items }: Props) {
   return (
     <section>
-      <ExerciseHeading>
+      <ExerciseHeading title="Skip counting">
         Count on by the table. Fill each empty box.
       </ExerciseHeading>
       <div className="skip-row">

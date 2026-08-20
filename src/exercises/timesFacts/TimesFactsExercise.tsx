@@ -12,7 +12,9 @@ export function TimesFactsExercise({ items }: Props) {
   const bands = chunkItems(items, timesFactsBandSize);
   return (
     <section>
-      <ExerciseHeading>Write the product in the box.</ExerciseHeading>
+      <ExerciseHeading title="Times pop">
+        Write the product in the box.
+      </ExerciseHeading>
       <div className="times-facts-bands sheet-body">
         {bands.map((band, bandIndex) => (
           <div className="times-facts-grid" key={bandIndex}>

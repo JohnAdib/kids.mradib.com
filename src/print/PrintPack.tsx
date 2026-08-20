@@ -1,6 +1,5 @@
 import { countMarkableItems } from "../pack/countMarkableItems";
 import type { PracticePack } from "../pack/PracticePack";
-import { pageComboTitle } from "../pack/pageComboTitle";
 import { PageHeader } from "./PageHeader";
 import type { PrintColour } from "./PrintColour";
 import type { PrintFont } from "./PrintFont";
@@ -22,7 +21,6 @@ export function PrintPack({ pack, font, colour }: Props) {
         return (
           <PrintPage key={index}>
             <PageHeader
-              title={pageComboTitle(page.exercises.map((item) => item.type))}
               itemCount={countMarkableItems(page.exercises)}
               showScore
             />

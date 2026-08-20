@@ -10,7 +10,7 @@ type Props = {
 export function PartialSquareExercise({ square }: Props) {
   return (
     <section>
-      <ExerciseHeading>
+      <ExerciseHeading title="Complete the square">
         {partialSquareHelpText(square.focusTables)}
       </ExerciseHeading>
       <div className="partial-square-frame sheet-body">
