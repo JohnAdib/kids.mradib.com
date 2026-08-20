@@ -18,8 +18,8 @@ export function createWhichIsMoreExercise({
       product: 9,
     };
     return {
-      leftText: `${left.a} × ${left.b}`,
-      rightText: `${right.a} × ${right.b}`,
+      left: { a: left.a, b: left.b },
+      right: { a: right.a, b: right.b },
       leftValue: left.product,
       rightValue: right.product,
     };

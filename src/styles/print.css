@@ -313,14 +313,24 @@
 }
 
 .compare-item {
-  display: flex;
+  display: grid;
+  grid-template-columns: 2.8ch 1.4ch 2.8ch 16mm 2.8ch 1.4ch 2.8ch;
   align-items: center;
   justify-content: center;
-  gap: 1.6mm;
+  column-gap: 1mm;
   min-height: 7.2mm;
   padding: 0;
   font-size: 12pt;
   font-variant-numeric: tabular-nums;
+}
+
+.compare-factor {
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.compare-symbol {
+  text-align: center;
 }
 
 .wheel-row {

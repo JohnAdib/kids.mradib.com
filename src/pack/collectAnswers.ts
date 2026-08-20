@@ -64,13 +64,15 @@ function answersFor(exercise: PackExercise): string[] {
       return exercise.items.map((item) => item.options[item.oddIndex] ?? "");
     case "whichIsMore":
       return exercise.items.map((item) => {
+        const leftText = `${item.left.a} × ${item.left.b}`;
+        const rightText = `${item.right.a} × ${item.right.b}`;
         if (item.leftValue > item.rightValue) {
-          return `${item.leftText} > ${item.rightText}`;
+          return `${leftText} > ${rightText}`;
         }
         if (item.leftValue < item.rightValue) {
-          return `${item.leftText} < ${item.rightText}`;
+          return `${leftText} < ${rightText}`;
         }
-        return `${item.leftText} = ${item.rightText}`;
+        return `${leftText} = ${rightText}`;
       });
     case "multiplesPath":
       return [
