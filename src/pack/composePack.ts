@@ -188,6 +188,8 @@ function buildExercise(
         items: createArrayDotsExercise({
           facts: ctx.multiply,
           count: count,
+          stage: ctx.stage,
+          next: ctx.next,
         }),
       };
     case "partialSquare":

@@ -1,7 +1,7 @@
-import { Blank } from "../../print/Blank";
 import { ExerciseHeading } from "../../print/ExerciseHeading";
-import { fillGridTracks } from "../../print/fillGridTracks";
 import type { ArrayItem } from "./ArrayItem";
+import { ArrayPrompt } from "./ArrayPrompt";
+import { arrayDotsHelpText } from "./arrayDotsHelpText";
 
 type Props = {
   items: ArrayItem[];
@@ -11,16 +11,18 @@ export function ArrayDotsExercise({ items }: Props) {
   return (
     <section>
       <ExerciseHeading title="Arrays">
-        Count the array, then write the product.
+        {arrayDotsHelpText(items)}
       </ExerciseHeading>
       <div
-        className="array-row sheet-body"
-        style={fillGridTracks(3, Math.ceil(items.length / 3))}
+        className="array-row"
+        style={{
+          gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
+        }}
       >
         {items.map((item, index) => (
           <div
             className="array-card"
-            key={`${item.rows}x${item.cols}-${index}`}
+            key={`${item.stage}-${item.rows}x${item.cols}-${item.divideBy}-${index}`}
           >
             <div
               className="dot-array"
@@ -33,7 +35,7 @@ export function ArrayDotsExercise({ items }: Props) {
               ))}
             </div>
             <p>
-              {item.rows} × {item.cols} = <Blank />
+              <ArrayPrompt item={item} />
             </p>
           </div>
         ))}

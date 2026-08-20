@@ -1,3 +1,4 @@
+import { arrayItemAnswer } from "../exercises/arrayDots/arrayItemAnswer";
 import { compareExpressionText } from "../exercises/whichIsMore/compareExpressionText";
 import type { PackExercise } from "./PackExercise";
 
@@ -47,9 +48,7 @@ function answersFor(exercise: PackExercise): string[] {
     case "skipCount":
       return exercise.items.map((item) => item.answers.join(", "));
     case "arrayDots":
-      return exercise.items.map(
-        (item) => `${item.rows} × ${item.cols} = ${item.rows * item.cols}`,
-      );
+      return exercise.items.map((item) => arrayItemAnswer(item));
     case "partialSquare":
       return exercise.square.rows
         .flatMap((row, r) =>
